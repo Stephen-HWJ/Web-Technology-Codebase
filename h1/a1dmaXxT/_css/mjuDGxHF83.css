@@ -1,0 +1,76 @@
+body {
+  width: 770px;
+  margin: 10px auto;
+  text-align: center;
+  font-family: Georgia, Times, "Times New Roman", serif;
+  color: rgb(50, 50, 50);
+}
+
+img {
+  width: 374px;
+  height: 374px;
+  object-fit: cover;
+  display: inline;
+  margin: 2px; 
+}
+
+.inline_img {
+  margin: 0;
+}
+
+.head_and_nav {
+  width: 664px;
+  height: 130px;
+  margin: 36px auto 40px auto;
+  border-width: 1px; 
+  border-style: solid; 
+}
+
+.img_title {
+  margin: 0px auto;
+  padding: 10px 10px 8px 10px;
+  width: 750px;
+  text-align: left;
+  font-size: 28px;
+}
+
+.nav_bar {
+  text-align: center;
+  font-style: italic;
+  margin: 10px auto;
+  font-size: 13px;
+}
+
+.nav_link {
+  padding: 10px;
+  color: gray;
+  text-decoration: none;
+}
+
+.nav_link:active {
+  color: black;
+}
+
+.visiting_link {
+  color: rgb(50, 50, 50);
+}
+
+footer {
+  font-size: 10px;
+  font-style: italic;
+  margin: 30px;
+  color: rgb(50, 50, 50);
+}
+
+footer img{
+  width: 20px;
+  height: 20px;
+  padding: 10px 8px;
+  margin: 6px 0;
+}
+
+h1{
+  font-size: 56px; 
+  font-weight: 100; 
+  margin: 18px 10px auto;
+}
