@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>James Jantz - Nature</title>
+</head>
+<body>
+<h1>test</h1>
+<script type="text/javascript"> 
+var jsonDoc;
+function loadJSON (url) {
+    var xmlhttp=new XMLHttpRequest(); 
+    xmlhttp.open("GET", url, false); //open, send, responseText are 
+    xmlhttp.send(); //properties of XMLHTTPRequest
+
+    jsonDoc=xmlhttp.responseText;
+    return jsonDoc; 
+}
+
+var res = JSON.parse(loadJSON('buildinglist.json'));
+</script>
+</body>
+</html>
