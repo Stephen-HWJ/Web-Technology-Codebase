@@ -2,22 +2,104 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>James Jantz - Nature</title>
+<title>Homework 4</title>
+<style type="text/css">
+body {
+    text-align: center;
+    margin: 100px;
+}
+</style>
+<script type="text/javascript"> 
+    function generateTD(content){
+        return '<td>' + content + '</td>';
+    }
+    
+    function generateCity(hubs){
+        if (hubs.length == 0){
+            return '';
+        }
+        res_text = '<ul><li><b>' + hubs[0] + '</b></li>';
+        for (const hub of hubs.slice(1)) {
+            res_text += '<li>' + hub + '</li>';
+        }
+        res_text += '</ul>';
+        return res_text;
+    }
+    
+    function generateHTML(jsonObj){
+        if (!("Row" in jsonObj.Mainline.Table)) {
+            return "";
+        }
+
+        html_text="<!DOCTYPE HTML><html lang=\"en\"><head><title>Largest Manufacturers by Production (2017)</title></head><body>";
+        html_text+="<table border='2'><tbody><tr>";
+        table_headers = jsonObj.Mainline.Table.Header;
+        table_rows = jsonObj.Mainline.Table.Row;
+        if (table_rows.length == 0) {
+            return "";
+        }
+    
+        // generate the table headers 
+        for (let index = 0; index < table_headers.Data.length; index++) {
+            const element = table_headers.Data[index];
+            html_text += '<th>' + element + '</th>';
+        }
+        html_text += '</tr>';
+    
+        // generate the table rows
+        for (const each_row of table_rows) {
+            html_text += '<tr>';
+            html_text += generateTD(each_row.Rank);
+            html_text += generateTD(each_row.Name);
+            html_text += generateTD(generateCity(each_row.Hubs.Hub));
+            html_text += generateTD(each_row.Height);
+            html_text += generateTD('<a href="' + each_row.HomePage + '">' + each_row.HomePage + '</a>');
+            html_text += generateTD('<img src="' + each_row.Logo + '" width="100px" height="100px">')
+            html_text += '</tr>';
+        }
+
+        html_text += "</tbody></table>" + "</bo" + "dy></html>";
+        return html_text;
+    }
+    
+    function viewJSON(what) { 
+        var URL = what.URL.value;
+        function loadJSON(url) {
+            xmlhttp=new XMLHttpRequest();
+            xmlhttp.open("GET", url, false); // "synchronous” (deprecated because it freezes the page while waiting for a response) * 
+            try {
+                xmlhttp.send();
+            }
+            catch (err){
+                console.log(err);
+                alert('File not found!');
+                return NaN;
+            }
+            if (xmlhttp.readyState != 4 || xmlhttp.status != 200){
+                alert('File not found!');
+                return NaN;
+            }
+            jsonObj= JSON.parse(xmlhttp.responseText);
+            return jsonObj;
+        }
+        jsonObj = loadJSON(URL); 
+        // if (isNaN(jsonObj)) return;
+        jsonObj.onload=generateHTML(jsonObj);
+        if (jsonObj.onload == "") {
+            alert("No data entry!");
+            return;
+        }
+        hWin = window.open("", "Assignment 4", "height=800,width=1200"); 
+        hWin.document.write(jsonObj.onload);
+        hWin.document.close();
+    }
+</script>
 </head>
 <body>
-<h1>test</h1>
-<script type="text/javascript"> 
-var jsonDoc;
-function loadJSON (url) {
-    var xmlhttp=new XMLHttpRequest(); 
-    xmlhttp.open("GET", url, false); //open, send, responseText are 
-    xmlhttp.send(); //properties of XMLHTTPRequest
-
-    jsonDoc=xmlhttp.responseText;
-    return jsonDoc; 
-}
-
-var res = JSON.parse(loadJSON('buildinglist.json'));
-</script>
+<p><b>Enter URL for list of tallest buildings JSON File</b></p>
+<form name="myform" method="POST">
+<p><input type="text" name="URL" maxlength="255" size="20" value=""></p>
+<p><input type="button" name="submit" value="Submit Query" onClick="viewJSON(this.form)"></p>
+</form>
 </body>
 </html>
