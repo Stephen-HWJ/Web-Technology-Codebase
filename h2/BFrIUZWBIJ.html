@@ -61,29 +61,30 @@ body {
         html_text += "</tbody></table>" + "</bo" + "dy></html>";
         return html_text;
     }
+    function loadJSON(url) {
+        var jsonObj = "";
+        xmlhttp=new XMLHttpRequest();
+        xmlhttp.onload = function() {
+            if (xmlhttp.readyState == 4){
+                if (xmlhttp.status == 200){
+                    jsonObj = JSON.parse(xmlhttp.responseText);
+                } else{
+                    alert("File not found!");
+                }
+            }
+        }
+        xmlhttp.onerror = function() {
+            alert("File not found!");
+        }
+        xmlhttp.open("GET", url, false); // "synchronous” (deprecated because it freezes the page while waiting for a response) * 
+        xmlhttp.send();
+        return jsonObj;
+    }
     
     function viewJSON(what) { 
         var URL = what.URL.value;
-        function loadJSON(url) {
-            xmlhttp=new XMLHttpRequest();
-            xmlhttp.open("GET", url, false); // "synchronous” (deprecated because it freezes the page while waiting for a response) * 
-            try {
-                xmlhttp.send();
-            }
-            catch (err){
-                console.log(err);
-                alert('File not found!');
-                return NaN;
-            }
-            if (xmlhttp.readyState != 4 || xmlhttp.status != 200){
-                alert('File not found!');
-                return NaN;
-            }
-            jsonObj= JSON.parse(xmlhttp.responseText);
-            return jsonObj;
-        }
         jsonObj = loadJSON(URL); 
-        // if (isNaN(jsonObj)) return;
+        if (jsonObj == "") return;
         jsonObj.onload=generateHTML(jsonObj);
         if (jsonObj.onload == "") {
             alert("No data entry!");
@@ -98,7 +99,7 @@ body {
 <body>
 <p><b>Enter URL for list of tallest buildings JSON File</b></p>
 <form name="myform" method="POST">
-<p><input type="text" name="URL" maxlength="255" size="20" value=""></p>
+<p><input type="text" name="URL" maxlength="255" size="20" value="buildinglist.json"></p>
 <p><input type="button" name="submit" value="Submit Query" onClick="viewJSON(this.form)"></p>
 </form>
 </body>
