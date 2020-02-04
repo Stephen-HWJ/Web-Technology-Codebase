@@ -51,10 +51,14 @@ body {
             html_text += '<tr>';
             html_text += generateTD(each_row.Rank);
             html_text += generateTD(each_row.Name);
-            html_text += generateTD(generateCity(each_row.Hubs.Hub));
+            try{
+            	html_text += generateTD(generateCity(each_row.Hubs.Hub));
+            } catch(e){
+            	html_text += generateTD("");
+            }
             html_text += generateTD(each_row.Height);
             html_text += generateTD('<a href="' + each_row.HomePage + '">' + each_row.HomePage + '</a>');
-            html_text += generateTD('<img src="' + each_row.Logo + '" width="100px" height="100px">')
+            html_text += generateTD('<img src="' + each_row.Logo + '" width="150px" height="150px">')
             html_text += '</tr>';
         }
 
@@ -90,7 +94,7 @@ body {
             alert("No data entry!");
             return;
         }
-        hWin = window.open("", "Assignment 4", "height=800,width=1200"); 
+        hWin = window.open("", "Assignment 4", "height=600,width=1000"); 
         hWin.document.write(jsonObj.onload);
         hWin.document.close();
     }
