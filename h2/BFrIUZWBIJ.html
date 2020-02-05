@@ -58,7 +58,7 @@ body {
             }
             html_text += generateTD(each_row.Height);
             html_text += generateTD('<a href="' + each_row.HomePage + '">' + each_row.HomePage + '</a>');
-            html_text += generateTD('<img src="' + each_row.Logo + '" width="150px" height="150px">')
+            html_text += generateTD('<img src="' + each_row.Logo + '" width="150px" height="150px">');
             html_text += '</tr>';
         }
 
@@ -80,7 +80,7 @@ body {
         xmlhttp.onerror = function() {
             alert("File not found!");
         }
-        xmlhttp.open("GET", url, false); // "synchronous” (deprecated because it freezes the page while waiting for a response) * 
+        xmlhttp.open("GET", url, false); 
         xmlhttp.send();
         return jsonObj;
     }

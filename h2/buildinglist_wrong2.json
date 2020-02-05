@@ -17,7 +17,7 @@
           "Rank": "",
           "Name": "",
           "Hubs": {
-            "Hub": []
+            "Hub": [""]
           },
           "Height": "",
           "HomePage": "",
@@ -28,9 +28,7 @@
           "Rank": "2",
           "Name": "Shanghai Tower",
           "Hubs": {
-            "Hub": [
-              "Shanghai"
-            ]
+            "Hub": []
           },
           "Height": "2,073",
           "HomePage": "https://en.wikipedia.org/wiki/Shanghai_Tower",
