@@ -18,12 +18,19 @@ body {
         if (hubs.length == 0){
             return '';
         }
-        if (hubs.length == 1 && hubs[0] == ""){
-            return '';
-        }
-        res_text = '<ul><li><b>' + hubs[0] + '</b></li>';
-        for (const hub of hubs.slice(1)) {
-            res_text += '<li>' + hub + '</li>';
+        res_text = '<ul>';
+        var i = 0;
+        for (const hub of hubs) {
+        	if (hub == ""){
+        		continue;
+        	}
+        	if (i == 0){
+        		res_text += '<li><b>' + hubs[0] + '</b></li>';
+        		i++;
+        	}
+        	else{
+            	res_text += '<li>' + hub + '</li>';
+            }
         }
         res_text += '</ul>';
         return res_text;
