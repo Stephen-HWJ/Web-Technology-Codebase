@@ -28,7 +28,7 @@ function addSlides() {
     const slidesJson = headlineJson['slides'];
     let innerHTML = "";
     for (let i = 0; i < slidesJson.length; i++) {
-        innerHTML += "<div class='slide_element'>";
+        innerHTML += "<div class='slide_element' id='slide_" + i + "'>";
         innerHTML += "<img src="+ slidesJson[i]['urlToImage'] +" alt='slide'"+i+" height='300'>";
         innerHTML += "<div class='text'>";
         innerHTML += "<h2>" + slidesJson[i]['title'] + "</h2>";
@@ -37,6 +37,12 @@ function addSlides() {
         innerHTML += "</div>";
     }
     document.getElementById("slides").innerHTML += innerHTML;
+}
+
+function switchSlide(id) {
+    document.getElementById('slide_'+id).style.display = 'none';
+    id = (id + 1) % 5;
+    document.getElementById('slide_'+id).style.display = 'block';
 }
 
 function addCards(src) {
@@ -56,12 +62,19 @@ function addCards(src) {
 // addCards('cnn');
 // addCards('fox-news');
 addSlides();
+let displaySlideID = 0;
+document.getElementById('slide_'+displaySlideID).style.display = 'inline-block';
+// const intervalID = setInterval(function () {
+//     switchSlide(displaySlideID);
+//     displaySlideID = (displaySlideID + 1) % 5;
+//     console.log(displaySlideID);
+// }, 3000);
 
 function getWords() {
     const freqWords = headlineJson['freq'];
     let myWords = [];
     for (let i = 0; i < freqWords.length; i++){
-        myWords.push({'word': freqWords[i][0], 'size': freqWords[i][1]*5});
+        myWords.push({'word': freqWords[i][0], 'size': freqWords[i][1]*7});
     }
     return myWords;
 }
