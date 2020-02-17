@@ -1,14 +1,20 @@
+body {
+    margin: 25px auto;
+    width: 1000px;
+}
+
 #slides {
     width: 500px;
     height: 300px;
-    float: left;
+    margin: 25px;
+    display: inline;
 }
 
 .slide_element {
     width: 500px;
     height: 300px;
     position: relative;
-    margin: 25px;
+    display: none;
 }
 
 .slide_element img{
@@ -41,5 +47,26 @@
     position: absolute;
     top: 0;
     left: 0;
-    display: block;
+    display: inline-block;
+}
+
+#wordCloud {
+    margin: 25px;
+    display: inline;
+}
+
+.news_title {
+    text-align: center;
+}
+
+.br_line {
+    border-top: 1px dotted black;
+}
+
+.news_title {
+    padding: 10px;
+}
+
+.news_title h1 {
+    margin: 0;
 }
