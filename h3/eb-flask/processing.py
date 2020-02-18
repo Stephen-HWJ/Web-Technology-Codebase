@@ -48,4 +48,4 @@ cnn_headline = get_headlines(source='cnn')
 fox_headline = get_headlines(source='fox-news')
 slides = get_headlines(source='', page_size=100)
 freq_words = get_freq_words()
-headlines = {'cnn': cnn_headline[:4], 'fox-news': fox_headline[:4], 'slides': slides[:5], 'freq': freq_words}
+headlines = {'cnn': cnn_headline[:4], 'fox-news': fox_headline[:4], 'slide': slides[:5], 'freq': freq_words}
