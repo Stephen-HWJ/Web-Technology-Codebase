@@ -24,51 +24,36 @@ function loadJSON(url) {
 
 const headlineJson = loadJSON('/headlines');
 
-function addSlides() {
-    const slidesJson = headlineJson['slides'];
+function addHeadlines(src, num) {
+    const headlineSrc = headlineJson[src];
     let innerHTML = "";
-    for (let i = 0; i < slidesJson.length; i++) {
-        innerHTML += "<div class='slide_element' id='slide_" + i + "'>";
-        innerHTML += "<img src="+ slidesJson[i]['urlToImage'] +" alt='slide'"+i+" height='300'>";
+    for (let i = 0; i < num; i++) {
+        innerHTML += "<div class='"+ src +"_element' id='" + src + "_" + i + "'>";
+        innerHTML += "<img src="+ headlineSrc[i]['urlToImage'] +" alt='slide'"+i+">";
         innerHTML += "<div class='text'>";
-        innerHTML += "<h2>" + slidesJson[i]['title'] + "</h2>";
-        innerHTML += "<p>" + slidesJson[i]['description'] + "</p></div>";
-        innerHTML += "<a class='links' target='_blank' href='" + slidesJson[i]['url'] + "'></a>";
-        innerHTML += "</div>";
-    }
-    document.getElementById("slides").innerHTML += innerHTML;
-}
-
-function switchSlide(id) {
-    document.getElementById('slide_'+id).style.display = 'none';
-    id = (id + 1) % 5;
-    document.getElementById('slide_'+id).style.display = 'block';
-}
-
-function addCards(src) {
-    const cardJson = headlineJson[src];
-    let innerHTML = "";
-    for (let i = 0; i < cardJson.length; i++) {
-        innerHTML += "<div class='card_element'>";
-        innerHTML += "<img src="+ cardJson[i]['urlToImage'] +" alt='slide'"+i+" height='150'>";
-        innerHTML += "<h2>" + cardJson[i]['title'] + "</h2>";
-        innerHTML += "<p>" + cardJson[i]['description'] + "</p>";
-        innerHTML += "<a href='" + cardJson[i]['url'] + "'></a>";
+        innerHTML += "<h2>" + headlineSrc[i]['title'] + "</h2>";
+        innerHTML += "<p>" + headlineSrc[i]['description'] + "</p></div>";
+        innerHTML += "<a class='links' target='_blank' href='" + headlineSrc[i]['url'] + "'></a>";
         innerHTML += "</div>";
     }
     document.getElementById(src).innerHTML += innerHTML;
 }
 
+
 // addCards('cnn');
 // addCards('fox-news');
-addSlides();
+addHeadlines('slide', 5);
+addHeadlines('cnn', 4)
+addHeadlines('fox-news', 4)
+
 let displaySlideID = 0;
 document.getElementById('slide_'+displaySlideID).style.display = 'inline-block';
-// const intervalID = setInterval(function () {
-//     switchSlide(displaySlideID);
-//     displaySlideID = (displaySlideID + 1) % 5;
-//     console.log(displaySlideID);
-// }, 3000);
+const intervalID = setInterval(function () {
+    document.getElementById('slide_'+displaySlideID).style.display = 'none';
+    displaySlideID = (displaySlideID + 1) % 5;
+    document.getElementById('slide_'+displaySlideID).style.display = 'inline-block';
+    // console.log(displaySlideID);
+}, 3000);
 
 function getWords() {
     const freqWords = headlineJson['freq'];
