@@ -1,6 +1,42 @@
 body {
     margin: 25px auto;
-    width: 950px;
+    width: 1200px;
+}
+
+.button {
+    /*position: absolute;*/
+    /*margin: 50px;*/
+    width: 250px;
+    top: 0;
+    float: left;
+    display: inline-block;
+    text-align: center;
+}
+
+.button * {
+    padding: 15px 25px;
+    width: 200px;
+    font-size: 19px;
+    background-color: #f3f3f3;
+    border: 1px solid #a5a2a2;
+    transition-duration: 0.4s;
+}
+
+#button1 {
+    border-radius: 5px 5px 0 0;
+    border-bottom: none;
+}
+
+#button2 {
+    border-radius: 0 0 5px 5px;
+    border-top: none;
+}
+.button *:hover {
+    background-color: #67ac5c;
+}
+
+.main {
+    display: inline-block;
 }
 
 #slide {
