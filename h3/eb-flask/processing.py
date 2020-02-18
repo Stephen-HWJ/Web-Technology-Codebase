@@ -21,8 +21,8 @@ def get_freq_words():
 
 
 def check_keys(article):
-    if not article['source'] or not article['source']['id'] or not article['source']['name']:
-        return False
+    # if not article['source'] or not article['source']['id'] or not article['source']['name']:
+    #     return False
     if not article['author'] or not article['title'] or not article['description'] or not article['url']:
         return False
     if not article['urlToImage'] or not article['publishedAt'] or not article['content']:
