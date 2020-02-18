@@ -22,7 +22,27 @@ function loadJSON(url) {
     return jsonObj;
 }
 
-const headlineJson = loadJSON('/headlines');
+
+function switchPage(dest) {
+    if (dest !== pageStatus){
+        let mainElement = document.getElementById('main');
+        let searchElement = document.getElementById('search');
+        let button1 = document.getElementsByClassName('up_button')[0];
+        let button2 = document.getElementsByClassName('down_button')[0];
+        if (dest === 'search'){
+            mainElement.style.display = 'none';
+            searchElement.style.display = 'inline-block';
+            button1.id = 'inactive';
+            button2.id = 'active';
+        } else {
+            mainElement.style.display = 'inline-block';
+            searchElement.style.display = 'none';
+            button2.id = 'inactive';
+            button1.id = 'active';
+        }
+        pageStatus = dest;
+    }
+}
 
 function addHeadlines(src, num) {
     const headlineSrc = headlineJson[src];
@@ -39,12 +59,21 @@ function addHeadlines(src, num) {
     document.getElementById(src).innerHTML += innerHTML;
 }
 
+function getSource() {
+    console.log('change source');
+}
 
-// addCards('cnn');
-// addCards('fox-news');
+function doSearch(){
+    console.log(document.getElementById('category').value);
+    return false;
+}
+
+let pageStatus = 'news';
+const headlineJson = loadJSON('/headlines');
+
 addHeadlines('slide', 5);
-addHeadlines('cnn', 4)
-addHeadlines('fox-news', 4)
+addHeadlines('cnn', 4);
+addHeadlines('fox-news', 4);
 
 let displaySlideID = 0;
 document.getElementById('slide_'+displaySlideID).style.display = 'inline-block';
@@ -59,7 +88,7 @@ function getWords() {
     const freqWords = headlineJson['freq'];
     let myWords = [];
     for (let i = 0; i < freqWords.length; i++){
-        myWords.push({'word': freqWords[i][0], 'size': freqWords[i][1]*7});
+        myWords.push({'word': freqWords[i][0], 'size': freqWords[i][1]*6});
     }
     return myWords;
 }
