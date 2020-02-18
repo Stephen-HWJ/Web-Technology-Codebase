@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from processing import headlines
 
 application = Flask(__name__)
@@ -13,6 +13,11 @@ def hello_world():
 @application.route('/headline')
 def send_headlines():
     return jsonify(headlines)
+
+
+@application.route('/search')
+def search():
+    return jsonify({'username': request.args.get('username'), 'passwd': request.args.get('password'), 'new': request.args.get('new')})
 
 
 # run the app.
