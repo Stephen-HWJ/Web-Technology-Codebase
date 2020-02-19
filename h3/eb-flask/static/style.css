@@ -151,3 +151,10 @@ body {
     left: 0;
     display: inline-block;
 }
+
+#search {
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    width: 800px;
+    margin: auto;
+}
