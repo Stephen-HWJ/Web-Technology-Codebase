@@ -13,7 +13,8 @@
 4. box model
 
 ## JavaScript and JSON
-1. "last updated on ..." <!-- document.write("Last updated on " + document.lastModified + ".")-->
+1. "last updated on ..." 
+<!-- document.write("Last updated on " + document.lastModified + ".")-->
 2. Fatorial table
 3. XMLHttpRequest 
 <!-- var req = new XMLHttpRequest();
@@ -52,5 +53,18 @@ for (var i = num - 1; i >= 0; i --){
 6. CORS header 允许 corss site.  (ACAO:origin.com)
 
 ## Web Serves
-1. 
+1. how handle multiple request
+2. app web server
+3. Apache web server
+4. conf, htdocs, logs, cgi-bin, icons, src
+5. &lt; limit&gt; 
+
+## JS Advanced
+1. window open
+<!-- newWin = open(url, name, xxx)-->
+2. navigator - appName, appVersion, cookieEnabled, languague...
+3. work with Radio buttons
+4. add event
+5. multiselection
+
 
