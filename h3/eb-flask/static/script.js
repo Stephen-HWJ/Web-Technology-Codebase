@@ -60,11 +60,29 @@ function addHeadlines(src, num) {
 }
 
 function getSource() {
-    console.log('change source');
+    const sourceJson = loadJSON("/source?category=" + document.getElementById('category').value);
+    let innerHTML = "<option value=\'all\'>all</option>";
+    for (let i = 0; i < sourceJson['sources'].length; i++) {
+        const oneSource = sourceJson['sources'][i];
+        innerHTML += "<option value='"+Object.values(oneSource)[0]+"'>" + Object.keys(oneSource)[0]+"</option>";
+    }
+    document.getElementById('source').innerHTML = innerHTML;
 }
 
+
 function doSearch(){
-    console.log(document.getElementById('category').value);
+    const keyword = document.getElementById('keyword').value;
+    const from = document.getElementById('from').value;
+    const to = document.getElementById('to').value;
+    const category = document.getElementById('category').value;
+    const source = document.getElementById('source').value;
+    console.log(keyword);
+    console.log(from);
+    console.log(to);
+    console.log(category);
+    console.log(source);
+    const resultJson = loadJSON("/search?keyword=" + keyword+"&from="+from+"&to="+to+"&category="+category+"&source="+source);
+    console.log(resultJson);
     return false;
 }
 
@@ -74,6 +92,8 @@ const headlineJson = loadJSON('/headlines');
 addHeadlines('slide', 5);
 addHeadlines('cnn', 4);
 addHeadlines('fox-news', 4);
+getSource();
+
 
 let displaySlideID = 0;
 document.getElementById('slide_'+displaySlideID).style.display = 'inline-block';
