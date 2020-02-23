@@ -12,24 +12,26 @@
     <button class="up_button" id="active" onclick="switchPage('news')">Google News</button>
     <button class="down_button" id="inactive" onclick="switchPage('search')">Search</button>
 </div>
-<div id="main">
+<div id="main" style="display: none">
     <div id="slide"></div
     ><div id="wordCloud"></div>
     <div id="cnn" class="news_title"><h1>CNN</h1><hr class="br_line"></div>
     <div id="fox-news" class="news_title"><h1>Fox News</h1><hr class="br_line"></div>
 </div>
-<div id="search" style="display: none">
+<div id="search" style="display: inline-block">
     <form onsubmit="return doSearch();" class="search_form">
-        <label for="keyword">Keyword</label>
+        <div id="line1">
+        <label for="keyword">Keyword <span style="color: red">*</span></label>
         <input type="text" name="keyword" id="keyword" required \>
 
-        <label for="from">From</label>
+        <label for="from">From <span style="color: red">*</span></label>
         <input type="date" name="from" id="from" value="">
 
-        <label for="to">To</label>
+        <label for="to">To <span style="color: red">*</span></label>
         <input type="date" name="to" id="to" value="">
         <br>
-
+        </div>
+        <div id="line2">
         <label for="category">Category</label>
         <select name="category" id="category" onchange="getSource()">
             <option value="all">all</option>
@@ -45,6 +47,7 @@
         <select name="source" id="source">
             <option value="all">all</option>
         </select>
+        </div>
         <input type="submit" value="Search">
         <input type="reset" value="Clear">
     </form>
