@@ -18,7 +18,7 @@
     <div id="cnn" class="news_title"><h1>CNN</h1><hr class="br_line"></div>
     <div id="fox-news" class="news_title"><h1>Fox News</h1><hr class="br_line"></div>
 </div>
-<div id="search" style="display: inline-block">
+<div id="search" style="display: inline-block;width: 800px;margin: auto;">
     <form onsubmit="return doSearch();" class="search_form">
         <div id="line1">
         <label for="keyword">Keyword <span style="color: red">*</span></label>
@@ -51,6 +51,8 @@
         <input type="submit" value="Search">
         <input type="reset" value="Clear">
     </form>
+    <div id="search_result">
+    </div>
 </div>
 
 <script src="static/script.js"></script>
