@@ -85,9 +85,25 @@ function getDate() {
 
     document.getElementById('to').value = getDateString(today);
     document.getElementById('from').value = getDateString(aWeekFromToday);
-    // console.log(today.toISOString().slice(0, 10));
-    // console.log(aWeekFromToday.toISOString().slice(0, 10));
+}
 
+function showDetail(card) {
+    console.log(card);
+    card.childNodes[1].setAttribute('style', 'display: none');
+}
+
+function showSearchResult(resultJson) {
+    let results = resultJson['everything'];
+    let innerHTML = "";
+    for (let i = 0; i < results.length; i++) {
+        const result = results[i];
+        innerHTML += "<div class='every_card' onclick='showDetail(this)'>";
+        innerHTML += "<img src='" + result['urlToImage'] + "' height='250px'><div class='every_text'>";
+        innerHTML += "<h2 class='every_title'>" + result['title'] + "</h2>";
+        innerHTML += "<p class='every_description'>" + result['description'] + "</p>";
+        innerHTML += "</div></div>";
+    }
+    document.getElementById("search_result").innerHTML = innerHTML;
 }
 
 function doSearch(){
@@ -103,6 +119,7 @@ function doSearch(){
     console.log(source);
     const resultJson = loadJSON("/search?keyword=" + keyword+"&from="+from+"&to="+to+"&category="+category+"&source="+source);
     console.log(resultJson);
+    showSearchResult(resultJson);
     return false;
 }
 
