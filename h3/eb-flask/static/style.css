@@ -169,6 +169,7 @@ form {
     border-width: 1px;
     padding: 10px;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .every_card:hover {
