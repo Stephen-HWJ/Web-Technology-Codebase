@@ -69,6 +69,26 @@ function getSource() {
     document.getElementById('source').innerHTML = innerHTML;
 }
 
+function getDateString(date){
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    if (month < 10){
+        return year + "-0" + month + "-" + day;
+    }
+    return year + "-" + month + "-" + day;
+}
+
+function getDate() {
+    const today = new Date();
+    const aWeekFromToday = new Date(today - 1000*3600*24*7);
+
+    document.getElementById('to').value = getDateString(today);
+    document.getElementById('from').value = getDateString(aWeekFromToday);
+    // console.log(today.toISOString().slice(0, 10));
+    // console.log(aWeekFromToday.toISOString().slice(0, 10));
+
+}
 
 function doSearch(){
     const keyword = document.getElementById('keyword').value;
@@ -93,6 +113,7 @@ addHeadlines('slide', 5);
 addHeadlines('cnn', 4);
 addHeadlines('fox-news', 4);
 getSource();
+getDate();
 
 
 let displaySlideID = 0;
