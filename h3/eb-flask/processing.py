@@ -33,6 +33,12 @@ def get_everything(q, from_param, to, sources):
     else:
         sources = everything_dict['articles']
         for source in sources:
+            # if not article['source'] or not article['source']['id'] or not article['source']['name']:
+            #     return False
+            if not source['author'] or not source['title'] or not source['description'] or not source['url']:
+                continue
+            if not source['urlToImage'] or not source['publishedAt']:
+                continue
             result.append({'urlToImage': source['urlToImage'], 'title': source['title'],
                            'description': source['description'], 'author': source['author'],
                            'source': source['source']['name'], 'date': source['publishedAt'], 'link': source['url']})
