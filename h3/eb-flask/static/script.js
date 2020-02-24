@@ -190,6 +190,10 @@ function doSearch(){
 
     const resultJson = loadJSON("/search?keyword=" + keyword+"&from="+from+"&to="+to+"&category="+category+"&source="+source);
     console.log(resultJson);
+    if (resultJson['status']==='error'){
+        alert(resultJson['message']);
+        return false;
+    }
     showSearchResult(resultJson);
     return false;
 }
