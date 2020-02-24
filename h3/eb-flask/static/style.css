@@ -26,6 +26,7 @@ body {
 .up_button {
     border-radius: 5px 5px 0 0;
     border-bottom: none;
+    margin: 0;
 }
 
 #active {
@@ -36,6 +37,7 @@ body {
 .down_button {
     border-radius: 0 0 5px 5px;
     border-top: none;
+    margin: 0;
 }
 
 .up_button:hover, .down_button:hover, #active:hover {
