@@ -1,4 +1,6 @@
-from newsapi import NewsApiClient
+import sys
+
+from newsapi import NewsApiClient, newsapi_exception
 import re
 
 
@@ -34,12 +36,15 @@ def get_short(description: str):
 
 
 def get_everything(q, from_param, to, sources):
-    if sources == 'all':
-        everything_dict = newsapi.get_everything(q=q, from_param=from_param, to=to, language='en',
-                                                 page_size=30, sort_by='publishedAt')
-    else:
-        everything_dict = newsapi.get_everything(q=q, from_param=from_param, to=to, sources=sources, language='en',
-                                                 page_size=30, sort_by='publishedAt')
+    try:
+        if sources == 'all':
+            everything_dict = newsapi.get_everything(q=q, from_param=from_param, to=to, language='en',
+                                                     page_size=30, sort_by='publishedAt')
+        else:
+            everything_dict = newsapi.get_everything(q=q, from_param=from_param, to=to, sources=sources, language='en',
+                                                     page_size=30, sort_by='publishedAt')
+    except newsapi_exception.NewsAPIException:
+        return sys.exc_info()[1].exception
     result = []
     if everything_dict['status'] != 'ok' or everything_dict['totalResults'] <= 0:
         pass
@@ -54,7 +59,7 @@ def get_everything(q, from_param, to, sources):
                            'description': source['description'], 'author': source['author'],
                            'source': source['source']['name'], 'date': source['publishedAt'],
                            'link': source['url'], 'short': get_short(source['description'])})
-    return result[:7]
+    return {'status': 'success', 'everything': result[:15]}
 
 
 def check_keys(article):
