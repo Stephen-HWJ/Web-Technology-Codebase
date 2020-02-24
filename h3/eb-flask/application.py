@@ -20,7 +20,6 @@ def search():
     keyword = request.args.get('keyword')
     from_date = request.args.get('from')
     to_date = request.args.get('to')
-    category = request.args.get('category')
     source = request.args.get('source')
     return jsonify({'everything': get_everything(q=keyword, from_param=from_date, to=to_date, sources=source)})
 
