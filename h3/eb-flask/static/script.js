@@ -15,13 +15,12 @@ function loadJSON(url) {
         }
     };
     xmlhttp.onerror = function() {
-        alert("File not found!");
+        alert("File not found in err!");
     };
     xmlhttp.open("GET", url, false);
     xmlhttp.send();
     return jsonObj;
 }
-
 
 function switchPage(dest) {
     if (dest !== pageStatus){
@@ -69,6 +68,17 @@ function getSource() {
     document.getElementById('source').innerHTML = innerHTML;
 }
 
+function getEveryDateFormat(dateStr) {
+    const date = new Date(dateStr);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    if (month < 10){
+        return "0" + month + "/" + day + "/" + year;
+    }
+    return month + "/" + day + "/" + year;
+}
+
 function getDateString(date){
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -88,22 +98,78 @@ function getDate() {
 }
 
 function showDetail(card) {
-    console.log(card);
-    card.childNodes[1].setAttribute('style', 'display: none');
+    // console.log(card);
+    card.setAttribute('class', 'every_card_long');
+}
+
+function showShortDescription(card) {
+    // console.log(card);
+    card.setAttribute('class', 'every_card_short');
+}
+
+function showMore() {
+    let button = document.getElementById('more_less_button');
+    let cards = document.getElementById('search_result');
+    if (button.value === "Show More") {
+        button.value = "Show Less";
+        for (let i = 0; i < cards.childNodes.length; i++) {
+            cards.childNodes[i].removeAttribute('style');
+        }
+    } else {
+        button.value = "Show More";
+        for (let i = 5; i < cards.childNodes.length; i++) {
+            cards.childNodes[i].setAttribute('style', 'display: none');
+        }
+        document.getElementById('more_less_button').removeAttribute('style');
+    }
+}
+
+function clearSearch() {
+    document.getElementById('keyword').value = "";
+    document.getElementById('category').value = "all";
+    getSource();
+    document.getElementById('search_result').innerText = "";
+    getDate();
+    return false;
 }
 
 function showSearchResult(resultJson) {
     let results = resultJson['everything'];
+    if (results.length === 0){
+        document.getElementById("search_result").innerHTML = "No results"
+        return;
+    }
     let innerHTML = "";
     for (let i = 0; i < results.length; i++) {
         const result = results[i];
-        innerHTML += "<div class='every_card' onclick='showDetail(this)'>";
-        innerHTML += "<img src='" + result['urlToImage'] + "' height='250px'><div class='every_text'>";
-        innerHTML += "<h2 class='every_title'>" + result['title'] + "</h2>";
-        innerHTML += "<p class='every_description'>" + result['description'] + "</p>";
-        innerHTML += "</div></div>";
+        if (i > 4) {
+            innerHTML += "<div class='every_card_short' style='display: none'>";
+        } else {
+            innerHTML += "<div class='every_card_short'>";
+        }
+        innerHTML += `<img src='${result['urlToImage']}' height='250px'><div class='every_text'>`;
+        innerHTML += `<h2 class='every_title'>${result['title']}</h2>`;
+        innerHTML += `<div class='every_detail'><p><b>Author: </b>${result['author']}</p>`;
+        innerHTML += `<p><b>Source: </b>${result['source']}</p><p><b>Date: </b>${getEveryDateFormat(result['date'])}</p><p>${result['description']}</p>`;
+        innerHTML += `<a href='${result['link']}' target="_blank">See Original Post</a></div>`;
+        innerHTML += `<p class='every_description'>${result['short']}</p>`;
+        innerHTML += "</div><p class=\"show_click\" onclick=\"showDetail(this.parentNode)\" style='margin: 0'></p>" +
+            "<p class='close_button' onclick='showShortDescription(this.parentNode)'>&times;</p></div>";
+    }
+    if (results.length >5 ){
+        innerHTML += "<input id='more_less_button' type='button' value='Show More' onclick='showMore()'>";
     }
     document.getElementById("search_result").innerHTML = innerHTML;
+}
+
+function testFromTo(from, to) {
+    const fromDate = new Date(from);
+    const toDate = new Date(to);
+    if (fromDate.getTime() > toDate.getTime()){
+        alert("Incorrect time");
+        return false;
+    }
+    return true;
 }
 
 function doSearch(){
@@ -117,6 +183,11 @@ function doSearch(){
     console.log(to);
     console.log(category);
     console.log(source);
+
+    if (!testFromTo(from, to)){
+        return false;
+    }
+
     const resultJson = loadJSON("/search?keyword=" + keyword+"&from="+from+"&to="+to+"&category="+category+"&source="+source);
     console.log(resultJson);
     showSearchResult(resultJson);
