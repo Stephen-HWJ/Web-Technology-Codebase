@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from processing import headlines, get_sources, get_everything
+from processing import headlines, get_sources, get_everything, newsapi
 
 application = Flask(__name__)
 
@@ -21,7 +21,7 @@ def search():
     from_date = request.args.get('from')
     to_date = request.args.get('to')
     source = request.args.get('source')
-    return jsonify({'everything': get_everything(q=keyword, from_param=from_date, to=to_date, sources=source)})
+    return jsonify(get_everything(q=keyword, from_param=from_date, to=to_date, sources=source))
 
 
 @application.route('/sources')
