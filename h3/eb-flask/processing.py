@@ -20,6 +20,19 @@ def get_freq_words():
     return sorted(freq_word.items(), key=lambda kv: kv[1], reverse=True)[:30]
 
 
+def get_short(description: str):
+    description_list = description.split(' ')
+    result = ""
+    for des in description_list:
+        if len(result + des) <= 75:
+            result += des + " "
+        else:
+            result = result[:-1]
+            result += "..."
+            break
+    return result
+
+
 def get_everything(q, from_param, to, sources):
     if sources == 'all':
         everything_dict = newsapi.get_everything(q=q, from_param=from_param, to=to, language='en',
@@ -33,16 +46,15 @@ def get_everything(q, from_param, to, sources):
     else:
         sources = everything_dict['articles']
         for source in sources:
-            # if not article['source'] or not article['source']['id'] or not article['source']['name']:
-            #     return False
             if not source['author'] or not source['title'] or not source['description'] or not source['url']:
                 continue
-            if not source['urlToImage'] or not source['publishedAt']:
+            if not source['urlToImage'] or not source['publishedAt'] or not source['source']['name']:
                 continue
             result.append({'urlToImage': source['urlToImage'], 'title': source['title'],
                            'description': source['description'], 'author': source['author'],
-                           'source': source['source']['name'], 'date': source['publishedAt'], 'link': source['url']})
-    return result
+                           'source': source['source']['name'], 'date': source['publishedAt'],
+                           'link': source['url'], 'short': get_short(source['description'])})
+    return result[:7]
 
 
 def check_keys(article):
