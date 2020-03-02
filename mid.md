@@ -67,4 +67,28 @@ for (var i = num - 1; i >= 0; i --){
 4. add event
 5. multiselection
 
+## Special questions
+
+4. How do you sign up for a domain name, say www.indotennis.com?
+You register the domain name with an ICANN approved registrar.
+
+5. Name two critical features of your web server you will need to configure in order to host the website?
+Server Root, Document Root, Location of Server side scripts
+
+10. What file or file(s) have to be created/set in order to establish a secure directory?
+.htaccess and .htpasswd
+
+String: startsWith, endsWith, includes
+```javascript
+re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+re.test()
+```
+
+```javascript
+xmlhttp.open("GET", "url", false)
+xmlhttp.send()
+```
+
+
+
 
