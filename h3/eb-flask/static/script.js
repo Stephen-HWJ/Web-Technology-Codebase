@@ -81,11 +81,12 @@ function getEveryDateFormat(dateStr) {
 
 function getDateString(date){
     const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    if (month < 10){
-        return year + "-0" + month + "-" + day;
-    }
+    let month = date.getMonth() + 1;
+    if (month < 10)
+        month = "0"+ month;
+    let day = date.getDate();
+    if (day < 10)
+        day = "0" + day;
     return year + "-" + month + "-" + day;
 }
 
@@ -94,7 +95,11 @@ function getDate() {
     const aWeekFromToday = new Date(today - 1000*3600*24*7);
 
     document.getElementById('to').value = getDateString(today);
+    // console.log(today);
+    // console.log(getDateString(today));
+    // console.log(document.getElementById('to').value);
     document.getElementById('from').value = getDateString(aWeekFromToday);
+    // console.log(document.getElementById('from').value);
 }
 
 function showDetail(card) {
