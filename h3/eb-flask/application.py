@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from processing import headlines, get_sources, get_everything, newsapi
+from processing import headlines, get_sources, get_everything
 
 application = Flask(__name__)
 
