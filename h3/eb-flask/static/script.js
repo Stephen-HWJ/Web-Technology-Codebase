@@ -226,7 +226,7 @@ function getWords() {
     const freqWords = headlineJson['freq'];
     let myWords = [];
     for (let i = 0; i < freqWords.length; i++){
-        myWords.push({'word': freqWords[i][0], 'size': freqWords[i][1]*6});
+        myWords.push({'word': freqWords[i][0], 'size': freqWords[i][1]*2});
     }
     return myWords;
 }
