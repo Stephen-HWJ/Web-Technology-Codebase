@@ -1,7 +1,7 @@
-function loadJSON(url) {
+function loadJSON(url, func) {
     let jsonObj = "";
     let xmlhttp = new XMLHttpRequest();
-    xmlhttp.onload = function() {
+    xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === 4){
             if (xmlhttp.status === 200){
                 try{
@@ -9,6 +9,7 @@ function loadJSON(url) {
                 } catch (e){
                     alert("Json file parsing error!");
                 }
+                func(jsonObj);
             } else{
                 alert("File not found!");
             }
@@ -17,7 +18,7 @@ function loadJSON(url) {
     xmlhttp.onerror = function() {
         alert("File not found in err!");
     };
-    xmlhttp.open("GET", url, false);
+    xmlhttp.open("GET", url, true);
     xmlhttp.send();
     return jsonObj;
 }
@@ -43,7 +44,7 @@ function switchPage(dest) {
     }
 }
 
-function addHeadlines(src, num) {
+function addHeadlines(headlineJson, src, num) {
     const headlineSrc = headlineJson[src];
     let innerHTML = "";
     for (let i = 0; i < num; i++) {
@@ -59,13 +60,14 @@ function addHeadlines(src, num) {
 }
 
 function getSource() {
-    const sourceJson = loadJSON("/source?category=" + document.getElementById('category').value);
+    loadJSON("/source?category=" + document.getElementById('category').value, function (sourceJson) {
     let innerHTML = "<option value=\'all\'>all</option>";
     for (let i = 0; i < sourceJson['sources'].length; i++) {
         const oneSource = sourceJson['sources'][i];
         innerHTML += "<option value='"+Object.values(oneSource)[0]+"'>" + Object.keys(oneSource)[0]+"</option>";
     }
     document.getElementById('source').innerHTML = innerHTML;
+    });
 }
 
 function getEveryDateFormat(dateStr) {
@@ -193,78 +195,101 @@ function doSearch(){
         return false;
     }
 
-    const resultJson = loadJSON("/search?keyword=" + keyword+"&from="+from+"&to="+to+"&category="+category+"&source="+source);
-    console.log(resultJson);
-    if (resultJson['status']==='error'){
-        alert(resultJson['message']);
-        return false;
+    function getResultJson(resultJson) {
+        console.log(resultJson);
+        if (resultJson['status']==='error'){
+            alert(resultJson['message']);
+        }
+        showSearchResult(resultJson);
     }
-    showSearchResult(resultJson);
+
+    loadJSON("/search?keyword=" + keyword+"&from="+from+"&to="+to+"&category="+category+"&source="+source, getResultJson);
     return false;
 }
 
 let pageStatus = 'news';
-const headlineJson = loadJSON('/headlines');
 
-addHeadlines('slide', 5);
-addHeadlines('cnn', 4);
-addHeadlines('fox-news', 4);
-getSource();
-getDate();
+function showMainPage() {
+
+    loadJSON('/headlines', showMainPageHelper);
+}
+
+showMainPage();
 
 
-let displaySlideID = 0;
-document.getElementById('slide_'+displaySlideID).style.display = 'inline-block';
-const intervalID = setInterval(function () {
-    document.getElementById('slide_'+displaySlideID).style.display = 'none';
-    displaySlideID = (displaySlideID + 1) % 5;
-    document.getElementById('slide_'+displaySlideID).style.display = 'inline-block';
-    // console.log(displaySlideID);
-}, 3000);
+function showMainPageHelper(headlineJson) {
+    addHeadlines(headlineJson, 'slide', 5);
+    addHeadlines(headlineJson, 'cnn', 4);
+    addHeadlines(headlineJson, 'fox-news', 4);
+    getSource();
+    getDate();
 
-function getWords() {
-    const freqWords = headlineJson['freq'];
-    let myWords = [];
-    for (let i = 0; i < freqWords.length; i++){
-        myWords.push({'word': freqWords[i][0], 'size': freqWords[i][1]*2});
+    let displaySlideID = 0;
+    document.getElementById('slide_' + displaySlideID).style.display = 'inline-block';
+    const intervalID = setInterval(function () {
+        document.getElementById('slide_' + displaySlideID).style.display = 'none';
+        displaySlideID = (displaySlideID + 1) % 5;
+        document.getElementById('slide_' + displaySlideID).style.display = 'inline-block';
+        // console.log(displaySlideID);
+    }, 3000);
+
+    function rescale(freq, min = 15, max = 50) {
+        const size_min = freq[freq.length - 1][1];
+        const scale = (max - min) / (freq[0][1] - freq[freq.length - 1][1]);
+        for (let i = 0; i < freq.length; i++) {
+            freq[i][1] = Math.round(min + scale * (freq[i][1] - size_min));
+        }
+        return freq;
     }
-    return myWords;
+
+    function getWords() {
+        const freqWords = rescale(headlineJson['freq']);
+        let myWords = [];
+        for (let i = 0; i < freqWords.length; i++) {
+            myWords.push({'word': freqWords[i][0], 'size': freqWords[i][1]});
+        }
+        return myWords;
+    }
+
+    const myWords = getWords();
+
+    const layout = d3.layout.cloud()
+        .size([350, 300])
+        .words(myWords.map(function (d) {
+            return {text: d.word, size: d.size, test: "haha"};
+        }))
+        .padding(5)
+        .rotate(function () {
+            return ~~(Math.random() * 2) * 90;
+        })
+        .font("Impact")
+        .fontSize(function (d) {
+            return d.size;
+        })
+        .on("end", draw);
+
+    layout.start();
+
+    function draw(words) {
+        d3.select("#wordCloud").append("svg").style("background", "#f3f3f3")
+            .attr("width", layout.size()[0])
+            .attr("height", layout.size()[1])
+            .append("g")
+            .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+            .selectAll("text")
+            .data(words)
+            .enter().append("text")
+            .style("font-size", function (d) {
+                return d.size + "px";
+            })
+            .style("font-family", "Impact")
+            .attr("text-anchor", "middle")
+            .attr("transform", function (d) {
+                return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+            })
+            .text(function (d) {
+                return d.text;
+            });
+    }
+
 }
-
-const myWords = getWords();
-
-const layout = d3.layout.cloud()
-    .size([350, 300])
-    .words(myWords.map(function (d) {
-        return {text: d.word, size: d.size, test: "haha"};
-    }))
-    .padding(5)
-    .rotate(function () {
-        return ~~(Math.random() * 2) * 90;
-    })
-    .font("Impact")
-    .fontSize(function (d) {
-        return d.size;
-    })
-    .on("end", draw);
-
-layout.start();
-
-function draw(words) {
-  d3.select("#wordCloud").append("svg").style("background", "#f3f3f3")
-      .attr("width", layout.size()[0])
-      .attr("height", layout.size()[1])
-    .append("g")
-      .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
-    .selectAll("text")
-      .data(words)
-    .enter().append("text")
-      .style("font-size", function(d) { return d.size + "px"; })
-      .style("font-family", "Impact")
-      .attr("text-anchor", "middle")
-      .attr("transform", function(d) {
-        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-      })
-      .text(function(d) { return d.text; });
-}
-
