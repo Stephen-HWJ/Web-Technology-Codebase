@@ -17,7 +17,7 @@ def get_freq_words():
     with open('stopwords_en.txt') as f:
         stop_words = set([i[:-1] for i in f.readlines()])
     for word in set(words):
-        if word and word not in stop_words:
+        if word and (word not in stop_words):
             freq_word[word] = words.count(word)
     return sorted(freq_word.items(), key=lambda kv: kv[1], reverse=True)[:30]
 
