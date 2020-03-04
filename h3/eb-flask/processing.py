@@ -98,8 +98,8 @@ def get_headlines(source='cnn', page_size=30):
 newsapi = NewsApiClient(api_key='8f156cdcc290483d8475ee55fcc8c3d9')
 cnn_headline = get_headlines(source='cnn')
 fox_headline = get_headlines(source='fox-news')
-slides = get_headlines(source='', page_size=100)
+slides = get_headlines(source='', page_size=30)
 freq_words = get_freq_words()
 headlines = {'cnn': cnn_headline[:4], 'fox-news': fox_headline[:4], 'slide': slides[:5], 'freq': freq_words}
-news_sources = get_sources()
-get_everything(q='test', from_param='2020-02-20', to='2020-02-21', sources='cnn')
+# news_sources = get_sources()
+# get_everything(q='test', from_param='2020-02-20', to='2020-02-21', sources='cnn')
