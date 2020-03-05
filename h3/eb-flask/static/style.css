@@ -5,11 +5,10 @@ body {
     font-family: Georgia,serif;
 }
 
-.button {
-    width: 250px;
-    top: 0;
+.button_wrapper {
+    width: 230px;
     float: left;
-    display: inline-block;
+    height: 900px;
 }
 
 .button * {
@@ -20,7 +19,7 @@ body {
     border: 1px solid #a5a2a2;
     transition-duration: 0.4s;
     font-family: Georgia, serif;
-
+    display: block;
 }
 
 .up_button {

@@ -49,7 +49,7 @@ function addHeadlines(headlineJson, src, num) {
     let innerHTML = "";
     for (let i = 0; i < num; i++) {
         innerHTML += "<div class='"+ src +"_element' id='" + src + "_" + i + "'>";
-        innerHTML += "<img src="+ headlineSrc[i]['urlToImage'] +" alt='slide'"+i+">";
+        innerHTML += "<img src="+ headlineSrc[i]['urlToImage'] + " alt='slide'"+i+">";
         innerHTML += "<div class='text'>";
         innerHTML += "<h2>" + headlineSrc[i]['title'] + "</h2>";
         innerHTML += "<p>" + headlineSrc[i]['description'] + "</p></div>";
@@ -143,7 +143,7 @@ function clearSearch() {
 function showSearchResult(resultJson) {
     let results = resultJson['everything'];
     if (results.length === 0){
-        document.getElementById("search_result").innerHTML = "No results"
+        document.getElementById("search_result").innerHTML = "No results";
         return;
     }
     let innerHTML = "";
@@ -154,7 +154,7 @@ function showSearchResult(resultJson) {
         } else {
             innerHTML += "<div class='every_card_short'>";
         }
-        innerHTML += `<img src='${result['urlToImage']}' height='250px'><div class='every_text'>`;
+        innerHTML += `<img src='${result['urlToImage']}' height='250px' alt='result'><div class='every_text'>`;
         innerHTML += `<h2 class='every_title'>${result['title']}</h2>`;
         innerHTML += `<div class='every_detail'><p><b>Author: </b>${result['author']}</p>`;
         innerHTML += `<p><b>Source: </b>${result['source']}</p><p><b>Date: </b>${getEveryDateFormat(result['date'])}</p><p>${result['description']}</p>`;
@@ -226,7 +226,7 @@ function showMainPageHelper(headlineJson) {
 
     let displaySlideID = 0;
     document.getElementById('slide_' + displaySlideID).style.display = 'inline-block';
-    const intervalID = setInterval(function () {
+    setInterval(function () {
         document.getElementById('slide_' + displaySlideID).style.display = 'none';
         displaySlideID = (displaySlideID + 1) % 5;
         document.getElementById('slide_' + displaySlideID).style.display = 'inline-block';
