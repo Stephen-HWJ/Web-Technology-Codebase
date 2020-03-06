@@ -218,9 +218,9 @@ showMainPage();
 
 
 function showMainPageHelper(headlineJson) {
-    addHeadlines(headlineJson, 'slide', 5);
-    addHeadlines(headlineJson, 'cnn', 4);
-    addHeadlines(headlineJson, 'fox-news', 4);
+    addHeadlines(headlineJson, 'slide', headlineJson['slide'].length);
+    addHeadlines(headlineJson, 'cnn', headlineJson['cnn'].length);
+    addHeadlines(headlineJson, 'fox-news', headlineJson['fox-news'].length);
     getSource();
     getDate();
 
