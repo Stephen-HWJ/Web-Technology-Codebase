@@ -67,6 +67,7 @@ body {
 
 .slide_element .text {
     position: absolute;
+    width: 100%;
     color: white;
     bottom: 0;
     background-color: rgba(5, 5, 5, 0.5);
