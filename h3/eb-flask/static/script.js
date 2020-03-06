@@ -73,11 +73,12 @@ function getSource() {
 function getEveryDateFormat(dateStr) {
     const date = new Date(dateStr);
     const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    if (month < 10){
-        return "0" + month + "/" + day + "/" + year;
-    }
+    let month = date.getMonth() + 1;
+    if (month < 10)
+        month = "0"+ month;
+    let day = date.getDate();
+    if (day < 10)
+        day = "0" + day;
     return month + "/" + day + "/" + year;
 }
 
