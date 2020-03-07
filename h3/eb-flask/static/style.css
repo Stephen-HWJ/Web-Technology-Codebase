@@ -264,6 +264,9 @@ select {
     cursor: pointer;
 }
 
+.every_card_long .close_button:active {
+    color: red;
+}
 
 .every_card_short .every_detail {
     display: none;
