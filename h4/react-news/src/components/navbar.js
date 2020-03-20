@@ -1,8 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar';
-import { Form, FormControl, Button } from "react-bootstrap";
+import { FaBookmark} from 'react-icons/fa'
+import {Navbar, Nav, OverlayTrigger, Tooltip} from 'react-bootstrap';
+
+import { Form, FormControl } from "react-bootstrap";
+import MySwitch from "./switch";
+
+
+
 import '../css/navbar.css';
 
 function MyNavbar() {
@@ -21,6 +25,33 @@ function MyNavbar() {
                 <Nav.Link href="/shop">Technology</Nav.Link>
                 <Nav.Link href="/shop">Sports</Nav.Link>
             </Nav>
+                <Nav pullright={"true"}>
+                    <Navbar.Brand>
+                        <OverlayTrigger
+                            rootClose={true}
+                            placement={'bottom'}
+                            overlay={
+                                <Tooltip id='tooltip-top2'>
+                                    Bookmark
+                                </Tooltip>
+                            }
+                        >
+                            <FaBookmark />
+                        </OverlayTrigger>
+                    </Navbar.Brand>
+                        {/*// The toggle is hidden in 1) favorites 2) search 3) article page*/}
+                        <Navbar.Brand>
+                            NYTimes
+                        </Navbar.Brand>
+                        <Nav.Link>
+                        {/*<>*/}
+                            <MySwitch />
+                        {/*</>*/}
+                        </Nav.Link>
+                        <Navbar.Brand>
+                            Guardian
+                        </Navbar.Brand>
+                </Nav>
             </Navbar.Collapse>
         </Navbar>
     );
