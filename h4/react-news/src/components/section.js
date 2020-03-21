@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import MyBounceLoader from "./loader";
 
 const serverUrl = "https://nodejs-hwj.appspot.com";
-
 
 class SectionPage extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class SectionPage extends Component {
         fetch(fetchUrl)
             .then(res => res.json())
             .then(data => {
-                console.log(data["returnArray"]);
+                console.log(data);
                 this.setState({
                     articles: data["returnArray"],
                     loading: false
@@ -36,7 +36,7 @@ class SectionPage extends Component {
 
     render() {
         return (
-            <h1>Show news here!</h1>
+            <>{this.state.loading ? <MyBounceLoader /> : <h1>Show news here!</h1>}</>
         );
     }
 }
