@@ -19,17 +19,18 @@ function guardianDataProcess(data) {
 	let returnArray = [];
 	for (var i = 0; i < resultsArray.length; i++) {
 		result = {"title": resultsArray[i].webTitle};
-		console.log(resultsArray[i].blocks.main.elements[0].assets.length);
-		if (resultsArray[i].blocks.main.elements[0].assets.length>0) {
-			result["image"] = resultsArray[i].blocks.main.elements[0].assets[resultsArray[i].blocks.main.elements[0].assets.length-1];
-		} else {
+		// console.log(resultsArray[i].blocks.main.elements[0].assets.length);
+		if (!resultsArray[i].blocks.main || !resultsArray[i].blocks.main.elements || !resultsArray[i].blocks.main.elements[0].assets || resultsArray[i].blocks.main.elements[0].assets.length===0) {
 			result["image"] = guardian_img;
+		} else {
+			result["image"] = resultsArray[i].blocks.main.elements[0].assets[resultsArray[i].blocks.main.elements[0].assets.length-1];
 		}
 		// result["image"] = resultsArray[i].blocks.main.elements[0].assests.length>0 ? resultsArray[i].blocks.main.elements[0].assests[length-1] : guardian_img;
 		result["section"] = resultsArray[i].sectionId;
 		result["date"] = resultsArray[i].webPublicationDate;
 		result["description"] = resultsArray[i].blocks.body[0].bodyTextSummary;
 		returnArray.push(result);
+		console.log(result)
 	}
 	return {"returnArray": returnArray.slice(0, 10)};
 }
@@ -37,13 +38,13 @@ function guardianDataProcess(data) {
 function nytDataProcess(data) {
 	var returnArray = [];
 	if (data.status != 'OK'){
-		return {"returnArray": data};
+		return {"err": data};
 	} else {
 		var results = data.results;
 		for (var i = 0; i < results.length; i++) {
 			var result = results[i];
 			var rData = {"title": result.title};
-			if (result.multimedia.length == 0 || result.multimedia[0].width < 200){
+			if (!result.multimedia || result.multimedia.length == 0 || result.multimedia[0].width < 200){
 				rData["image"] = "https://upload.wikimedia.org/wikipedia/commons/0/0e/Nytimes_hq.jpg";
 			} else {
 				rData["image"] = result.multimedia[0].url;
@@ -52,6 +53,7 @@ function nytDataProcess(data) {
 			rData["date"] = result.published_date;
 			rData["description"] = result.abstract;
 			returnArray.push(rData);
+			console.log(rData);
 		}
 	}
 
@@ -82,7 +84,7 @@ app.get('/guardian/:section', (req, res) => {
       res.send(guardianDataProcess(data));
    })
    .catch(err => {
-      res.send({'error': 'fetch error'});
+      res.send({'error': err});
    });
 
 });
@@ -98,7 +100,7 @@ app.get('/nyt/:section', (req, res) => {
       res.send(nytDataProcess(data));
    })
    .catch(err => {
-      res.send({'error': 'fetch error'});
+      res.send({'error': err});
    });
 });
 
@@ -110,7 +112,7 @@ app.get('/test/nyt', (req, res) => {
       res.send(data);
    })
    .catch(err => {
-      res.send({'error': 'fetch error'});
+      res.send({'error': err});
    });
 });
 
