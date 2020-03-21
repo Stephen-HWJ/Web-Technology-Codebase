@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './components/home';
 import Shop from './components/shop';
 import Error from "./components/error";
 import MyNavbar from "./components/navbar";
+import SectionPage from "./components/section";
 import './App.css';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
     <main>
       <MyNavbar />
       <Switch>
-        <Route path='/' component={Home} exact />
+        <Route path='/' component={SectionPage} exact />
         <Route path='/shop' component={Shop} />
         <Route component={Error} />
       </Switch>
