@@ -15,6 +15,7 @@ class MySwitch extends Component {
     render() {
         return (
             <label>
+                <span>NYTimes</span>
                 <Switch
                     onChange={this.handleChange}
                     uncheckedIcon={false}
@@ -23,6 +24,8 @@ class MySwitch extends Component {
                     offColor={'#dddddd'}
                     checked={this.state.checked}
                 />
+                <span>Guardian</span>
+
             </label>
         );
     }

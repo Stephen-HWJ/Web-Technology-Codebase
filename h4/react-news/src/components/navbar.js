@@ -26,7 +26,7 @@ function MyNavbar() {
                 <Nav.Link href="/shop">Sports</Nav.Link>
             </Nav>
                 <Nav pullright={"true"}>
-                    <Navbar.Brand>
+                    <Navbar.Text>
                         <OverlayTrigger
                             rootClose={true}
                             placement={'bottom'}
@@ -38,19 +38,10 @@ function MyNavbar() {
                         >
                             <FaBookmark />
                         </OverlayTrigger>
-                    </Navbar.Brand>
-                        {/*// The toggle is hidden in 1) favorites 2) search 3) article page*/}
-                        <Navbar.Brand>
-                            NYTimes
-                        </Navbar.Brand>
-                        <Nav.Link>
-                        {/*<>*/}
-                            <MySwitch />
-                        {/*</>*/}
-                        </Nav.Link>
-                        <Navbar.Brand>
-                            Guardian
-                        </Navbar.Brand>
+                    </Navbar.Text>
+                    <Nav.Link>
+                    <MySwitch />
+                    </Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

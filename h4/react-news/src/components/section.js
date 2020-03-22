@@ -9,7 +9,7 @@ class SectionPage extends Component {
         super(props);
 
         this.state = {
-            section: "technology",
+            section: "home",
             loading: true,
             articles: []
         }

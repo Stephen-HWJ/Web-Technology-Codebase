@@ -47,6 +47,14 @@ class MyBadge extends React.Component {
                 },
                 text: section.toUpperCase()
             });
+        } else {
+            this.setState({
+                backgroundStyle: {
+                    backgroundColor: backgroundColorJson["other"],
+                    color: textColorJson["other"],
+                },
+                text: section.toUpperCase()
+            });
         }
     }
 
