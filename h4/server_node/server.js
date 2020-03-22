@@ -9,7 +9,8 @@ const guardian_key = "9ee2a116-fe34-40b3-a5af-fbbf20724bd4";
 const guardian_img = "https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png";
 
 const nyt_api = "https://api.nytimes.com/svc/topstories/v2/";
-const nyt_key = ".json?api-key=jbCOd2UUEnht6m84577J7N59NPj8MwT7";https://api.nytimes.com/svc/topstories/v2/world.json?api-key=jbCOd2UUEnht6m84577J7N59NPj8MwT7
+const nyt_key = ".json?api-key=jbCOd2UUEnht6m84577J7N59NPj8MwT7";
+// https://api.nytimes.com/svc/topstories/v2/world.json?api-key=jbCOd2UUEnht6m84577J7N59NPj8MwT7
 
 function guardianDataProcess(data) {
 	if (data.response.status === "error") {
@@ -27,6 +28,7 @@ function guardianDataProcess(data) {
 		}
 		// result["image"] = resultsArray[i].blocks.main.elements[0].assests.length>0 ? resultsArray[i].blocks.main.elements[0].assests[length-1] : guardian_img;
 		result["section"] = resultsArray[i].sectionId;
+		result["url"] = resultsArray[i].webUrl;
 		result["date"] = resultsArray[i].webPublicationDate;
 		result["description"] = resultsArray[i].blocks.body[0].bodyTextSummary;
 		returnArray.push(result);
@@ -50,6 +52,7 @@ function nytDataProcess(data) {
 				rData["image"] = result.multimedia[0].url;
 			}
 			rData["section"] = result.section;
+			rData["url"] = result.url;
 			rData["date"] = result.published_date;
 			rData["description"] = result.abstract;
 			returnArray.push(rData);
