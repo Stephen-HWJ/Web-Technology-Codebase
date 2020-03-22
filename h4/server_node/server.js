@@ -23,7 +23,7 @@ function guardianDataProcess(data) {
 		if (!resultsArray[i].blocks.main || !resultsArray[i].blocks.main.elements || !resultsArray[i].blocks.main.elements[0].assets || resultsArray[i].blocks.main.elements[0].assets.length===0) {
 			result["image"] = guardian_img;
 		} else {
-			result["image"] = resultsArray[i].blocks.main.elements[0].assets[resultsArray[i].blocks.main.elements[0].assets.length-1];
+			result["image"] = resultsArray[i].blocks.main.elements[0].assets[resultsArray[i].blocks.main.elements[0].assets.length-1].file;
 		}
 		// result["image"] = resultsArray[i].blocks.main.elements[0].assests.length>0 ? resultsArray[i].blocks.main.elements[0].assests[length-1] : guardian_img;
 		result["section"] = resultsArray[i].sectionId;
