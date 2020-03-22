@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MyBounceLoader from "./loader";
+import Article from "./article";
 
 const serverUrl = "https://nodejs-hwj.appspot.com";
 
@@ -36,7 +37,16 @@ class SectionPage extends Component {
 
     render() {
         return (
-            <>{this.state.loading ? <MyBounceLoader /> : <h1>Show news here!</h1>}</>
+            this.state.loading ?
+                <MyBounceLoader /> :
+                <>
+                {this.state.articles.map((article, index) =>
+                    <Article image={article.image}
+                             key={index}
+                             title={article.title}
+                             description={article.description}
+                             date={article.date.slice(0, 10)}
+            />)}</>
         );
     }
 }
