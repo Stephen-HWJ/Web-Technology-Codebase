@@ -9,7 +9,7 @@ class SectionPage extends Component {
         super(props);
 
         this.state = {
-            section: "home",
+            section: "technology",
             loading: true,
             articles: []
         }
@@ -32,21 +32,15 @@ class SectionPage extends Component {
     };
 
     componentDidMount() {
-        this.fetchArticles("guardian");
+        this.fetchArticles("nyt");
     }
 
     render() {
         return (
             this.state.loading ?
                 <MyBounceLoader /> :
-                <>
-                {this.state.articles.map((article, index) =>
-                    <Article image={article.image}
-                             key={index}
-                             title={article.title}
-                             description={article.description}
-                             date={article.date.slice(0, 10)}
-            />)}</>
+                this.state.articles.map((article, index) =>
+                    <Article article={article} key={index}/>)
         );
     }
 }
