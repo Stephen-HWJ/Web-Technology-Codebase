@@ -73,6 +73,9 @@ app.get('/guardian/:section', (req, res) => {
 	if (req.params.section === "home") {
 		api_url += "search?api-key="+guardian_key+"&section=(sport|business|technology|politics)&show-blocks=all";
 	} else {
+		if (req.params.section === "sports") {
+			req.params.section = "sport"
+		}
 		api_url += req.params.section + "?api-key="+guardian_key+"&show-blocks=all";
 	}
 	let res_data = "";
