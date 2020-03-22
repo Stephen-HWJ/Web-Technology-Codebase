@@ -15,7 +15,7 @@ function Article(props) {
                     <Col xs={12} md={9}>
                     <Card.Title className={"font-italic font-weight-bold"}>{props.article.title}</Card.Title>
                     <Card.Text>
-                        <TextTruncate line={3} text={props.article.description} />
+                        <TextTruncate element={"span"} line={3} text={props.article.description} />
                     </Card.Text>
                     <Card.Text>
                         <span className={"font-italic"}>{props.article.date.slice(0, 10)}</span>
