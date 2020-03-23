@@ -19,11 +19,11 @@ function MyNavbar() {
             <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
                 <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/shop">World</Nav.Link>
-                <Nav.Link href="/shop">Politics</Nav.Link>
-                <Nav.Link href="/shop">Business</Nav.Link>
-                <Nav.Link href="/shop">Technology</Nav.Link>
-                <Nav.Link href="/shop">Sports</Nav.Link>
+                <Nav.Link href="/section/world">World</Nav.Link>
+                <Nav.Link href="/section/politics">Politics</Nav.Link>
+                <Nav.Link href="/section/business">Business</Nav.Link>
+                <Nav.Link href="/section/technology">Technology</Nav.Link>
+                <Nav.Link href="/section/sports">Sports</Nav.Link>
             </Nav>
                 <Nav pullright={"true"}>
                     <Navbar.Text>

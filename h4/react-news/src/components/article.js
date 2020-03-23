@@ -5,7 +5,7 @@ import MyBadge from "./badge";
 import MyShare from "./share";
 import "../css/article.css"
 
-function Article(props) {
+function ArticleCard(props) {
     return (
         <Card className="article shadow m-3">
             <Card.Body>
@@ -32,4 +32,4 @@ function Article(props) {
     );
 }
 
-export default Article;
+export default ArticleCard;
