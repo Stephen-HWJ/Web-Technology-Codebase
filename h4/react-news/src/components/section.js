@@ -34,16 +34,12 @@ class SectionPage extends Component {
         this.fetchArticles("nyt");
     }
 
-    handleClick() {
-        console.log('The link was clicked.');
-    }
-
     render() {
         return (
             this.state.loading ?
                 <MyBounceLoader /> :
                 this.state.articles.map((article, index) =>
-                    <ArticleCard article={article} key={index}  onClick={this.handleClick}/>)
+                    <ArticleCard article={article} key={index}/>)
         );
     }
 }
