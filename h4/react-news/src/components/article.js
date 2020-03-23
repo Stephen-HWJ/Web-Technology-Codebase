@@ -1,13 +1,21 @@
 import React from "react";
 import { Card, Row, Col, Image } from "react-bootstrap";
+import { useHistory } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate';
 import MyBadge from "./badge";
 import MyShare from "./share";
 import "../css/article.css"
 
 function ArticleCard(props) {
+    let history = useHistory();
+
+    function handleClick() {
+        // console.log("/article/" + props.article.id);
+        history.push("/article?=" + props.article.id);
+    }
+
     return (
-        <Card className="article shadow m-3">
+        <Card className="article shadow m-3" onClick={handleClick}>
             <Card.Body>
                 <Row>
                     <Col xs={12} md={3}>
