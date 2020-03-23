@@ -7,6 +7,7 @@ app.use(cors());
 const guardian_api = "https://content.guardianapis.com/";
 const guardian_key = "9ee2a116-fe34-40b3-a5af-fbbf20724bd4";
 const guardian_img = "https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png";
+// https://content.guardianapis.com/search?api-key=9ee2a116-fe34-40b3-a5af-fbbf20724bd4&section=(sport|business|technology|politics)&show-blocks=all
 
 const nyt_api = "https://api.nytimes.com/svc/topstories/v2/";
 const nyt_key = ".json?api-key=jbCOd2UUEnht6m84577J7N59NPj8MwT7";
@@ -20,7 +21,7 @@ function guardianDataProcess(data) {
 	let returnArray = [];
 	for (var i = 0; i < resultsArray.length; i++) {
 		result = {"title": resultsArray[i].webTitle};
-		// console.log(resultsArray[i].blocks.main.elements[0].assets.length);
+		result["id"] = resultsArray[i].id;
 		if (!resultsArray[i].blocks.main || !resultsArray[i].blocks.main.elements || !resultsArray[i].blocks.main.elements[0].assets || resultsArray[i].blocks.main.elements[0].assets.length===0) {
 			result["image"] = guardian_img;
 		} else {
@@ -32,9 +33,26 @@ function guardianDataProcess(data) {
 		result["date"] = resultsArray[i].webPublicationDate;
 		result["description"] = resultsArray[i].blocks.body[0].bodyTextSummary;
 		returnArray.push(result);
-		console.log(result)
 	}
 	return {"returnArray": returnArray.slice(0, 10)};
+}
+
+function guardianContentProcess(data) {
+	if (data.response.status === "error") {
+		return {"content": data};
+	}
+	let content = data.response.content;
+	let result = {"title": content.webTitle,
+				  "date": content.webPublicationDate,
+				  "description": content.blocks.body[0].bodyTextSummary};
+	if (!content.blocks.main || !content.blocks.main.elements || 
+		content.blocks.main.elements.length === 0 || !content.blocks.main.elements[0].assets || 
+		content.blocks.main.elements[0].assets.length === 0) {
+		result["image"] = "http://csci571.com/hw/hw8/images/guardian.png";
+	} else {
+		result["image"] = content.blocks.main.elements[0].assets[content.blocks.main.elements[0].assets.length - 1].file;
+	}
+	return {"content": result};
 }
 
 function nytDataProcess(data) {
@@ -53,14 +71,35 @@ function nytDataProcess(data) {
 			}
 			rData["section"] = result.section;
 			rData["url"] = result.url;
+			rData["id"] = result.url;
 			rData["date"] = result.published_date;
 			rData["description"] = result.abstract;
 			returnArray.push(rData);
-			console.log(rData);
 		}
 	}
 
 	return {"returnArray": returnArray.slice(0, 10)};
+}
+
+function nytContentProcess(data) {
+	if (data.response.status === "error") {
+		return {"content": data};
+	}
+	let content = data.response.docs[0];
+	let result = {"title": content.headline.main,
+				  "date": content.pub_date,
+				  "description": content.abstract};
+	for (var i = 0; i < content.multimedia.length; i++) {
+		let img = content.multimedia[i];
+		if (img.width >= 2000) {
+			result["image"] = "https://nytimes.com/" + img.url
+			break;
+		}
+	}
+	if (!result["image"]) {
+		result["image"] = "http://csci571.com/hw/hw8/images/nytimes.jpg"
+	}
+	return {"content": result};
 }
 
 app.get('/', (req, res) => {
@@ -111,7 +150,6 @@ app.get('/nyt/:section', (req, res) => {
 });
 
 app.get('/test/nyt', (req, res) => {
-	console.log("https://nodejs-hwj.appspot.com/nyt/home");
    fetch("https://nodejs-hwj.appspot.com/nyt/home")
    .then(res => res.json())
    .then(data => {
@@ -121,6 +159,30 @@ app.get('/test/nyt', (req, res) => {
       res.send({'error': err});
    });
 });
+
+app.get('/article/:source/*', (req, res) => {
+	let api_url = ""
+	if (req.params.source === "guardian") {
+		api_url += guardian_api + req.params[0] + "?api-key=" + guardian_key + "&show-blocks=all";
+	} else if (req.params.source === "nyt") {
+		api_url += 'https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=web_url:("'+req.params[0]+'")&api-key=jbCOd2UUEnht6m84577J7N59NPj8MwT7';
+	} else {
+		res.send({'error': "wrong source api"});
+	}
+   fetch(api_url)
+   .then(res => res.json())
+   .then(data => {
+	   	if (req.params.source === "guardian") {
+	      res.send(guardianContentProcess(data));
+	  }else {
+	  	res.send(nytContentProcess(data));
+	  }
+   })
+   .catch(err => {
+      res.send({'error': err});
+   });
+});
+
 
 // Listen to the App Engine-specified port, or 8080 otherwise
 const PORT = process.env.PORT || 8080;
