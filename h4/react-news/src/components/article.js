@@ -9,9 +9,20 @@ import "../css/article.css"
 function ArticleCard(props) {
     let history = useHistory();
 
-    function handleClick() {
+    function handleClick(event) {
         // console.log("/article/" + props.article.id);
-        history.push("/article?=" + props.article.id);
+        // history.push("/article?=" + props.article.id);
+        // event.preventDefault();
+        // event.stopPropagation();
+        // event.nativeEvent.stopImmediatePropagation();
+        // @TODO: Change to new way of preventEvent()
+        if(!event.target.outerHTML.includes("<path") && !event.target.outerHTML.includes("circle") && !event.target.outerHTML.includes("aria-hidden")){
+            history.push("/article?=" + props.article.id);
+        }
+        else{
+            event.stopPropagation();
+        }
+
     }
 
     return (

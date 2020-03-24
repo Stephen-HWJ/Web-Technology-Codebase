@@ -1,6 +1,6 @@
 import React from "react";
 import MyBounceLoader from "./loader";
-
+import ContentCard from "./contentCard";
 
 class ArticleContent extends React.Component {
     constructor(props) {
@@ -8,7 +8,7 @@ class ArticleContent extends React.Component {
         this.state = {
             loading: true,
             id: this.props.location.search.slice(2,),
-            article: {},
+            article: NaN,
         }
     }
 
@@ -18,10 +18,10 @@ class ArticleContent extends React.Component {
             .then(res => res.json())
             .then(data => {
                 this.setState({
-                    articles: data["content"],
+                    article: data["content"],
                     loading: false
                 });
-                console.log(data);
+                console.log(this.state);
             })
             .catch(err => {
                 console.log("fetch error", err);
@@ -29,14 +29,14 @@ class ArticleContent extends React.Component {
     };
 
     componentDidMount() {
-        this.fetchArticles("nyt", this.state.id);
+        this.fetchArticles("guardian", this.state.id);
     }
 
     render() {
-        return (<>
-            {this.state.loading ?
-                <MyBounceLoader /> :
-                <p>done</p>}</>
+        return (<>{this.state.loading ?
+                    <MyBounceLoader /> :
+                    <ContentCard article={this.state.article}/>
+                }</>
         );
     }
 }
