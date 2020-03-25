@@ -9,6 +9,7 @@
     "bootstrap": "^4.4.1",
     "commentbox.io": "^2.0.0",
     "emotion": "^10.0.27",
+    "history": "^4.10.1",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
     "qs": "^6.9.2",

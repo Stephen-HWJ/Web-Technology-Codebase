@@ -4,14 +4,17 @@ import Switch from "react-switch";
 class MySwitch extends Component {
     constructor(props) {
         super(props);
-        this.state = { checked: false };
+        this.state = { checked: localStorage.getItem("news_src") ?
+                localStorage.getItem("news_src") === "guardian" : false };
         this.handleChange = this.handleChange.bind(this);
     }
+
 
     handleChange(checked) {
         this.setState({ checked });
         localStorage.setItem("news_src", checked ? "guardian" : "nyt");
         console.log(localStorage.getItem("news_src"));
+        window.location.reload();
     }
 
     componentDidMount() {
