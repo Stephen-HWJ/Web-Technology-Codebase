@@ -1,23 +1,15 @@
 import React from "react";
 import { FaBookmark} from 'react-icons/fa'
-import {Navbar, Nav, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {Navbar, Nav, OverlayTrigger, Tooltip, Form, FormControl, Button} from 'react-bootstrap';
 import SearchBox from "./searchBox";
 import MySwitch from "./switch";
-
-
 
 import '../css/navbar.css';
 
 function MyNavbar() {
     return (
         <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-            {/*<MediaQuery maxDeviceWidth = {767}>*/}
-                <div style={{width:"20%"}}>
-                    <SearchBox
-                        // refresh = {this.state.refreshCount}
-                    />
-                </div>
-            {/*</MediaQuery>*/}
+            <div style={{width:"20%"}}><SearchBox /></div>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">

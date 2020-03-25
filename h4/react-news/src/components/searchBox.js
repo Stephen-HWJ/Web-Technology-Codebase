@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import AsyncSelect from 'react-select/async';
+import { withRouter } from 'react-router-dom';
 
-export default class SearchBox extends Component<*, State> {
+class SearchBox extends Component {
     state = {
         inputValue: '',
         results: []
@@ -21,7 +22,6 @@ export default class SearchBox extends Component<*, State> {
             const resultsRaw = data.suggestionGroups[0].searchSuggestions;
             const results = resultsRaw.map(result => ({ value: result.displayText, label: result.displayText }));
             this.setState({ results });
-            console.log(this.state);
         } catch (error) {
             console.error(`Error fetching search ${inputValue}`);
         }
@@ -34,15 +34,29 @@ export default class SearchBox extends Component<*, State> {
         return inputValue;
     };
 
+    handleChange = (option) => {
+        console.log('/search?=' + option.value);
+        // this.thisHistory.push('/search?=' + option.value);
+        const { history } = this.props;
+        if (history)
+            history.push('/search?=' + option.value);
+    };
+
     render() {
         return (
-            <div>
-                <AsyncSelect
+            // <Form style={{width:"20%"}} >
+            <AsyncSelect
                     cacheOptions
+                    noOptionsMessage={() => "No Match"}
+                    placeholder={"Enter keyword .."}
                     loadOptions={this.filterColors}
                     onInputChange={this.handleInputChange}
-                />
-            </div>
+                    onChange = {this.handleChange}
+            />
+            // </Form>
         );
     }
 }
+
+// export default SearchBox;
+export default withRouter(SearchBox);
