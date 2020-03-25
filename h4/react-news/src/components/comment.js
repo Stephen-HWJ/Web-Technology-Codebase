@@ -13,8 +13,9 @@ class MyCommentBox extends React.Component {
     render() {
         // @TODO: https://commentbox.io/docs for further notice of
         //  article-wise comment
+        console.log("mounting " + this.props.id);
         return (
-            <div className="commentbox" />
+            <div className="commentbox" id={this.props.id}/>
         );
     }
 }

@@ -17,11 +17,13 @@ class ContentCard extends React.Component {
 
     render() {
         const {article} = this.props;
+        console.log(article);
+        console.log(this.props.id);
         return <><Card className={"shadow m-3"}>
             <Card.Body>
-                <Card.Title className={"font-italic font-weight-bold"}>{this.props.article.title}</Card.Title>
+                <Card.Title className={"font-italic font-weight-bold"}>{article.title}</Card.Title>
                 <Card.Subtitle className="font-italic">
-                    {this.props.article.date.slice(0, 10)}
+                    {article.date.slice(0, 10)}
                     {/*@TODO: change the url for share*/}
                     <FacebookShareButton
                         url={"https://github.com/"}
@@ -39,14 +41,12 @@ class ContentCard extends React.Component {
                         <EmailIcon size={28} round/>
                     </EmailShareButton>
                 </Card.Subtitle>
-                <Card.Img variant={"top"} src={this.props.article.image}/>
+                <Card.Img variant={"top"} src={article.image}/>
                 <Card.Text>
-                    {this.props.article.description}
+                    {article.description}
                 </Card.Text>
-                {/*<Card.Link href="#">Card Link</Card.Link>*/}
-                {/*<Card.Link href="#">Another Link</Card.Link>*/}
             </Card.Body>
-        </Card><MyCommentBox/>
+        </Card><MyCommentBox id={this.props.id} />
         </>
     }
 }

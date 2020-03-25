@@ -7,7 +7,7 @@ class ArticleContent extends React.Component {
         super(props);
         this.state = {
             loading: true,
-            id: this.props.location.search.slice(2,),
+            id: this.props.location.search.slice(4,),
             article: NaN,
         }
     }
@@ -21,7 +21,7 @@ class ArticleContent extends React.Component {
                     article: data["content"],
                     loading: false
                 });
-                console.log(this.state);
+                // console.log(this.state);
             })
             .catch(err => {
                 console.log("fetch error", err);
@@ -35,7 +35,7 @@ class ArticleContent extends React.Component {
     render() {
         return (<>{this.state.loading ?
                     <MyBounceLoader /> :
-                    <ContentCard article={this.state.article}/>
+                    <ContentCard article={this.state.article} id={this.state.id}/>
                 }</>
         );
     }

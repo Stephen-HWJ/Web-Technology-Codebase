@@ -17,7 +17,7 @@ function ArticleCard(props) {
         // event.nativeEvent.stopImmediatePropagation();
         // @TODO: Change to new way of preventEvent()
         if(!event.target.outerHTML.includes("<path") && !event.target.outerHTML.includes("circle") && !event.target.outerHTML.includes("aria-hidden")){
-            history.push("/article?=" + props.article.id);
+            history.push("/article?id=" + props.article.id);
         }
         else{
             event.stopPropagation();
