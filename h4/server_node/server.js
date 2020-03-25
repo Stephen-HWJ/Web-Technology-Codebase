@@ -113,7 +113,7 @@ app.get('/api/:param1/and/:param2', (req, res) => {
 app.get('/guardian/:section', (req, res) => {
 	let api_url = guardian_api;
 	if (req.params.section === "home") {
-		api_url += "search?api-key="+guardian_key+"&section=(sport|business|technology|politics)&show-blocks=all";
+		api_url += "search?api-key="+guardian_key+"&section=(sport|business|technology|politics|world)&show-blocks=all";
 	} else {
 		if (req.params.section === "sports") {
 			req.params.section = "sport"
