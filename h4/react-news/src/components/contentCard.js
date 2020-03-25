@@ -17,8 +17,6 @@ class ContentCard extends React.Component {
 
     render() {
         const {article} = this.props;
-        console.log(article);
-        console.log(this.props.id);
         return <><Card className={"shadow m-3"}>
             <Card.Body>
                 <Card.Title className={"font-italic font-weight-bold"}>{article.title}</Card.Title>

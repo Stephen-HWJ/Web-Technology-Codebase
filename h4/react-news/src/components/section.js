@@ -31,7 +31,7 @@ class SectionPage extends Component {
     };
 
     componentDidMount() {
-        this.fetchArticles("guardian");
+        this.fetchArticles(localStorage.getItem("news_src"));
     }
 
     render() {

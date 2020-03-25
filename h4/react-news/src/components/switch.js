@@ -10,6 +10,14 @@ class MySwitch extends Component {
 
     handleChange(checked) {
         this.setState({ checked });
+        localStorage.setItem("news_src", checked ? "guardian" : "nyt");
+        console.log(localStorage.getItem("news_src"));
+    }
+
+    componentDidMount() {
+        if (localStorage.getItem("news_src")){
+            this.setState({checked: localStorage.getItem("news_src") === "guardian"})
+        }
     }
 
     render() {

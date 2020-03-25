@@ -21,7 +21,7 @@ class ArticleContent extends React.Component {
                     article: data["content"],
                     loading: false
                 });
-                // console.log(this.state);
+                console.log(this.state);
             })
             .catch(err => {
                 console.log("fetch error", err);
@@ -29,7 +29,7 @@ class ArticleContent extends React.Component {
     };
 
     componentDidMount() {
-        this.fetchArticles("guardian", this.state.id);
+        this.fetchArticles(localStorage.getItem("news_src"), this.state.id);
     }
 
     render() {
