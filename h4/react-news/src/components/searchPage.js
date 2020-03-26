@@ -1,13 +1,50 @@
 import React from "react";
+import MyBounceLoader from "./loader";
+import SearchCard from "./searchCard";
+import { Row, Col } from 'react-bootstrap';
 
-function SearchPage(props) {
-    let state = {
+class SearchPage extends React.Component {
+    state = {
         loading: true,
-        id: props.location.search.slice(2,),
-        article: NaN,
+        articles: [],
     };
 
-    return <h3>Search page {state.id}</h3>;
+    searchKeyword = this.props.location.search.slice(2,);
+
+    fetchArticles (src) {
+        let fetchUrl = "https://nodejs-hwj.appspot.com/search/" + src + "/" + this.searchKeyword;
+        fetch(fetchUrl)
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    articles: this.state.articles.concat(data["search"]),
+                });
+                if (src === "guardian")
+                    this.setState({loading: false});
+                console.log(this.state.articles);
+            })
+            .catch(err => {
+                console.log("fetch error", err);
+            });
+    };
+
+    componentDidMount() {
+        this.fetchArticles('nyt');
+        this.fetchArticles('guardian');
+    }
+
+    render(){
+        return (<><Row>{this.state.loading ?
+                <MyBounceLoader /> :
+                // <p>this</p>
+
+                this.state.articles.map((article, index) =>
+                    <Col md = {3} xs ={12}>
+                    <SearchCard article={article} key={index}/></Col>)
+
+            }</Row></>
+        );
+    };
 }
 
 export default SearchPage;
