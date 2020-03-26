@@ -58,7 +58,7 @@ function guardianSearchProcess(data) {
 		// result["description"] = resultsArray[i].blocks.body[0].bodyTextSummary;
 		returnArray.push(result);
 	}
-	return {"returnArray": returnArray.slice(0, 10)};
+	return {"search": returnArray.slice(0, 5)};
 }
 
 function guardianContentProcess(data) {
@@ -76,7 +76,7 @@ function guardianContentProcess(data) {
 	} else {
 		result["image"] = content.blocks.main.elements[0].assets[content.blocks.main.elements[0].assets.length - 1].file;
 	}
-	return {"search": result};
+	return {"content": result};
 }
 
 function nytDataProcess(data) {
@@ -148,7 +148,7 @@ function nytSearchProcess(data) {
 		}
 		returnArray.push(result);
 	}
-	return {"search": returnArray.slice(0, 10)};
+	return {"search": returnArray.slice(0, 5)};
 }
 
 app.get('/', (req, res) => {
