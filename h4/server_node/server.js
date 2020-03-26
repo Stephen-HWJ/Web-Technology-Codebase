@@ -37,6 +37,30 @@ function guardianDataProcess(data) {
 	return {"returnArray": returnArray.slice(0, 10)};
 }
 
+function guardianSearchProcess(data) {
+	if (data.response.status === "error") {
+		return {"returnArray": data};
+	} 
+	let resultsArray = data.response.results;
+	let returnArray = [];
+	for (var i = 0; i < resultsArray.length; i++) {
+		result = {"title": resultsArray[i].webTitle};
+		result["id"] = resultsArray[i].id;
+		if (!resultsArray[i].blocks.main || !resultsArray[i].blocks.main.elements || !resultsArray[i].blocks.main.elements[0].assets || resultsArray[i].blocks.main.elements[0].assets.length===0) {
+			result["image"] = guardian_img;
+		} else {
+			result["image"] = resultsArray[i].blocks.main.elements[0].assets[resultsArray[i].blocks.main.elements[0].assets.length-1].file;
+		}
+		// result["image"] = resultsArray[i].blocks.main.elements[0].assests.length>0 ? resultsArray[i].blocks.main.elements[0].assests[length-1] : guardian_img;
+		result["section"] = resultsArray[i].sectionId;
+		result["url"] = resultsArray[i].webUrl;
+		result["date"] = resultsArray[i].webPublicationDate;
+		// result["description"] = resultsArray[i].blocks.body[0].bodyTextSummary;
+		returnArray.push(result);
+	}
+	return {"returnArray": returnArray.slice(0, 10)};
+}
+
 function guardianContentProcess(data) {
 	if (data.response.status === "error") {
 		return {"content": data};
@@ -52,7 +76,7 @@ function guardianContentProcess(data) {
 	} else {
 		result["image"] = content.blocks.main.elements[0].assets[content.blocks.main.elements[0].assets.length - 1].file;
 	}
-	return {"content": result};
+	return {"search": result};
 }
 
 function nytDataProcess(data) {
@@ -100,6 +124,31 @@ function nytContentProcess(data) {
 		result["image"] = "http://csci571.com/hw/hw8/images/nytimes.jpg"
 	}
 	return {"content": result};
+}
+
+function nytSearchProcess(data) {
+	if (data.response.status === "error") {
+		return {"content": data};
+	}
+	let returnArray = [];
+	for (var i = 0; i < data.response.docs.length; i++) {
+		let content = data.response.docs[i];
+		let result = {"title": content.headline.main,
+					  "date": content.pub_date,
+					  "url": content.web_url, "id": content.web_url, "section": content.news_desk};
+		for (var j = 0; j < content.multimedia.length; j++) {
+			let img = content.multimedia[j];
+			if (img.width >= 2000) {
+				result["image"] = "https://nytimes.com/" + img.url
+				break;
+			}
+		}
+		if (!result["image"]) {
+			result["image"] = "http://csci571.com/hw/hw8/images/nytimes.jpg"
+		}
+		returnArray.push(result);
+	}
+	return {"search": returnArray.slice(0, 10)};
 }
 
 app.get('/', (req, res) => {
@@ -176,6 +225,29 @@ app.get('/article/:source/*', (req, res) => {
 	      res.send(guardianContentProcess(data));
 	  }else {
 	  	res.send(nytContentProcess(data));
+	  }
+   })
+   .catch(err => {
+      res.send({'error': err});
+   });
+});
+
+app.get('/search/:source/*', (req, res) => {
+	let api_url = "";
+	if (req.params.source === "guardian") {
+		api_url += guardian_api + "search?q=" + req.params[0] +"&api-key=" + guardian_key + "&show-blocks=all";
+	} else if (req.params.source === "nyt") {
+		api_url += "https://api.nytimes.com/svc/search/v2/articlesearch.json?q="+req.params[0]+"&api-key=jbCOd2UUEnht6m84577J7N59NPj8MwT7";
+	} else {
+		res.send({'error': "wrong source api"});
+	}
+	   fetch(api_url)
+   .then(res => res.json())
+   .then(data => {
+	   	if (req.params.source === "guardian") {
+	      res.send(guardianSearchProcess(data));
+	  }else {
+	  	res.send(nytSearchProcess(data));
 	  }
    })
    .catch(err => {
