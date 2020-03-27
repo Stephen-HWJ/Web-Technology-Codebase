@@ -8,6 +8,7 @@ import {
     TwitterIcon,
     TwitterShareButton
 } from "react-share";
+import TextTruncate from 'react-text-truncate'
 import MyCommentBox from "./comment";
 import MyBookmarkIcon from "./bookmark";
 
@@ -43,7 +44,7 @@ class ContentCard extends React.Component {
                 </Card.Subtitle>
                 <Card.Img variant={"top"} src={article.image}/>
                 <Card.Text>
-                    {article.description}
+                    <TextTruncate line={6} element={"span"} truncateText="…" text={article.description}/>
                 </Card.Text>
             </Card.Body>
         </Card><MyCommentBox id={this.props.id} />

@@ -5,6 +5,7 @@ import SearchBox from "./searchBox";
 import MySwitch from "./switch";
 
 import '../css/navbar.css';
+import ReactTooltip from "react-tooltip";
 
 function MyNavbar() {
     useEffect(() => {
@@ -27,19 +28,9 @@ function MyNavbar() {
                 <Nav.Link href="/section/sports">Sports</Nav.Link>
             </Nav>
                 <Nav pullright={"true"}>
-                    <Navbar.Text>
-                        <OverlayTrigger
-                            rootClose={true}
-                            placement={'bottom'}
-                            overlay={
-                                <Tooltip id='tooltip-top2'>
-                                    Bookmark
-                                </Tooltip>
-                            }
-                        >
-                            <FaBookmark />
-                        </OverlayTrigger>
-                    </Navbar.Text>
+                    <Nav.Link href="/favourite">
+                        <FaBookmark data-tip="Bookmark" data-for={"navbar"}/>
+                        <ReactTooltip place="bottom" id={"navbar"} type="dark" effect="solid"/></Nav.Link>
                     <Nav.Link>
                     <MySwitch />
                     </Nav.Link>
