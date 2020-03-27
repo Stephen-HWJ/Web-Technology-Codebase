@@ -12,6 +12,9 @@ function MyNavbar() {
         if (!localStorage.getItem("favouriteArticles")){
             localStorage.setItem("favouriteArticles", JSON.stringify({}));
         }
+        if (!localStorage.getItem("news_src")){
+            localStorage.setItem("news_src", "guardian");
+        }
     });
 
     return (
