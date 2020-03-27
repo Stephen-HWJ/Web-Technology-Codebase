@@ -1,12 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { FaBookmark} from 'react-icons/fa'
-import {Navbar, Nav, OverlayTrigger, Tooltip, Form, FormControl, Button} from 'react-bootstrap';
+import {Navbar, Nav, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import SearchBox from "./searchBox";
 import MySwitch from "./switch";
 
 import '../css/navbar.css';
 
 function MyNavbar() {
+    useEffect(() => {
+        if (!localStorage.getItem("favouriteArticles")){
+            localStorage.setItem("favouriteArticles", JSON.stringify([]));
+        }
+    });
+
     return (
         <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
             <div style={{width:"20%"}}><SearchBox /></div>

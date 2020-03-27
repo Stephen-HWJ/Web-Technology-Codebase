@@ -39,8 +39,8 @@ class SearchPage extends React.Component {
                 // <p>this</p>
 
                 this.state.articles.map((article, index) =>
-                    <Col md = {3} xs ={12}>
-                    <SearchCard article={article} key={index}/></Col>)
+                    <Col md = {3} xs ={12} key={index}>
+                    <SearchCard article={article} /></Col>)
 
             }</Row></>
         );

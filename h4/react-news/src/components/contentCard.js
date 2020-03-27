@@ -9,6 +9,7 @@ import {
     TwitterShareButton
 } from "react-share";
 import MyCommentBox from "./comment";
+import MyBookmarkIcon from "./bookmark";
 
 class ContentCard extends React.Component {
     constructor(props) {
@@ -38,6 +39,7 @@ class ContentCard extends React.Component {
                     >
                         <EmailIcon size={28} round/>
                     </EmailShareButton>
+                    <MyBookmarkIcon id={this.props.id}/>
                 </Card.Subtitle>
                 <Card.Img variant={"top"} src={article.image}/>
                 <Card.Text>

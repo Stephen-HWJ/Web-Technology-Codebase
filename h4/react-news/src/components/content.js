@@ -21,7 +21,7 @@ class ArticleContent extends React.Component {
                     article: data["content"],
                     loading: false
                 });
-                console.log(this.state);
+                console.log(this.state.article);
             })
             .catch(err => {
                 console.log("fetch error", err);
