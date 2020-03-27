@@ -8,7 +8,7 @@ class ArticleContent extends React.Component {
         this.state = {
             loading: true,
             id: this.props.location.search.slice(4,),
-            article: NaN,
+            article: NaN
         }
     }
 
@@ -17,11 +17,11 @@ class ArticleContent extends React.Component {
         fetch(fetchUrl)
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 this.setState({
                     article: data["content"],
                     loading: false
                 });
-                console.log(this.state.article);
             })
             .catch(err => {
                 console.log("fetch error", err);
@@ -29,7 +29,9 @@ class ArticleContent extends React.Component {
     };
 
     componentDidMount() {
-        this.fetchArticles(localStorage.getItem("news_src"), this.state.id);
+        console.log(this.state.id.slice(0, 4));
+        let src = this.state.id.slice(0, 4) === "http" ? "nyt" : "guardian";
+        this.fetchArticles(src, this.state.id);
     }
 
     render() {

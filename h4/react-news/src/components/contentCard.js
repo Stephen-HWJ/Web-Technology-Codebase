@@ -39,7 +39,7 @@ class ContentCard extends React.Component {
                     >
                         <EmailIcon size={28} round/>
                     </EmailShareButton>
-                    <MyBookmarkIcon id={this.props.id}/>
+                    <MyBookmarkIcon article={article} id={this.props.id} section={this.props.section}/>
                 </Card.Subtitle>
                 <Card.Img variant={"top"} src={article.image}/>
                 <Card.Text>

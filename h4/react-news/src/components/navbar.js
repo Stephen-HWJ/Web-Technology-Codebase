@@ -9,7 +9,7 @@ import '../css/navbar.css';
 function MyNavbar() {
     useEffect(() => {
         if (!localStorage.getItem("favouriteArticles")){
-            localStorage.setItem("favouriteArticles", JSON.stringify([]));
+            localStorage.setItem("favouriteArticles", JSON.stringify({}));
         }
     });
 

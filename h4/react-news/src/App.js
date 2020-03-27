@@ -5,6 +5,7 @@ import SectionPage from "./components/section";
 import ArticleContent from "./components/content";
 import SearchPage from "./components/searchPage";
 import './App.css';
+import FavouritePage from "./components/favourite";
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
       <Switch>
         <Route path={"/article"} component={ArticleContent} exact/>
         <Route path={"/search"} component={SearchPage} exact/>
+        <Route path={"/favourite"} component={FavouritePage} exact/>
         <Route path='/section/:sec' component={SectionPage} exact />
-        {/*<Route path='/shop' component={Shop} exact />*/}
         <Route component={SectionPage} exact />
       </Switch>
     </main>
