@@ -1,6 +1,8 @@
 import React from "react";
 import FB from "./fabookmark";
 import FBneg from "./faunbookmark";
+import { toast, ToastContainer, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class MyBookmarkIcon extends React.Component{
     state = {
@@ -14,8 +16,10 @@ class MyBookmarkIcon extends React.Component{
 
         let localFav = JSON.parse(localStorage.getItem("favouriteArticles"));
         if (localFav[this.props.id]) {
+            toast("Removing - " + article.title);
             delete localFav[this.props.id];
         } else {
+            toast("Saving " + article.title);
             localFav[this.props.id] = this.props.article;
         }
         localStorage.setItem("favouriteArticles", JSON.stringify(localFav));
@@ -24,10 +28,19 @@ class MyBookmarkIcon extends React.Component{
     };
 
     render () {
-        return this.state.bookmarked ?
+        return <>{this.state.bookmarked ?
                 <span onClick={this.clickHandler}><FB/></span>:
-                <span onClick={this.clickHandler}><FBneg/></span>
-
+                <span onClick={this.clickHandler}><FBneg/></span>}
+                <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={true}
+                    newestOnTop={false}
+                    closeOnClick
+                    draggable
+                    transition={Zoom}
+                />
+            </>
     };
 }
 

@@ -5,6 +5,18 @@ import Image from "react-bootstrap/Image";
 import MyShare from "./share";
 import {useHistory} from "react-router-dom";
 import {MdDelete} from "react-icons/md";
+import { toast, ToastContainer, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure(<ToastContainer
+    position="top-center"
+    autoClose={5000}
+    hideProgressBar={true}
+    newestOnTop={false}
+    closeOnClick
+    draggable
+    transition={Zoom}
+/>);
 
 function SearchCard(props) {
     const { article } = props;
@@ -20,24 +32,26 @@ function SearchCard(props) {
     };
 
     let deleteHandler = (e) => {
-        if(!e.target.outerHTML.includes("<path") && !e.target.outerHTML.includes("circle") && !e.target.outerHTML.includes("aria-hidden")){
+        // if(!e.target.outerHTML.includes("<path") && !e.target.outerHTML.includes("circle") && !e.target.outerHTML.includes("aria-hidden")){
             let fav = JSON.parse(localStorage.getItem("favouriteArticles"));
             console.log(article.id);
             delete fav[article.id];
             localStorage.setItem("favouriteArticles", JSON.stringify(fav));
+            toast("Removing - " + article.title);
             console.log(fav);
-            window.location.reload();
-        }
-        else{
-            e.stopPropagation();
-        }
+            // window.location.reload();
+        // }
+        // else{
+        //     e.stopPropagation();
+        // }
     };
 
     console.log(article);
 
     return (
+        <>
         <Card className="article shadow m-3 d-inline-block" style={{padding: '0'}}>
-            <Card.Body onClick={clickHandler}>
+            <Card.Body>
                 <Card.Title>
                     {article.title}<MyShare title={article.title} url={article.url}/>
                     <MdDelete onClick={deleteHandler}/>
@@ -49,6 +63,16 @@ function SearchCard(props) {
                 </Card.Text>
             </Card.Body>
         </Card>
+        <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            draggable
+            transition={Zoom}
+        />
+        </>
     )
 }
 
