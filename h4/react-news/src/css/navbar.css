@@ -1,16 +1,17 @@
-/* Style using gradient navbar */
-.navbar, .navbar-default {
-    background-image: linear-gradient(to right,#182848 0,#4b6cb7 100%) !important; /* CSS rules marked !important take precedence over later rules. */
-}
-
-.basic-navbar-left{
-    float:left;
+/* override bootstrap navbar colors */
+.navbar,
+.navbar-default {
+    background-image: linear-gradient(to right,#182848 0,#4b6cb7 100%) !important; /* override background image gradient w/ flat color */
 }
 
 .nav-link:hover{
     color: white !important;
 }
 
-.nav-link a{
-    font-size: 15px;
+.tag {
+    color: white !important;
+}
+
+.tag:hover {
+    cursor:default;
 }

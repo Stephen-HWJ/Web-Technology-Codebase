@@ -26,16 +26,18 @@ class MySwitch extends Component {
     render() {
         return (
             <label>
-                <span>NYTimes</span>
+                <span style={{color: "white", padding: "15px"}}>NYTimes</span>
                 <Switch
                     onChange={this.handleChange}
+                    height={25}
+                    width={50}
                     uncheckedIcon={false}
                     checkedIcon={false}
                     onColor={'#2196f3'}
                     offColor={'#dddddd'}
                     checked={this.state.checked}
                 />
-                <span>Guardian</span>
+                <span style={{color: "white", padding: "15px"}}>Guardian</span>
 
             </label>
         );
