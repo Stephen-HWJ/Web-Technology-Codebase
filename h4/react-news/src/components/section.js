@@ -31,6 +31,9 @@ class SectionPage extends Component {
     };
 
     componentDidMount() {
+        if (!localStorage.getItem("news_src")) {
+            localStorage.setItem("news_src", "guardian");
+        }
         this.fetchArticles(localStorage.getItem("news_src"));
     }
 

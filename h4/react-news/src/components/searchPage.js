@@ -18,9 +18,8 @@ class SearchPage extends React.Component {
             .then(data => {
                 this.setState({
                     articles: this.state.articles.concat(data["search"]),
+                    loading: false
                 });
-                if (src === "guardian")
-                    this.setState({loading: false});
                 console.log(this.state.articles);
             })
             .catch(err => {
@@ -29,8 +28,7 @@ class SearchPage extends React.Component {
     };
 
     componentDidMount() {
-        this.fetchArticles('nyt');
-        this.fetchArticles('guardian');
+        this.fetchArticles(localStorage.getItem("news_src"));
     }
 
     render(){
