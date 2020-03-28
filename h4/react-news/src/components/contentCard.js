@@ -19,23 +19,23 @@ class ContentCard extends React.Component {
 
     render() {
         const {article} = this.props;
+        console.log(article);
         return <><Card className={"shadow m-3"}>
             <Card.Body>
                 <Card.Title className={"font-italic font-weight-bold"}>{article.title}</Card.Title>
                 <Card.Subtitle className="font-italic">
                     {article.date.slice(0, 10)}
-                    {/*@TODO: change the url for share*/}
                     <FacebookShareButton
-                        url={"https://github.com/"}
+                        url={article.url}
                         hashtag={"#CSCI_571_NewsApp"}
                     >
                         <FacebookIcon size={28} round />
                     </FacebookShareButton>
-                    <TwitterShareButton url={"https://github.com/"}
+                    <TwitterShareButton url={article.url}
                                         hashtags={["CSCI_571_NewsApp"]}>
                         <TwitterIcon size={28} round/>
                     </TwitterShareButton>
-                    <EmailShareButton url={"https://github.com/"}
+                    <EmailShareButton url={article.url}
                                       subject={"#CSCI_571_NewsApp"}
                     >
                         <EmailIcon size={28} round/>

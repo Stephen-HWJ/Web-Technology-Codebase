@@ -17,7 +17,6 @@ class ArticleContent extends React.Component {
         fetch(fetchUrl)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 this.setState({
                     article: data["content"],
                     loading: false
@@ -29,7 +28,6 @@ class ArticleContent extends React.Component {
     };
 
     componentDidMount() {
-        console.log(this.state.id.slice(0, 4));
         let src = this.state.id.slice(0, 4) === "http" ? "nyt" : "guardian";
         this.fetchArticles(src, this.state.id);
     }

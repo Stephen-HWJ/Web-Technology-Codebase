@@ -23,7 +23,6 @@ function MyNavbar() {
     let showSwitch = () => {
         let sections = ["/", "/section/world", "/section/politics",
             "/section/business", "/section/technology", "section/sports"];
-        console.log(location.pathname);
         return sections.includes(location.pathname);
     };
 
