@@ -3,6 +3,7 @@ import FB from "./fabookmark";
 import FBneg from "./faunbookmark";
 import { toast, ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../css/toastify.css';
 
 class MyBookmarkIcon extends React.Component{
     state = {
