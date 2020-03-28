@@ -9,6 +9,7 @@ import { toast, ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../css/toastify.css';
 import { useLocation } from 'react-router-dom';
+import TextTruncate from "react-text-truncate";
 
 toast.configure(<ToastContainer
     position="top-center"
@@ -65,7 +66,8 @@ function SearchCard(props) {
         <Card className="article shadow m-3 d-inline-block" style={{padding: '0'}}>
             <Card.Body>
                 <Card.Title>
-                    {article.title}<MyShare title={article.title} url={article.url}/>
+                    <TextTruncate line={2} element={"span"} truncateText="…" text={article.title}/>
+                    <MyShare title={article.title} url={article.url}/>
                     {showDelete()? <MdDelete onClick={deleteHandler}/> : null}
                 </Card.Title>
                 <Image src={article.image} thumbnail/>

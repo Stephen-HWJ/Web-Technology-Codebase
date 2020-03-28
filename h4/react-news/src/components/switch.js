@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Switch from "react-switch";
+import {Nav} from "react-bootstrap";
 
 class MySwitch extends Component {
     constructor(props) {
@@ -25,8 +26,8 @@ class MySwitch extends Component {
 
     render() {
         return (
-            <label>
-                <span style={{color: "white", padding: "15px"}}>NYTimes</span>
+            <label  style={{marginTop: "10px", marginBottom: "0"}}>
+                <span style={{color: "white", padding: "15px", verticalAlign: "text-bottom"}}>NYTimes</span>
                 <Switch
                     onChange={this.handleChange}
                     height={25}
@@ -37,7 +38,7 @@ class MySwitch extends Component {
                     offColor={'#dddddd'}
                     checked={this.state.checked}
                 />
-                <span style={{color: "white", padding: "15px"}}>Guardian</span>
+                <span style={{color: "white", padding: "15px", verticalAlign: "text-bottom"}}>Guardian</span>
 
             </label>
         );
