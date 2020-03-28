@@ -54,6 +54,7 @@ function guardianSearchProcess(data) {
 		// result["image"] = resultsArray[i].blocks.main.elements[0].assests.length>0 ? resultsArray[i].blocks.main.elements[0].assests[length-1] : guardian_img;
 		result["section"] = resultsArray[i].sectionId;
 		result["url"] = resultsArray[i].webUrl;
+		result["src"] = "guardian";
 		result["date"] = resultsArray[i].webPublicationDate;
 		// result["description"] = resultsArray[i].blocks.body[0].bodyTextSummary;
 		returnArray.push(result);
@@ -68,7 +69,8 @@ function guardianContentProcess(data) {
 	let content = data.response.content;
 	let result = {"title": content.webTitle,
 				  "date": content.webPublicationDate,
-				  "description": content.blocks.body[0].bodyTextSummary};
+				  "description": content.blocks.body[0].bodyTextSummary,
+				  "section": content.sectionId, "url": content.webUrl};
 	if (!content.blocks.main || !content.blocks.main.elements || 
 		content.blocks.main.elements.length === 0 || !content.blocks.main.elements[0].assets || 
 		content.blocks.main.elements[0].assets.length === 0) {
@@ -111,8 +113,8 @@ function nytContentProcess(data) {
 	}
 	let content = data.response.docs[0];
 	let result = {"title": content.headline.main,
-				  "date": content.pub_date,
-				  "description": content.abstract};
+				  "date": content.pub_date, "url": content.web_url,
+				  "description": content.abstract, "section": content.news_desk};
 	for (var i = 0; i < content.multimedia.length; i++) {
 		let img = content.multimedia[i];
 		if (img.width >= 2000) {
@@ -134,7 +136,7 @@ function nytSearchProcess(data) {
 	for (var i = 0; i < data.response.docs.length; i++) {
 		let content = data.response.docs[i];
 		let result = {"title": content.headline.main,
-					  "date": content.pub_date,
+					  "date": content.pub_date, "src": "nyt",
 					  "url": content.web_url, "id": content.web_url, "section": content.news_desk};
 		for (var j = 0; j < content.multimedia.length; j++) {
 			let img = content.multimedia[j];
