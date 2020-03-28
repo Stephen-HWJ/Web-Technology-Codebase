@@ -11,11 +11,29 @@ import {
 import TextTruncate from 'react-text-truncate'
 import MyCommentBox from "./comment";
 import MyBookmarkIcon from "./bookmark";
+import {MdExpandLess, MdExpandMore} from "react-icons/md";
+import {Element, Link} from 'react-scroll';
 
 class ContentCard extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            expanded: false,
+        };
+        this.myRef = React.createRef()
     }
+
+    expandClick = () => {
+        // if (this.state.expanded) {
+        //     window.scrollTo({top: 0, left: 1, behavior: 'smooth' });
+        // }
+        this.setState({expanded: !this.state.expanded});
+        if (!this.state.expanded) {
+            this.myRef.current.scrollIntoView({behavior: "smooth"});
+        } else {
+            window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+        }
+    };
 
     render() {
         const {article} = this.props;
@@ -43,9 +61,14 @@ class ContentCard extends React.Component {
                     <MyBookmarkIcon article={article} id={this.props.id} section={this.props.section}/>
                 </Card.Subtitle>
                 <Card.Img variant={"top"} src={article.image}/>
-                <Card.Text>
-                    <TextTruncate line={6} element={"span"} truncateText="…" text={article.description}/>
+                <Card.Text ref={this.myRef} >
+                    {this.state.expanded ?
+                        article.description :
+                        <TextTruncate line={6} element={"span"} truncateText="…" text={article.description}/>}
                 </Card.Text>
+                <div className={"float-right"} onClick={this.expandClick}>
+                    {this.state.expanded ? <MdExpandLess  size={"2em"}/> : <MdExpandMore size={"2em"}/> }
+                </div>
             </Card.Body>
         </Card><MyCommentBox id={this.props.id} />
         </>
