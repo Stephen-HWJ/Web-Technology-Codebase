@@ -27,7 +27,7 @@ function MyNavbar() {
     };
 
     return (
-        <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" id={"head"}>
             <div style={{width:"20%"}}><SearchBox /></div>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">

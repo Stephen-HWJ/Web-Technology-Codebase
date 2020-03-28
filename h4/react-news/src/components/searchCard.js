@@ -63,7 +63,7 @@ function SearchCard(props) {
 
     return (
         <>
-        <Card className="article shadow m-2 d-inline-block" >
+        <Card className="shadow m-2 d-inline-block" >
             <Card.Body>
                 <Card.Title>
                     <TextTruncate line={2} element={"span"} truncateText="…" text={article.title}/>

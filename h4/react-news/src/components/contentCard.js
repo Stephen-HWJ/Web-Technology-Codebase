@@ -31,11 +31,11 @@ class ContentCard extends React.Component {
         //     window.scrollTo({top: 0, left: 1, behavior: 'smooth' });
         // }
         this.setState({expanded: !this.state.expanded}, this.callbackFunction);
-        if (!this.state.expanded) {
-            this.myRef.current.scrollIntoView({behavior: "smooth"});
-        } else {
-            window.scrollTo({top: 0, left: 0, behavior: "smooth"});
-        }
+        // if (!this.state.expanded) {
+        //     this.myRef.current.scrollIntoView({behavior: "smooth"});
+        // } else {
+        //     window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+        // }
     };
 
     render() {
@@ -61,15 +61,15 @@ class ContentCard extends React.Component {
                     </Row>
                 </Card.Subtitle>
                 <Card.Img style={{marginTop: "0.5em"}} variant={"top"} src={article.image}/>
-                <Card.Text ref={this.myRef}  >
+                <Card.Text ref={this.myRef}  id={"test"}>
                     {this.state.expanded || this.state.source === "nyt" ?
                         article.description :
-                        <TextTruncate line={6} element={"span"} truncateText="…" text={article.description}/>}
+                        <TextTruncate  line={6} element={"span"} truncateText="…" text={article.description}/>}
                 </Card.Text>
                 {this.state.source === "guardian" ?
-                    <div className={"float-right"} onClick={this.expandClick}>
+                    <a style={{color: "black"}} className={"float-right"} href={this.state.expanded?"#test":"#head"} onClick={this.expandClick}>
                         {this.state.expanded ? <MdExpandLess  size={"2em"}/> : <MdExpandMore size={"2em"}/> }
-                    </div> : null}
+                    </a> : null}
             </Card.Body>
         </Card><MyCommentBox id={this.props.id} />
         </>
