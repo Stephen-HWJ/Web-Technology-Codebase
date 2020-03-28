@@ -34,7 +34,8 @@ class SearchPage extends React.Component {
     }
 
     render(){
-        return (<><Row>{this.state.loading ?
+        return (<><Row><Col xs={12}>
+                <h4>Results</h4></Col>{this.state.loading ?
                 <MyBounceLoader /> :
                 // <p>this</p>
 

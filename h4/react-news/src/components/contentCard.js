@@ -20,7 +20,9 @@ class ContentCard extends React.Component {
         super(props);
         this.state = {
             expanded: false,
-        };
+            source: this.props.id.slice(0, 4) === "http" ? "nyt" : "guardian"
+
+    };
         this.myRef = React.createRef()
     }
 
@@ -28,7 +30,7 @@ class ContentCard extends React.Component {
         // if (this.state.expanded) {
         //     window.scrollTo({top: 0, left: 1, behavior: 'smooth' });
         // }
-        this.setState({expanded: !this.state.expanded});
+        this.setState({expanded: !this.state.expanded}, this.callbackFunction);
         if (!this.state.expanded) {
             this.myRef.current.scrollIntoView({behavior: "smooth"});
         } else {
@@ -38,7 +40,6 @@ class ContentCard extends React.Component {
 
     render() {
         const {article} = this.props;
-        console.log(article);
         return <><Card className={"shadow m-3"}>
             <Card.Body>
                 <Card.Title className={"font-italic h1"}>{article.title}</Card.Title>
@@ -60,14 +61,15 @@ class ContentCard extends React.Component {
                     </Row>
                 </Card.Subtitle>
                 <Card.Img style={{marginTop: "0.5em"}} variant={"top"} src={article.image}/>
-                <Card.Text ref={this.myRef} >
-                    {this.state.expanded ?
+                <Card.Text ref={this.myRef}  >
+                    {this.state.expanded || this.state.source === "nyt" ?
                         article.description :
                         <TextTruncate line={6} element={"span"} truncateText="…" text={article.description}/>}
                 </Card.Text>
-                <div className={"float-right"} onClick={this.expandClick}>
-                    {this.state.expanded ? <MdExpandLess  size={"2em"}/> : <MdExpandMore size={"2em"}/> }
-                </div>
+                {this.state.source === "guardian" ?
+                    <div className={"float-right"} onClick={this.expandClick}>
+                        {this.state.expanded ? <MdExpandLess  size={"2em"}/> : <MdExpandMore size={"2em"}/> }
+                    </div> : null}
             </Card.Body>
         </Card><MyCommentBox id={this.props.id} />
         </>
