@@ -9,7 +9,7 @@ let backgroundColorJson = {
     "sports": "rgb(246, 194, 68)",
     "other": "rgb(110, 117, 124)",
     "guardian": "rgb(20, 40, 74)",
-    "nyt": "rgb(221, 221, 221)"
+    "nytimes": "rgb(221, 221, 221)"
 };
 
 let textColorJson = {
@@ -20,7 +20,7 @@ let textColorJson = {
     "sports": "black",
     "other": "white",
     "guardian": "white",
-    "nyt": "black"
+    "nytimes": "black"
 };
 
 

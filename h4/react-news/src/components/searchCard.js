@@ -7,6 +7,8 @@ import {useHistory} from "react-router-dom";
 import {MdDelete} from "react-icons/md";
 import { toast, ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../css/toastify.css';
+import { useLocation } from 'react-router-dom';
 
 toast.configure(<ToastContainer
     position="top-center"
@@ -46,6 +48,16 @@ function SearchCard(props) {
         // }
     };
 
+    let location = useLocation();
+
+    let getSource = () => {
+        return article.id.slice(0, 4) === "http" ? "NYTIMES" : "GUARDIAN";
+    };
+
+    let showDelete = () => {
+        return location.pathname === "/favourite";
+    };
+
     console.log(article);
 
     return (
@@ -54,12 +66,13 @@ function SearchCard(props) {
             <Card.Body>
                 <Card.Title>
                     {article.title}<MyShare title={article.title} url={article.url}/>
-                    <MdDelete onClick={deleteHandler}/>
+                    {showDelete()? <MdDelete onClick={deleteHandler}/> : null}
                 </Card.Title>
                 <Image src={article.image} thumbnail/>
                 <Card.Text style={{marginTop: '10px'}}>
                     <span className={"font-italic"}>{article.date.slice(0, 10)}</span>
                     <MyBadge text={props.article.section}/>
+                    {showDelete()? <MyBadge text={getSource()}/> : null}
                 </Card.Text>
             </Card.Body>
         </Card>

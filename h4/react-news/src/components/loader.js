@@ -1,18 +1,17 @@
 import React from "react";
 import { BounceLoader } from "react-spinners";
 import {css} from "@emotion/core";
+import "../css/loader.css";
 
 const override = css`
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+  margin-left: 20px;
 `;
 
 function MyBounceLoader() {
-    return <BounceLoader css={override} size={40} color={"#123abc"} loading={true}/>;
+    return <div className="loader">
+                <BounceLoader css={override} size={40} color={"#123abc"}/>
+                <p className={"h4"}>Loading</p>
+            </div> ;
 }
 
 export default MyBounceLoader;
