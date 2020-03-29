@@ -19,10 +19,10 @@ function ArticleCard(props) {
         <Card className="shadow m-3" style={{cursor: "pointer"}} onClick={(e) => handleClick(e)}>
             <Card.Body>
                 <Row>
-                    <Col xs={12} md={3}>
+                    <Col xs={12} sm={4} md={3} xl={2}>
                     <Image src={props.article.image} thumbnail/>
                     </Col>
-                    <Col xs={12} md={9}>
+                    <Col xs={12} sm={8} md={9} xl={10}>
                     <Card.Title className={"font-italic font-weight-bold"}>
                         {props.article.title}
                         <MyShare title={props.article.title} url={props.article.url}/>
