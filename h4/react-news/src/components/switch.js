@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Switch from "react-switch";
-import {Nav} from "react-bootstrap";
 
 class MySwitch extends Component {
     constructor(props) {

@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa'
-import {Navbar, Nav, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {Navbar, Nav} from 'react-bootstrap';
 import SearchBox from "./searchBox";
 import MySwitch from "./switch";
 import { useLocation } from 'react-router-dom';

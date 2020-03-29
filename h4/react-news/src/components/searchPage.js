@@ -35,8 +35,6 @@ class SearchPage extends React.Component {
         return (<><Row className={"p-3"}><Col xs={12}>
                 <h4>Results</h4></Col>{this.state.loading ?
                 <MyBounceLoader /> :
-                // <p>this</p>
-
                 this.state.articles.map((article, index) =>
                     <Col md = {3} xs ={12} key={index} style={{padding: '0'}} >
                     <SearchCard article={article} /></Col>)

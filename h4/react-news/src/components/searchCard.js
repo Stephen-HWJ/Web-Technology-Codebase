@@ -26,27 +26,21 @@ function SearchCard(props) {
     let history = useHistory();
 
     let clickHandler = (e) => {
-        if(!e.target.outerHTML.includes("<path") && !e.target.outerHTML.includes("circle") && !e.target.outerHTML.includes("aria-hidden")){
-            history.push("/article?id=" + article.id);
-        }
-        else{
-            e.stopPropagation();
-        }
+        e.preventDefault();
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
+        history.push("/article?id=" + article.id);
     };
 
     let deleteHandler = (e) => {
-        // if(!e.target.outerHTML.includes("<path") && !e.target.outerHTML.includes("circle") && !e.target.outerHTML.includes("aria-hidden")){
-            let fav = JSON.parse(localStorage.getItem("favouriteArticles"));
-            console.log(article.id);
-            delete fav[article.id];
-            localStorage.setItem("favouriteArticles", JSON.stringify(fav));
-            toast("Removing - " + article.title);
-            console.log(fav);
-            // window.location.reload();
-        // }
-        // else{
-        //     e.stopPropagation();
-        // }
+        console.log("removed " + article.id);
+        e.preventDefault();
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
+        let fav = JSON.parse(localStorage.getItem("favouriteArticles"));
+        delete fav[article.id];
+        localStorage.setItem("favouriteArticles", JSON.stringify(fav));
+        toast("Removing - " + article.title);
     };
 
     let location = useLocation();
@@ -63,7 +57,7 @@ function SearchCard(props) {
 
     return (
         <>
-        <Card className="shadow m-2 d-inline-block" >
+        <Card className="shadow m-2 d-inline-block " onClick={clickHandler} style={{cursor: "pointer"}}>
             <Card.Body>
                 <Card.Title>
                     <TextTruncate line={2} element={"span"} truncateText="…" text={article.title}/>

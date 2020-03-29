@@ -10,23 +10,14 @@ function ArticleCard(props) {
     let history = useHistory();
 
     function handleClick(event) {
-        // console.log("/article/" + props.article.id);
-        // history.push("/article?=" + props.article.id);
-        // event.preventDefault();
-        // event.stopPropagation();
-        // event.nativeEvent.stopImmediatePropagation();
-        // @TODO: Change to new way of preventEvent()
-        if(!event.target.outerHTML.includes("<path") && !event.target.outerHTML.includes("circle") && !event.target.outerHTML.includes("aria-hidden")){
-            history.push("/article?id=" + props.article.id);
-        }
-        else{
-            event.stopPropagation();
-        }
-
+        event.preventDefault();
+        event.stopPropagation();
+        event.nativeEvent.stopImmediatePropagation();
+        history.push("/article?id=" + props.article.id);
     }
 
     return (
-        <Card className="article shadow m-3" onClick={handleClick}>
+        <Card className="article shadow m-3" onClick={(e) => handleClick(e)}>
             <Card.Body>
                 <Row>
                     <Col xs={12} md={3}>
