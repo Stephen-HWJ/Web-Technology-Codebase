@@ -19,3 +19,7 @@
 html {
     scroll-behavior: smooth;
 }
+
+.__react_component_tooltip {
+    padding: 5px !important;
+}

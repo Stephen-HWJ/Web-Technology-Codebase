@@ -14,6 +14,7 @@ import MyBookmarkIcon from "./bookmark";
 import {MdExpandLess, MdExpandMore} from "react-icons/md";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import ReactTooltip from "react-tooltip";
 
 class ContentCard extends React.Component {
     constructor(props) {
@@ -40,13 +41,13 @@ class ContentCard extends React.Component {
                         {article.date.slice(0, 10)}</Col>
                     <Col xs={6} md={2}>
                     <span className={"float-right"}>
-                    <FacebookShareButton url={article.url} hashtag={"#CSCI_571_NewsApp"} >
+                    <FacebookShareButton data-tip="Facebook" data-for={"share"} url={article.url} hashtag={"#CSCI_571_NewsApp"} >
                         <FacebookIcon size={28} round />
                     </FacebookShareButton>
-                    <TwitterShareButton url={article.url} hashtags={["CSCI_571_NewsApp"]}>
+                    <TwitterShareButton data-tip="Twitter" data-for={"share"} url={article.url} hashtags={["CSCI_571_NewsApp"]}>
                         <TwitterIcon size={28} round/>
                     </TwitterShareButton>
-                    <EmailShareButton url={article.url} subject={"#CSCI_571_NewsApp"}>
+                    <EmailShareButton data-tip="Email" data-for={"share"} url={article.url} subject={"#CSCI_571_NewsApp"}>
                         <EmailIcon size={28} round/>
                     </EmailShareButton>
                     <MyBookmarkIcon article={article} id={this.props.id} section={this.props.section}/></span></Col>
@@ -67,6 +68,7 @@ class ContentCard extends React.Component {
                     </a> : null}
             </Card.Body>
         </Card><MyCommentBox id={this.props.id} />
+        <ReactTooltip place="top" id={"share"} type="dark" effect="solid"/>
         </>
     }
 }
