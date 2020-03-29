@@ -15,13 +15,13 @@ function FavouritePage() {
 
     return <>
         {Object.keys(articles).length ?
-            <Row>
+            <Row className={"p-3"}>
                 <Col xs={12}>
                     <h4>Favorites</h4></Col>
                 {Object.keys(articles).map((key, index) =>
-                    <Col md = {3} xs ={12} key={index}>
+                    <Col xs={12} sm={6} md={4} lg={3} key={index} style={{padding: "0"}}>
                     <SearchCard article={articles[key]} onClick={clickHandler} onDelete={deleteHandler}/></Col>)}</Row> :
-            <h4 className={"text-center"}>You have no saved articles</h4>
+            <h4 className={"text-center p-3"}>You have no saved articles</h4>
         }</>;
 }
 

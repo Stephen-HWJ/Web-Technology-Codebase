@@ -51,7 +51,7 @@ function SearchCard(props) {
         <Card className="shadow m-2 d-inline-block " onClick={clickHandler} style={{cursor: "pointer"}}>
             <Card.Body>
                 <Card.Title>
-                    <TextTruncate line={2} element={"span"} truncateText="…" text={article.title}/>
+                    <TextTruncate className={"font-weight-bold font-italic"} line={2} element={"span"} truncateText="…" text={article.title}/>
                     <MyShare title={article.title} url={article.url}/>
                     {showDelete()? <MdDelete onClick={deleteHandler}/> : null}
                 </Card.Title>

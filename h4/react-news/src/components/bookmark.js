@@ -30,7 +30,7 @@ class MyBookmarkIcon extends React.Component{
 
     render () {
         return <>{this.state.bookmarked ?
-                <span onClick={this.clickHandler} style={{textAlign: "right"}}><FB/></span>:
+                <span onClick={this.clickHandler} style={{float: "right"}}><FB/></span>:
                 <span onClick={this.clickHandler} style={{float: "right"}}><FBneg/></span>}
                 <ToastContainer
                     position="top-center"

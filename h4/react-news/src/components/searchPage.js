@@ -35,7 +35,7 @@ class SearchPage extends React.Component {
                 <h4>Results</h4></Col>{this.state.loading ?
                 <MyBounceLoader /> :
                 this.state.articles.map((article, index) =>
-                    <Col md = {3} xs ={12} key={index} style={{padding: '0'}} >
+                    <Col xs={12} sm={6} md={4} lg={3} key={index} style={{padding: '0'}} >
                     <SearchCard article={article} /></Col>)
 
             }</Row></>
