@@ -35,22 +35,24 @@ class ContentCard extends React.Component {
         const {article} = this.props;
         return <><Card className={"shadow m-3"}>
             <Card.Body>
-                <Card.Title className={"font-italic h1"}>{article.title}</Card.Title>
+                <Card.Title style={{fontSize: "18pt", fontStyle: "italic"}}>{article.title}</Card.Title>
                 <Card.Subtitle>
-                    <Row><Col xs={6} md={10} className={"align-bottom;"}>
+                    <Row>
+                        <Col xs={5} className={"font-italic"} style={{paddingRight: "0", verticalAlign: "middle"}}>
                         {article.date.slice(0, 10)}</Col>
-                    <Col xs={6} md={2}>
-                    <span className={"float-right"}>
-                    <FacebookShareButton data-tip="Facebook" data-for={"share"} url={article.url} hashtag={"#CSCI_571_NewsApp"} >
-                        <FacebookIcon size={28} round />
-                    </FacebookShareButton>
-                    <TwitterShareButton data-tip="Twitter" data-for={"share"} url={article.url} hashtags={["CSCI_571_NewsApp"]}>
-                        <TwitterIcon size={28} round/>
-                    </TwitterShareButton>
-                    <EmailShareButton data-tip="Email" data-for={"share"} url={article.url} subject={"#CSCI_571_NewsApp"}>
-                        <EmailIcon size={28} round/>
-                    </EmailShareButton>
-                    <MyBookmarkIcon article={article} id={this.props.id} section={this.props.section}/></span></Col>
+                        <Col style={{paddingLeft: "0", textAlign: "right"}} xs={5}>
+                        <FacebookShareButton data-tip="Facebook" data-for={"share"} url={article.url} hashtag={"#CSCI_571_NewsApp"} >
+                            <FacebookIcon size={28} round />
+                        </FacebookShareButton>
+                        <TwitterShareButton data-tip="Twitter" data-for={"share"} url={article.url} hashtags={["CSCI_571_NewsApp"]}>
+                            <TwitterIcon size={28} round/>
+                        </TwitterShareButton>
+                        <EmailShareButton data-tip="Email" data-for={"share"} url={article.url} subject={"#CSCI_571_NewsApp"}>
+                            <EmailIcon size={28} round/>
+                        </EmailShareButton>
+                        </Col>
+                        <Col xs={2}>
+                        <MyBookmarkIcon article={article} id={this.props.id} section={this.props.section}/></Col>
                     </Row>
                 </Card.Subtitle>
                 <Card.Img style={{marginTop: "0.5em"}} variant={"top"} src={article.image}/>
