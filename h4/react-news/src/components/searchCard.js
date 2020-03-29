@@ -11,16 +11,6 @@ import '../css/toastify.css';
 import { useLocation } from 'react-router-dom';
 import TextTruncate from "react-text-truncate";
 
-toast.configure(<ToastContainer
-    position="top-center"
-    autoClose={5000}
-    hideProgressBar={true}
-    newestOnTop={false}
-    closeOnClick
-    draggable
-    transition={Zoom}
-/>);
-
 function SearchCard(props) {
     const { article } = props;
     let history = useHistory();
@@ -41,6 +31,7 @@ function SearchCard(props) {
         delete fav[article.id];
         localStorage.setItem("favouriteArticles", JSON.stringify(fav));
         toast("Removing - " + article.title);
+        props.onDelete();
     };
 
     let location = useLocation();
