@@ -26,7 +26,7 @@ class MySwitch extends Component {
     render() {
         return (
             <label  style={{marginTop: "10px", marginBottom: "0"}}>
-                <span style={{color: "white", padding: "15px", verticalAlign: "text-bottom"}}>NYTimes</span>
+                <span style={{color: "white", paddingRight: "15px", verticalAlign: "text-bottom", fontSize: "18px"}}>NYTimes</span>
                 <Switch
                     onChange={this.handleChange}
                     height={25}
@@ -37,8 +37,7 @@ class MySwitch extends Component {
                     offColor={'#dddddd'}
                     checked={this.state.checked}
                 />
-                <span style={{color: "white", padding: "15px", verticalAlign: "text-bottom"}}>Guardian</span>
-
+                <span style={{color: "white", paddingLeft: "15px", verticalAlign: "text-bottom", fontSize: "18px"}}>Guardian</span>
             </label>
         );
     }
