@@ -19,8 +19,6 @@ function App() {
         <Route component={SectionPage} exact />
       </Switch>
     </main>
-
-
   );
 }
 

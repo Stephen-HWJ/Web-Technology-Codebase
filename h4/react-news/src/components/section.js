@@ -7,7 +7,6 @@ const serverUrl = "https://nodejs-hwj.appspot.com";
 class SectionPage extends Component {
     constructor(props) {
         super(props);
-        // this.clickHandler = this.clickHandler.bind(this);
         this.state = {
             loading: true,
             articles: []
@@ -24,8 +23,7 @@ class SectionPage extends Component {
                     articles: data["returnArray"],
                     loading: false
                 })
-            })
-            .catch(err => {
+            }, err => {
                 console.log("fetch error", err);
             });
     };

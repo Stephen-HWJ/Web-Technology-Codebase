@@ -27,15 +27,7 @@ class ContentCard extends React.Component {
     }
 
     expandClick = () => {
-        // if (this.state.expanded) {
-        //     window.scrollTo({top: 0, left: 1, behavior: 'smooth' });
-        // }
-        this.setState({expanded: !this.state.expanded}, this.callbackFunction);
-        // if (!this.state.expanded) {
-        //     this.myRef.current.scrollIntoView({behavior: "smooth"});
-        // } else {
-        //     window.scrollTo({top: 0, left: 0, behavior: "smooth"});
-        // }
+        this.setState({expanded: !this.state.expanded});
     };
 
     render() {
@@ -67,7 +59,10 @@ class ContentCard extends React.Component {
                         <TextTruncate  line={6} element={"span"} truncateText="…" text={article.description}/>}
                 </Card.Text>
                 {this.state.source === "guardian" ?
-                    <a style={{color: "black"}} className={"float-right"} href={this.state.expanded?"#test":"#head"} onClick={this.expandClick}>
+                    <a style={{color: "black", cursor: "default"}}
+                       className={"float-right"}
+                       href={this.state.expanded?"#test":"#head"}
+                       onClick={this.expandClick}>
                         {this.state.expanded ? <MdExpandLess  size={"2em"}/> : <MdExpandMore size={"2em"}/> }
                     </a> : null}
             </Card.Body>

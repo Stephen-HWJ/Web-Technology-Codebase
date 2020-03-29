@@ -48,7 +48,7 @@ function MyNavbar() {
                     }
                     <ReactTooltip place="bottom" id={"navbar"} type="dark" effect="solid"/></Nav.Link>
                 <Nav.Item>
-                    {showSwitch()? <MySwitch />:<span/>}
+                    {showSwitch()? <MySwitch />:null}
                 </Nav.Item>
             </Nav>
             </Navbar.Collapse>

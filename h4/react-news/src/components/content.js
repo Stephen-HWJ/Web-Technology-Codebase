@@ -13,7 +13,7 @@ class ArticleContent extends React.Component {
     }
 
     fetchArticles (src, id) {
-        let fetchUrl = "https://nodejs-hwj.appspot.com/article/" + src + "/" + id;
+        let fetchUrl = `https://nodejs-hwj.appspot.com/article/${src}/${id}`;
         fetch(fetchUrl)
             .then(res => res.json())
             .then(data => {
@@ -21,8 +21,7 @@ class ArticleContent extends React.Component {
                     article: data["content"],
                     loading: false
                 });
-            })
-            .catch(err => {
+            }, err => {
                 console.log("fetch error", err);
             });
     };

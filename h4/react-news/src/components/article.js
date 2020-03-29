@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate';
 import MyBadge from "./badge";
 import MyShare from "./share";
-import "../css/article.css"
 
 function ArticleCard(props) {
     let history = useHistory();
@@ -17,7 +16,7 @@ function ArticleCard(props) {
     }
 
     return (
-        <Card className="article shadow m-3" onClick={(e) => handleClick(e)}>
+        <Card className="shadow m-3" style={{cursor: "pointer"}} onClick={(e) => handleClick(e)}>
             <Card.Body>
                 <Row>
                     <Col xs={12} md={3}>
@@ -32,7 +31,7 @@ function ArticleCard(props) {
                         <TextTruncate element={"span"} line={3} text={props.article.description} />
                     </Card.Text>
                     <Card.Text>
-                        <span className={"font-italic"}>{props.article.date.slice(0, 10)}</span>
+                        <span className={"font-italic "}>{props.article.date.slice(0, 10)}</span>
                         <MyBadge text={props.article.section}/>
                     </Card.Text>
                     </Col>

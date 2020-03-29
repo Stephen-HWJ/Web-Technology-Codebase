@@ -12,7 +12,7 @@ class SearchPage extends React.Component {
     searchKeyword = this.props.location.search.slice(2,);
 
     fetchArticles (src) {
-        let fetchUrl = "https://nodejs-hwj.appspot.com/search/" + src + "/" + this.searchKeyword;
+        let fetchUrl = `https://nodejs-hwj.appspot.com/search/${src}/${this.searchKeyword}`;
         fetch(fetchUrl)
             .then(res => res.json())
             .then(data => {
@@ -21,8 +21,7 @@ class SearchPage extends React.Component {
                     loading: false
                 });
                 console.log(this.state.articles);
-            })
-            .catch(err => {
+            }, err => {
                 console.log("fetch error", err);
             });
     };

@@ -12,7 +12,7 @@ class MyCommentBox extends React.Component {
 
     render() {
         return (
-            <div className="commentbox" id={this.props.id}/>
+            <div className="commentBox" id={this.props.id}/>
         );
     }
 }

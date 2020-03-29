@@ -25,7 +25,7 @@ class MyBookmarkIcon extends React.Component{
         }
         localStorage.setItem("favouriteArticles", JSON.stringify(localFav));
         this.setState({bookmarked: !this.state.bookmarked});
-        console.log(localStorage.getItem("favouriteArticles"));
+        console.log(JSON.parse(localStorage.getItem("favouriteArticles")));
     };
 
     render () {

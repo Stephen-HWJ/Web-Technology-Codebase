@@ -44,7 +44,6 @@ class SearchBox extends Component {
 
     render() {
         return (
-            // <Form style={{width:"20%"}} >
             <AsyncSelect
                     cacheOptions
                     noOptionsMessage={() => "No Match"}
@@ -53,7 +52,6 @@ class SearchBox extends Component {
                     onInputChange={this.handleInputChange}
                     onChange = {this.handleChange}
             />
-            // </Form>
         );
     }
 }
