@@ -54,7 +54,7 @@ function SearchCard(props) {
                     <span className={"font-italic"}>{article.date.slice(0, 10)}</span>
 
                     {showDelete()? <span className={"float-right"} ><MyBadge text={props.article.section}/><span> </span><MyBadge text={getSource()}/></span> :
-                        <MyBadge  className={"float-right"}  text={props.article.section}/>}
+                        <span className={"float-right"}><MyBadge  className={"float-right"}  text={props.article.section}/></span>}
                 </Card.Text>
             </Card.Body>
         </Card>

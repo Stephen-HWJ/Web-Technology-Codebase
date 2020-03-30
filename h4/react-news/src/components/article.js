@@ -32,7 +32,7 @@ function ArticleCard(props) {
                     </Card.Text>
                     <Card.Text>
                         <span className={"font-italic "}>{props.article.date.slice(0, 10)}</span>
-                        <MyBadge className={"float-right"}  text={props.article.section}/>
+                        <span className={"float-right"}><MyBadge text={props.article.section}/></span>
                     </Card.Text>
                     </Col>
                 </Row>
