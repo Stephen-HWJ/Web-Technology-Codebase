@@ -38,8 +38,10 @@ class SearchBox extends Component {
         console.log('/search?=' + option.value);
         // this.thisHistory.push('/search?=' + option.value);
         const { history } = this.props;
-        if (history)
+        if (history) {
             history.push('/search?=' + option.value);
+            window.location.reload();
+        }
     };
 
     render() {

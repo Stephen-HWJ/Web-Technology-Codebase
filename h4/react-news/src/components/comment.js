@@ -3,8 +3,8 @@ import commentBox from "commentbox.io";
 
 class MyCommentBox extends React.Component {
     componentDidMount() {
-        this.removeCommentBox = commentBox("5669785102712832-proj");
-        // this.removeCommentBox = commentBox("5631219517620224-proj");
+        // this.removeCommentBox = commentBox("5669785102712832-proj");
+        this.removeCommentBox = commentBox("5631219517620224-proj");
     }
 
     componentWillUnmount() {

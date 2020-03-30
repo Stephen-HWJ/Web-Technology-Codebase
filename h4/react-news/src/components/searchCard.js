@@ -52,8 +52,9 @@ function SearchCard(props) {
                 <Image src={article.image} thumbnail/>
                 <Card.Text style={{marginTop: '10px'}}>
                     <span className={"font-italic"}>{article.date.slice(0, 10)}</span>
-                    <MyBadge text={props.article.section}/>
-                    {showDelete()? <MyBadge text={getSource()}/> : null}
+
+                    {showDelete()? <span className={"float-right"} ><MyBadge text={props.article.section}/><span> </span><MyBadge text={getSource()}/></span> :
+                        <MyBadge  className={"float-right"}  text={props.article.section}/>}
                 </Card.Text>
             </Card.Body>
         </Card>

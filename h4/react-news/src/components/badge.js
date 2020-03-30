@@ -59,7 +59,7 @@ class MyBadge extends React.Component {
     }
 
     render() {
-        return <Badge className={"float-right"} style={this.state.backgroundStyle} variant={"info"}>{this.state.text}</Badge>;
+        return <Badge style={this.state.backgroundStyle} variant={"info"}>{this.state.text}</Badge>;
     }
 }
 
