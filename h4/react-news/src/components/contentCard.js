@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "react-bootstrap/card";
+import {Card} from "react-bootstrap";
 import {
     EmailIcon,
     EmailShareButton,
@@ -12,8 +12,7 @@ import TextTruncate from 'react-text-truncate'
 import MyCommentBox from "./comment";
 import MyBookmarkIcon from "./bookmark";
 import {MdExpandLess, MdExpandMore} from "react-icons/md";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import {Row, Col} from "react-bootstrap";
 import ReactTooltip from "react-tooltip";
 
 class ContentCard extends React.Component {

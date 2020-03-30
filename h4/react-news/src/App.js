@@ -10,6 +10,7 @@ import FavouritePage from "./components/favourite";
 function App() {
   return (
     <main>
+        {/*<h1>Test</h1>*/}
       <MyNavbar />
       <Switch>
         <Route path={"/article"} component={ArticleContent} exact/>

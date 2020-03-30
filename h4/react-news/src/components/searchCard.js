@@ -1,11 +1,9 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
 import MyBadge from "./badge";
-import Image from "react-bootstrap/Image";
+import {Image, Card} from "react-bootstrap";
 import MyShare from "./share";
 import {useHistory} from "react-router-dom";
 import {MdDelete} from "react-icons/md";
-import { toast, ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../css/toastify.css';
 import { useLocation } from 'react-router-dom';
@@ -30,8 +28,7 @@ function SearchCard(props) {
         let fav = JSON.parse(localStorage.getItem("favouriteArticles"));
         delete fav[article.id];
         localStorage.setItem("favouriteArticles", JSON.stringify(fav));
-        toast("Removing - " + article.title);
-        props.onDelete();
+        props.onDelete(article);
     };
 
     let location = useLocation();
@@ -44,10 +41,7 @@ function SearchCard(props) {
         return location.pathname === "/favourite";
     };
 
-    console.log(article);
-
     return (
-        <>
         <Card className="shadow m-2 d-inline-block " onClick={clickHandler} style={{cursor: "pointer"}}>
             <Card.Body>
                 <Card.Title>
@@ -63,16 +57,6 @@ function SearchCard(props) {
                 </Card.Text>
             </Card.Body>
         </Card>
-        <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={true}
-            newestOnTop={false}
-            closeOnClick
-            draggable
-            transition={Zoom}
-        />
-        </>
     )
 }
 

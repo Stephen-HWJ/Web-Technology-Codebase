@@ -1,5 +1,5 @@
 import React from "react";
-import Badge from "react-bootstrap/badge";
+import {Badge} from "react-bootstrap";
 
 let backgroundColorJson = {
     "world": "rgb(124, 78, 255)",
