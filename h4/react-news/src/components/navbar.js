@@ -1,12 +1,13 @@
 import React, {useEffect} from "react";
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa'
 import {Navbar, Nav, Col} from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
+import ReactTooltip from "react-tooltip";
+
 import SearchBox from "./searchBox";
 import MySwitch from "./switch";
-import { useLocation } from 'react-router-dom';
 
 import '../css/navbar.css';
-import ReactTooltip from "react-tooltip";
 
 function MyNavbar() {
     useEffect(() => {
@@ -28,7 +29,7 @@ function MyNavbar() {
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id={"head"}>
-            <Col xs={"9"} sm={"5"} md={"3"} xl={"2"} style={{marginRight: "10px", padding: "0"}}><SearchBox /></Col>
+            <Col xs={"9"} sm={"5"} md={"4"} lg={"3"} xl={"2"} style={{marginRight: "10px", padding: "0"}}><SearchBox /></Col>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto" activeKey={location.pathname}>
@@ -47,10 +48,17 @@ function MyNavbar() {
                         <FaRegBookmark data-tip="Bookmark" data-for={"navbar"} size={20}/>
                     }
                     <ReactTooltip place="bottom" id={"navbar"} type="dark" effect="solid"/></Nav.Link>
-                <Nav.Item>
+                {/*<Nav.Item style={{height: "36px"}}>*/}
                     {showSwitch()?
-                        <MySwitch />:null}
-                </Nav.Item>
+                        <>
+                            <Navbar.Text
+                                style={{color: "white", fontSize: "18px", height: "36px"}}>
+                                NYTimes</Navbar.Text>
+                            <Nav.Link style={{transform: "translateY(-23%)", height: "36px"}}><MySwitch /></Nav.Link>
+                            <Navbar.Text
+                               style={{color: "white", fontSize: "18px", height: "36px"}}>
+                               Guardian</Navbar.Text></>
+                        :null}
             </Nav>
             </Navbar.Collapse>
         </Navbar>
