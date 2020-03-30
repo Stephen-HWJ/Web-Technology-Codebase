@@ -8,30 +8,26 @@ import {
     TwitterIcon,
     TwitterShareButton
 } from "react-share";
+import TextTruncate from 'react-text-truncate'
 import MyCommentBox from "./comment";
 import MyBookmarkIcon from "./bookmark";
 import {MdExpandLess, MdExpandMore} from "react-icons/md";
 import {Row, Col} from "react-bootstrap";
 import ReactTooltip from "react-tooltip";
-import ContentTruncate from "./contentTruncate";
 
 class ContentCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             expanded: false,
-            source: this.props.id.slice(0, 4) === "http" ? "nyt" : "guardian",
-            truncated: false
+            source: this.props.id.slice(0, 4) === "http" ? "nyt" : "guardian"
+
     };
         this.myRef = React.createRef()
     }
 
     expandClick = () => {
         this.setState({expanded: !this.state.expanded});
-    };
-
-    isTruncated = () => {
-        this.setState({truncated: true});
     };
 
     render() {
@@ -62,9 +58,9 @@ class ContentCard extends React.Component {
                 <Card.Text ref={this.myRef}  id={"test"}>
                     {this.state.expanded || this.state.source === "nyt" ?
                         article.description :
-                        <ContentTruncate text={article.description} isTruncate={this.isTruncated}/>}
+                        <TextTruncate line={6} element={"span"} truncateText="…" text={article.description}/>}
                 </Card.Text>
-                {this.state.source === "guardian" && this.state.truncated ?
+                {this.state.source === "guardian" ?
                     <a style={{color: "black", cursor: "default"}}
                        className={"float-right"}
                        href={this.state.expanded?"#test":"#head"}
