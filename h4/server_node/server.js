@@ -32,7 +32,9 @@ function guardianDataProcess(data) {
 		result["url"] = resultsArray[i].webUrl;
 		result["date"] = resultsArray[i].webPublicationDate;
 		result["description"] = resultsArray[i].blocks.body[0].bodyTextSummary;
-		returnArray.push(result);
+		if (result.title && result.id && result.image && result.section && result.url && result.date && result.description) {
+			returnArray.push(result);
+		}
 	}
 	return {"returnArray": returnArray.slice(0, 10)};
 }
@@ -57,9 +59,11 @@ function guardianSearchProcess(data) {
 		result["src"] = "guardian";
 		result["date"] = resultsArray[i].webPublicationDate;
 		// result["description"] = resultsArray[i].blocks.body[0].bodyTextSummary;
-		returnArray.push(result);
+		if (result.title && result.id && result.image && result.section && result.url && result.date && result.src) {
+			returnArray.push(result);
+		}
 	}
-	return {"search": returnArray.slice(0, 5)};
+	return {"search": returnArray.slice(0, 10)};
 }
 
 function guardianContentProcess(data) {
@@ -90,17 +94,25 @@ function nytDataProcess(data) {
 		for (var i = 0; i < results.length; i++) {
 			var result = results[i];
 			var rData = {"title": result.title};
-			if (!result.multimedia || result.multimedia.length == 0 || result.multimedia[0].width < 200){
+			if (!result.multimedia || result.multimedia.length === 0){
 				rData["image"] = "https://upload.wikimedia.org/wikipedia/commons/0/0e/Nytimes_hq.jpg";
 			} else {
-				rData["image"] = result.multimedia[0].url;
+				for (var j = 0; j < result.multimedia.length; j++) {
+					let img = result.multimedia[j];
+					if (img.width >= 2000) {
+						rData["image"] = "https://nytimes.com/" + img.url
+						break;
+					}
+				}
 			}
 			rData["section"] = result.section;
 			rData["url"] = result.url;
 			rData["id"] = result.url;
 			rData["date"] = result.published_date;
 			rData["description"] = result.abstract;
-			returnArray.push(rData);
+			if (rData.title && rData.id && rData.image && rData.section && rData.url && rData.date && rData.description) {
+				returnArray.push(rData);
+			}
 		}
 	}
 
@@ -148,9 +160,11 @@ function nytSearchProcess(data) {
 		if (!result["image"]) {
 			result["image"] = "http://csci571.com/hw/hw8/images/nytimes.jpg"
 		}
-		returnArray.push(result);
+		if (result.title && result.id && result.image && result.section && result.url && result.date && result.src) {
+			returnArray.push(result);
+		}
 	}
-	return {"search": returnArray.slice(0, 5)};
+	return {"search": returnArray.slice(0, 10)};
 }
 
 app.get('/', (req, res) => {
