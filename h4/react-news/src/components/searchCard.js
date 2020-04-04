@@ -21,7 +21,7 @@ function SearchCard(props) {
     };
 
     let deleteHandler = (e) => {
-        console.log("removed " + article.id);
+        // console.log("removed " + article.id);
         e.preventDefault();
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();

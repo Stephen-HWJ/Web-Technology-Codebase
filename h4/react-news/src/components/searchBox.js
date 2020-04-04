@@ -35,12 +35,12 @@ class SearchBox extends Component {
     };
 
     handleChange = (option) => {
-        console.log('/search?=' + option.value);
+        // console.log('/search?=' + option.value);
         // this.thisHistory.push('/search?=' + option.value);
         const { history } = this.props;
         if (history) {
+            // window.location.reload();
             history.push('/search?=' + option.value);
-            window.location.reload();
         }
     };
 

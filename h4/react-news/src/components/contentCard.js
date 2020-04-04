@@ -30,6 +30,13 @@ class ContentCard extends React.Component {
         this.setState({expanded: !this.state.expanded});
     };
 
+    testHeight = () => {
+        if (document.getElementById("test")) {
+            return document.getElementById("test").scrollHeight !== document.getElementById("test").clientHeight
+        }
+        return true;
+    };
+
     render() {
         const {article} = this.props;
         return <><Card className={"shadow m-3"}>
