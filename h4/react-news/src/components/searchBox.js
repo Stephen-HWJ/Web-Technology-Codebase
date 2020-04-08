@@ -5,7 +5,8 @@ import { withRouter } from 'react-router-dom';
 class SearchBox extends Component {
     state = {
         inputValue: '',
-        results: []
+        results: [],
+        selection: null
     };
 
     filterColors = async (inputValue: string) => {
@@ -28,20 +29,29 @@ class SearchBox extends Component {
         return this.state.results;
     };
 
+    UNSAFE_componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
+        if (!window.location.href.includes("/search")){
+            this.setState({
+                selection: null
+            })
+        }
+    }
+
     handleInputChange = async (newValue: string) => {
         const inputValue = newValue.replace(/\W/g, '');
         this.setState({ inputValue });
         return inputValue;
     };
 
-    handleChange = (option) => {
+    handleChange = (newValue) => {
         // console.log('/search?=' + option.value);
         // this.thisHistory.push('/search?=' + option.value);
         const { history } = this.props;
         if (history) {
-            // window.location.reload();
-            history.push('/search?=' + option.value);
+            history.push('/search?=' + newValue.value);
         }
+        this.setState({selection: { value: newValue.value, label: newValue.value}});
+        // console.log(this.state);
     };
 
     render() {
@@ -51,8 +61,9 @@ class SearchBox extends Component {
                     noOptionsMessage={() => "No Match"}
                     placeholder={"Enter keyword .."}
                     loadOptions={this.filterColors}
+                    value={this.state.selection}
                     onInputChange={this.handleInputChange}
-                    // onChange = {this.handleChange}
+                    onChange = {this.handleChange}
             />
         );
     }
