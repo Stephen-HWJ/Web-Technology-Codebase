@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MyBounceLoader from "./loader";
 import ArticleCard from "./article";
+import { withRouter } from "react-router-dom";
 
 const serverUrl = "https://nodejs-hwj.appspot.com";
 
@@ -15,7 +16,7 @@ class SectionPage extends Component {
 
     fetchArticles = (src) => {
         let fetchUrl = this.props.match.params["sec"] ?
-            serverUrl + "/" + src + "/" + this.props.match.params["sec"] : serverUrl + "/" + src + "/home";
+            serverUrl + "/" + src + "/" + this.props.match.params["sec"]  : serverUrl + "/" + src + "/home";
         fetch(fetchUrl)
             .then(res => res.json())
             .then(data => {
@@ -27,6 +28,15 @@ class SectionPage extends Component {
                 console.log("fetch error", err);
             });
     };
+
+    UNSAFE_componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
+        this.setState({
+            loading: true,
+            articles: []
+        }, () => {
+            this.fetchArticles(localStorage.getItem("news_src"));
+        });
+    }
 
     componentDidMount() {
         if (!localStorage.getItem("news_src")) {
@@ -45,4 +55,4 @@ class SectionPage extends Component {
     }
 }
 
-export default SectionPage;
+export default withRouter(SectionPage);
