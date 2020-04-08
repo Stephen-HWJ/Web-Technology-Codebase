@@ -100,7 +100,7 @@ function nytDataProcess(data) {
 				for (var j = 0; j < result.multimedia.length; j++) {
 					let img = result.multimedia[j];
 					if (img.width >= 2000) {
-						rData["image"] = "https://nytimes.com/" + img.url
+						rData["image"] = img.url
 						break;
 					}
 				}
