@@ -3,6 +3,7 @@ import { FaBookmark, FaRegBookmark } from 'react-icons/fa'
 import {Navbar, Nav, Col} from 'react-bootstrap';
 import { withRouter, NavLink } from 'react-router-dom';
 import ReactTooltip from "react-tooltip";
+import FavTag from "./favTag";
 
 import SearchBox from "./searchBox";
 import MySwitch from "./switch";
@@ -41,11 +42,7 @@ class MyNavbar extends React.Component{
 
                 <Nav pullright={"true"}>
                     <Nav.Link as={NavLink} to="/favourite" className={"tag"}>
-                        {window.location.pathname === "/favourite" ?
-                            <FaBookmark data-tip="Bookmark" data-for={"navbar"} size={20}/>:
-                            <FaRegBookmark data-tip="Bookmark" data-for={"navbar"} size={20}/>
-                        }
-                        <ReactTooltip place="bottom" id={"navbar"} type="dark" effect="solid"/></Nav.Link>
+                        <FavTag/></Nav.Link>
                     {/*<Nav.Item style={{height: "36px"}}>*/}
                     {this.showSwitch()?
                         <>

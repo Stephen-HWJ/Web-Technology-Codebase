@@ -52,11 +52,10 @@ class SearchBox extends Component {
                     placeholder={"Enter keyword .."}
                     loadOptions={this.filterColors}
                     onInputChange={this.handleInputChange}
-                    onChange = {this.handleChange}
+                    // onChange = {this.handleChange}
             />
         );
     }
 }
 
-// export default SearchBox;
 export default withRouter(SearchBox);
