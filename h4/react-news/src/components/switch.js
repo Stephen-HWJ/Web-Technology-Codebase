@@ -5,7 +5,7 @@ class MySwitch extends Component {
     constructor(props) {
         super(props);
         this.state = { checked: localStorage.getItem("news_src") ?
-                localStorage.getItem("news_src") === "guardian" : false };
+                localStorage.getItem("news_src") === "guardian" : true };
         this.handleChange = this.handleChange.bind(this);
     }
 
