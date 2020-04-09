@@ -8,7 +8,6 @@ import {
     TwitterIcon,
     TwitterShareButton
 } from "react-share";
-import TextTruncate from 'react-text-truncate'
 import MyCommentBox from "./comment";
 import MyBookmarkIcon from "./bookmark";
 import {MdExpandLess, MdExpandMore} from "react-icons/md";
@@ -62,12 +61,17 @@ class ContentCard extends React.Component {
                     </Row>
                 </Card.Subtitle>
                 <Card.Img style={{marginTop: "0.5em"}} variant={"top"} src={article.image}/>
-                <Card.Text ref={this.myRef}  id={"test"}>
-                    {this.state.expanded || this.state.source === "nyt" ?
-                        article.description :
-                        <TextTruncate line={6} element={"span"} truncateText="…" text={article.description}/>}
+                <Card.Text ref={this.myRef}>
+                    {this.state.source === "nyt" ?
+                        article.description:
+                        article.head
+                    }
+                    {this.state.source === "guardian" && article.later && this.state.expanded?
+                        <span id={"test"}>{article.later}</span>: null }
+                    {this.state.source === "guardian" && article.later && !this.state.expanded?
+                        "..." : null }
                 </Card.Text>
-                {this.state.source === "guardian" ?
+                {this.state.source === "guardian" && article.later ?
                     <a style={{color: "black", cursor: "default"}}
                        className={"float-right"}
                        href={this.state.expanded?"#test":"#head"}

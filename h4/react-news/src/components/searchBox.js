@@ -54,6 +54,10 @@ class SearchBox extends Component {
         // console.log(this.state);
     };
 
+    componentWillUnmount(): void {
+        console.log("unmounted");
+    }
+
     render() {
         return (
             <AsyncSelect
