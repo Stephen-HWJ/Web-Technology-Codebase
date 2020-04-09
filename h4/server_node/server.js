@@ -73,7 +73,7 @@ function guardianContentProcess(data) {
 	let content = data.response.content;
 	let result = {"title": content.webTitle,
 				  "date": content.webPublicationDate,
-				  "description": content.blocks.body[0].bodyTextSummary,
+				  // "description": content.blocks.body[0].bodyTextSummary,
 				  "section": content.sectionId, "url": content.webUrl};
 	if (!content.blocks.main || !content.blocks.main.elements || 
 		content.blocks.main.elements.length === 0 || !content.blocks.main.elements[0].assets || 
@@ -82,6 +82,9 @@ function guardianContentProcess(data) {
 	} else {
 		result["image"] = content.blocks.main.elements[0].assets[content.blocks.main.elements[0].assets.length - 1].file;
 	}
+	let sentences = content.blocks.body[0].bodyTextSummary.match(/[^\.!:\?]+[\.!:\?]+/g);
+	result["head"] = sentences.slice(0, 4).join(" ");
+	result["later"] = sentences.slice(4,).join(" ");
 	return {"content": result};
 }
 
