@@ -7,4 +7,5 @@
     right: 0;
     margin: auto;
     position: absolute;
+    z-index: -999999;
 }

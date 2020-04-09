@@ -1,8 +1,6 @@
 import React from "react";
-import { FaBookmark, FaRegBookmark } from 'react-icons/fa'
 import {Navbar, Nav, Col} from 'react-bootstrap';
 import { withRouter, NavLink } from 'react-router-dom';
-import ReactTooltip from "react-tooltip";
 import FavTag from "./favTag";
 
 import SearchBox from "./searchBox";
@@ -34,6 +32,7 @@ class MyNavbar extends React.Component{
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto" activeKey={window.location.pathname}>
                     <Nav.Link as={NavLink} exact to="/">Home</Nav.Link>
+                    <Nav.Link as={NavLink} exact to="/section/world">World</Nav.Link>
                     <Nav.Link as={NavLink} exact to="/section/politics">Politics</Nav.Link>
                     <Nav.Link as={NavLink} exact to="/section/business">Business</Nav.Link>
                     <Nav.Link as={NavLink} exact to="/section/technology">Technology</Nav.Link>
