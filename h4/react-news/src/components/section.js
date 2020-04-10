@@ -33,9 +33,8 @@ class SectionPage extends Component {
         this.setState({
             loading: true,
             articles: []
-        }, () => {
-            this.fetchArticles(localStorage.getItem("news_src"));
         });
+        this.fetchArticles(localStorage.getItem("news_src"));
     }
 
     componentDidMount() {
