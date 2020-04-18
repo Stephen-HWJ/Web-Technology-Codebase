@@ -7,6 +7,14 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+
+struct WeatherAPI: Encodable {
+    let q: String
+    let units: String
+    let appid: String
+}
 
 class Weather {
     
@@ -25,5 +33,19 @@ class Weather {
     func printInfo() {
         print(self.cityOfLocation)
         print(self.stateOfLocation)
+    }
+    
+    func getWeather() {
+        let weatherParams = "https://api.openweathermap.org/data/2.5/weather?q=\(cityOfLocation)&units=metric&appid=48d6ef9b8fe8d0a508261053d62dd362"
+        let url = weatherParams.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        Alamofire.request(url!, method: .get).validate().responseJSON(completionHandler: {response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
 }
