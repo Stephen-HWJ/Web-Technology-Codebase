@@ -79,7 +79,7 @@
                                     <outlet property="backgroundImage" destination="NZq-Pa-cBK" id="pMf-r2-vnA"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="NewsCell" id="0kG-qa-sFp" customClass="NewsTableViewCell" customModule="newsApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="NewsCell" id="0kG-qa-sFp" customClass="NewsTableViewCell" customModule="newsApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="179" width="375" height="118"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0kG-qa-sFp" id="EKR-Ow-ZIl">
@@ -101,7 +101,10 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UK Daily coronavirus death toll surpasses 9000 for first time ..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oE9-nD-BN2">
-                                            <rect key="frame" x="138" y="11" width="221" height="68"/>
+                                            <rect key="frame" x="138" y="11" width="221" height="73"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="73" id="yfV-aF-dAB"/>
+                                            </constraints>
                                             <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="8" right="8"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -136,7 +139,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bookmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nXR-IB-jcx">
-                                            <rect key="frame" x="333" y="91" width="15" height="16"/>
+                                            <rect key="frame" x="333" y="87" width="15" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="15" id="4lA-6S-MS2"/>
                                             </constraints>
@@ -151,9 +154,7 @@
                                         <constraint firstItem="oE9-nD-BN2" firstAttribute="trailing" secondItem="EKR-Ow-ZIl" secondAttribute="trailingMargin" id="GpE-1W-FUk"/>
                                         <constraint firstItem="HAS-qp-Y9R" firstAttribute="leading" secondItem="EKR-Ow-ZIl" secondAttribute="leading" constant="17" id="Kt5-od-1aN"/>
                                         <constraint firstItem="nXR-IB-jcx" firstAttribute="leading" relation="lessThanOrEqual" secondItem="TCD-Q7-XWB" secondAttribute="trailing" constant="29" id="LO2-Am-Gzh"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="oE9-nD-BN2" secondAttribute="bottom" constant="28" id="Li0-Cs-OBe"/>
                                         <constraint firstItem="TCD-Q7-XWB" firstAttribute="bottom" secondItem="EKR-Ow-ZIl" secondAttribute="bottomMargin" id="NAo-1V-uN0"/>
-                                        <constraint firstItem="nXR-IB-jcx" firstAttribute="top" secondItem="oE9-nD-BN2" secondAttribute="bottom" constant="12" id="OzB-mM-Qqs"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="nXR-IB-jcx" secondAttribute="trailing" constant="11" id="acj-wh-3tW"/>
                                         <constraint firstItem="TCD-Q7-XWB" firstAttribute="leading" secondItem="2Ub-cC-Esx" secondAttribute="trailing" id="dFi-Al-aWb"/>
                                         <constraint firstItem="GwD-FL-FHH" firstAttribute="leading" secondItem="HAS-qp-Y9R" secondAttribute="trailing" constant="8" id="euC-QK-xDx"/>

@@ -13,7 +13,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
     
     var locationManager: CLLocationManager = CLLocationManager()
     var localWeather: Weather?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +27,15 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:  #selector(sortArray), for: .valueChanged)
+        self.refreshControl = refreshControl
+        
+    }
+
+    @objc func sortArray() {
+        print("refreshed")
+        refreshControl?.endRefreshing()
     }
     
     // MARK: - Location manager delegate
