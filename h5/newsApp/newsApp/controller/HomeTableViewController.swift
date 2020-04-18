@@ -47,7 +47,6 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
         } else {
             if let placemarks = placemarks, let placemark = placemarks.first {
                 localWeather = Weather(cityOfLocation: placemark.locality!, stateOfLocation: placemark.administrativeArea!)
-                localWeather?.getWeather()
             } else {
                 print("No Matching Addresses Found")
             }

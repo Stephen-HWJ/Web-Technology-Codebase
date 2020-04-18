@@ -22,17 +22,20 @@ class Weather {
     
     var cityOfLocation: String = ""
     var stateOfLocation: String = ""
-//    var temperature: Int?
-//    var weatherType: String?
+    var temperature: Int = 0
+    var weatherType: String = ""
     
     init(cityOfLocation: String, stateOfLocation: String) {
         self.cityOfLocation = cityOfLocation
         self.stateOfLocation = stateOfLocation
+        self.getWeather()
     }
     
     func printInfo() {
         print(self.cityOfLocation)
         print(self.stateOfLocation)
+        print(self.temperature)
+        print(self.weatherType)
     }
     
     func getWeather() {
@@ -42,7 +45,9 @@ class Weather {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                print(json)
+                self.temperature = json["main"]["temp"].int!
+                self.weatherType = json["weather"][0]["main"].string!
+                self.printInfo()
             case .failure(let error):
                 print(error)
             }
