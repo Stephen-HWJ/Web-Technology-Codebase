@@ -79,12 +79,14 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as? WeatherTableViewCell else {
-            fatalError("The first cell is not an intance of WeatherTableViewCell.")
-        }
-        if let localWeather = localWeather {
-            cell.cityOfLocation.text = localWeather.cityOfLocation
-        }
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as? WeatherTableViewCell else {
+//            fatalError("The first cell is not an intance of WeatherTableViewCell.")
+//        }
+//        if let localWeather = localWeather {
+//            cell.cityOfLocation.text = localWeather.cityOfLocation
+//        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath)
         
 //        cell.stateOfLocation.text = localWeather?.stateOfLocation
 //        cell.weatherType.text = localWeather?.weatherType
