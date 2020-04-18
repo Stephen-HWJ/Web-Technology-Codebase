@@ -168,6 +168,10 @@
                                 <connections>
                                     <outlet property="background" destination="taP-oL-6ih" id="DAf-b4-v6Y"/>
                                     <outlet property="newImage" destination="HAS-qp-Y9R" id="JMQ-b9-117"/>
+                                    <outlet property="newsDate" destination="GwD-FL-FHH" id="p3V-6G-nEH"/>
+                                    <outlet property="newsSrc" destination="TCD-Q7-XWB" id="qV1-Qt-a7o"/>
+                                    <outlet property="newsTitle" destination="oE9-nD-BN2" id="KiQ-C9-O6c"/>
+                                    <outlet property="tagged" destination="nXR-IB-jcx" id="I94-uH-cCH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

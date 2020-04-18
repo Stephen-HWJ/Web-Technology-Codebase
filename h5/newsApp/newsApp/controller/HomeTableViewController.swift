@@ -86,13 +86,16 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
 //            cell.cityOfLocation.text = localWeather.cityOfLocation
 //        }
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath)
-        
+        var cell: UITableViewCell
         if indexPath.row == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath)
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath)
+            let news = NewsCell(imageUrl: "https://media.guim.co.uk/5b2b3cb838cad4b2f84035d497623223b2625798/0_88_3500_2100/master/3500.jpg", title: "Coronavirus US live: White House holds daily briefing amid stay-at-home protests", time: "3h ago", source: "world", tagged: false)
+            if let cell = cell as? NewsTableViewCell {
+                cell.newsData = news
+            }
         }
-        
-        
 //        cell.stateOfLocation.text = localWeather?.stateOfLocation
 //        cell.weatherType.text = localWeather?.weatherType
 //        if let t = localWeather?.temperature {

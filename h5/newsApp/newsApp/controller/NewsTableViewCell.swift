@@ -28,6 +28,16 @@ extension UIImageView {
 class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var newImage: UIImageView!
+    @IBOutlet weak var newsTitle: UILabel!
+    @IBOutlet weak var newsDate: UILabel!
+    @IBOutlet weak var newsSrc: UILabel!
+    @IBOutlet weak var tagged: UIImageView!
+    
+    var newsData: NewsCell? {
+        didSet{
+            getNewsInfo()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,7 +46,17 @@ class NewsTableViewCell: UITableViewCell {
         background.layer.borderColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0).cgColor
         background.layer.borderWidth = 1
         
-        newImage.downloadImage(from: URL(string: "https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png")!)
+        newImage.layer.cornerRadius = 8
+    }
+    
+    func getNewsInfo() {
+        if let news = newsData {
+            newImage.downloadImage(from: URL(string: news.imageUrl)!)
+            newsTitle.text = news.title
+            newsDate.text = news.time
+            newsSrc.text = news.source
+//            tagged = false
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
