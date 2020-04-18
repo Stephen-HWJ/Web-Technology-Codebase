@@ -9,10 +9,14 @@
 import UIKit
 
 class NewsTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var background: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        background.layer.cornerRadius = 8
+        background.layer.borderColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0).cgColor
+        background.layer.borderWidth = 1
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

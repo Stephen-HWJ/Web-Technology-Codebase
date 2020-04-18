@@ -75,7 +75,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 5
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,7 +86,12 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
 //            cell.cityOfLocation.text = localWeather.cityOfLocation
 //        }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath)
+        var cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath)
+        
+        if indexPath.row == 0 {
+            cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath)
+        }
+        
         
 //        cell.stateOfLocation.text = localWeather?.stateOfLocation
 //        cell.weatherType.text = localWeather?.weatherType

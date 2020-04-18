@@ -9,10 +9,12 @@
 import UIKit
 
 class WeatherTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        backgroundImage.layer.cornerRadius = 8
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
