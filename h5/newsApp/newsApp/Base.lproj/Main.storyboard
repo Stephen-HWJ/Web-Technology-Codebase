@@ -93,7 +93,7 @@
                                                 <constraint firstAttribute="height" constant="113" id="N1k-K2-u5b"/>
                                             </constraints>
                                         </imageView>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-guardian" translatesAutoresizingMaskIntoConstraints="NO" id="HAS-qp-Y9R">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-guardian" translatesAutoresizingMaskIntoConstraints="NO" id="HAS-qp-Y9R">
                                             <rect key="frame" x="17" y="1" width="113" height="111"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="113" id="1Ax-k2-AJk"/>
@@ -167,6 +167,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="background" destination="taP-oL-6ih" id="DAf-b4-v6Y"/>
+                                    <outlet property="newImage" destination="HAS-qp-Y9R" id="JMQ-b9-117"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
