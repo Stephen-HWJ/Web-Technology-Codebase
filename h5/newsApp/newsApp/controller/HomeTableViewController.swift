@@ -12,6 +12,7 @@ import CoreLocation
 class HomeTableViewController: UITableViewController, CLLocationManagerDelegate {
     
     var locationManager: CLLocationManager = CLLocationManager()
+    var localWeather: Weather?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +23,9 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        print("table view loaded")
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
     
     // MARK: Location manager delegate
@@ -37,6 +38,29 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
         default:
             // location si allowed, start monitoring
             manager.startUpdatingLocation()
+        }
+    }
+    
+    func processGeocoderResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?){
+        if let error = error {
+            print("Unable to Reverse Geocode Location (\(error))")
+        } else {
+            if let placemarks = placemarks, let placemark = placemarks.first {
+                localWeather = Weather(cityOfLocation: placemark.locality!, stateOfLocation: placemark.administrativeArea!)
+                localWeather?.printInfo()
+            } else {
+                print("No Matching Addresses Found")
+            }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            let geoCoder = CLGeocoder()
+            
+            geoCoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
+                self.processGeocoderResponse(withPlacemarks: placemarks, error: error)
+            })
         }
     }
 
