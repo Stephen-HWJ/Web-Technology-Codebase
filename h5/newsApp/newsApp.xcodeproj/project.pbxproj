@@ -18,6 +18,7 @@
 		F2B9326F244A83AD008732F7 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9326E244A83AD008732F7 /* Weather.swift */; };
 		F2C58AAF244B9DA000A5B765 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C58AAE244B9DA000A5B765 /* WeatherTableViewCell.swift */; };
 		F2C58AB1244B9DC300A5B765 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C58AB0244B9DC300A5B765 /* NewsTableViewCell.swift */; };
+		F2C58AB3244BABD900A5B765 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C58AB2244BABD900A5B765 /* NewsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		F2B9326E244A83AD008732F7 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		F2C58AAE244B9DA000A5B765 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
 		F2C58AB0244B9DC300A5B765 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		F2C58AB2244BABD900A5B765 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		FC3802E803F280DEB7851674 /* Pods_newsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_newsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				F2B9326E244A83AD008732F7 /* Weather.swift */,
+				F2C58AB2244BABD900A5B765 /* NewsCell.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				F25ED3FA244974D700076A6A /* AppDelegate.swift in Sources */,
 				F25ED3FC244974D700076A6A /* SceneDelegate.swift in Sources */,
 				F2B9326F244A83AD008732F7 /* Weather.swift in Sources */,
+				F2C58AB3244BABD900A5B765 /* NewsCell.swift in Sources */,
 				F2B93268244A7724008732F7 /* HomeTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
