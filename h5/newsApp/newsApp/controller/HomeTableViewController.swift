@@ -26,9 +26,10 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        
     }
     
-    // MARK: Location manager delegate
+    // MARK: - Location manager delegate
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
@@ -62,28 +63,39 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
             })
         }
     }
+    
+    // MARK: - Table view delegate
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 1
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as? WeatherTableViewCell else {
+            fatalError("The first cell is not an intance of WeatherTableViewCell.")
+        }
+        if let localWeather = localWeather {
+            cell.cityOfLocation.text = localWeather.cityOfLocation
+        }
+        
+//        cell.stateOfLocation.text = localWeather?.stateOfLocation
+//        cell.weatherType.text = localWeather?.weatherType
+//        if let t = localWeather?.temperature {
+//            cell.temperature.text = String(t)
+//        }
+//        cell.temperature.text = String( localWeather?.temperature )
+        
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

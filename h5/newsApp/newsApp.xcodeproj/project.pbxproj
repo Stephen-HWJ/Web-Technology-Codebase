@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		E1AEBDD4F3899242167E05B5 /* Pods_newsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC3802E803F280DEB7851674 /* Pods_newsApp.framework */; };
+		F25A8B7D244ABF2F0003F468 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25A8B7C244ABF2F0003F468 /* WeatherTableViewCell.swift */; };
+		F25A9D18244B7B3800A38BAF /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25A9D17244B7B3800A38BAF /* NewsTableViewCell.swift */; };
 		F25ED3FA244974D700076A6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25ED3F9244974D700076A6A /* AppDelegate.swift */; };
 		F25ED3FC244974D700076A6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25ED3FB244974D700076A6A /* SceneDelegate.swift */; };
-		F25ED3FE244974D700076A6A /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25ED3FD244974D700076A6A /* FirstViewController.swift */; };
 		F25ED400244974D700076A6A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25ED3FF244974D700076A6A /* SecondViewController.swift */; };
 		F25ED403244974D700076A6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F25ED401244974D700076A6A /* Main.storyboard */; };
 		F25ED405244974D800076A6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F25ED404244974D800076A6A /* Assets.xcassets */; };
@@ -22,10 +23,11 @@
 /* Begin PBXFileReference section */
 		390EFDE1CEB70B9E26537054 /* Pods-newsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newsApp.release.xcconfig"; path = "Target Support Files/Pods-newsApp/Pods-newsApp.release.xcconfig"; sourceTree = "<group>"; };
 		9482857F53B3C2EEEB03B296 /* Pods-newsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newsApp.debug.xcconfig"; path = "Target Support Files/Pods-newsApp/Pods-newsApp.debug.xcconfig"; sourceTree = "<group>"; };
+		F25A8B7C244ABF2F0003F468 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
+		F25A9D17244B7B3800A38BAF /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		F25ED3F6244974D700076A6A /* newsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = newsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F25ED3F9244974D700076A6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F25ED3FB244974D700076A6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F25ED3FD244974D700076A6A /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		F25ED3FF244974D700076A6A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		F25ED402244974D700076A6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F25ED404244974D800076A6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -65,6 +67,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F25A9D19244B7BD900A38BAF /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				F25A8B7C244ABF2F0003F468 /* WeatherTableViewCell.swift */,
+				F25A9D17244B7B3800A38BAF /* NewsTableViewCell.swift */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
 		F25ED3ED244974D700076A6A = {
 			isa = PBXGroup;
 			children = (
@@ -99,9 +110,9 @@
 		F2B93269244A8323008732F7 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				F25A9D19244B7BD900A38BAF /* cells */,
 				F25ED3F9244974D700076A6A /* AppDelegate.swift */,
 				F25ED3FB244974D700076A6A /* SceneDelegate.swift */,
-				F25ED3FD244974D700076A6A /* FirstViewController.swift */,
 				F25ED3FF244974D700076A6A /* SecondViewController.swift */,
 				F2B93267244A7724008732F7 /* HomeTableViewController.swift */,
 			);
@@ -232,7 +243,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F25ED400244974D700076A6A /* SecondViewController.swift in Sources */,
-				F25ED3FE244974D700076A6A /* FirstViewController.swift in Sources */,
+				F25A9D18244B7B3800A38BAF /* NewsTableViewCell.swift in Sources */,
+				F25A8B7D244ABF2F0003F468 /* WeatherTableViewCell.swift in Sources */,
 				F25ED3FA244974D700076A6A /* AppDelegate.swift in Sources */,
 				F25ED3FC244974D700076A6A /* SceneDelegate.swift in Sources */,
 				F2B9326F244A83AD008732F7 /* Weather.swift in Sources */,
