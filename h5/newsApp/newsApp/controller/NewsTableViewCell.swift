@@ -25,8 +25,9 @@ extension UIImageView {
    }
 }
 
-class NewsTableViewCell: UITableViewCell {
-    @IBOutlet weak var background: UIImageView!
+class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
+//    @IBOutlet weak var background: UIImageView!
+    @IBOutlet weak var background: UIView!
     @IBOutlet weak var newImage: UIImageView!
     @IBOutlet weak var newsTitle: UILabel!
     @IBOutlet weak var newsDate: UILabel!
@@ -47,6 +48,9 @@ class NewsTableViewCell: UITableViewCell {
         background.layer.borderWidth = 1
         
         newImage.layer.cornerRadius = 8
+        
+        let interaction = UIContextMenuInteraction(delegate: self)
+        self.addInteraction(interaction)
     }
     
     func getNewsInfo() {
@@ -65,4 +69,23 @@ class NewsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    // MARK: - Delegate protocol implementation
+    
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
+
+            return self.makeContextMenu()
+        })
+    }
+    
+    func makeContextMenu() -> UIMenu {
+
+        // Create a UIAction for sharing
+        let share = UIAction(title: "Share Pupper", image: UIImage(systemName: "square.and.arrow.up")) { action in
+            // Show system share sheet
+        }
+
+        // Create and return a UIMenu with the share action
+        return UIMenu(title: "Menu", children: [share])
+    }
 }
