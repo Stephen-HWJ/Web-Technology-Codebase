@@ -49,7 +49,7 @@ class Weather {
                 let json = JSON(value)
                 self.temperature = json["main"]["temp"].int!
                 self.weatherType = json["weather"][0]["main"].string!
-                self.printInfo()
+//                self.printInfo()
 //                SwiftSpinner.hide()
             case .failure(let error):
                 print(error)

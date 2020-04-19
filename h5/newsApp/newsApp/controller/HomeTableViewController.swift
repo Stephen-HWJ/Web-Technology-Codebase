@@ -13,6 +13,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
     
     var locationManager: CLLocationManager = CLLocationManager()
     var localWeather: Weather?
+    var newsArrayData: NewsCellArray?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +31,12 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(sortArray), for: .valueChanged)
         self.refreshControl = refreshControl
-        
+        newsArrayData = NewsCellArray(tab: "home")
     }
+    
 
+    // MARK: - Pull down to refresh function
+    
     @objc func sortArray() {
         print("refreshed")
         refreshControl?.endRefreshing()
