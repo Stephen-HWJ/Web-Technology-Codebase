@@ -23,12 +23,41 @@ function guardianDataProcess(data) {
 		}
 		result["time"] = resultsArray[i].webPublicationDate;
 		result["section"] = resultsArray[i].sectionName;
-		result["date"] = resultsArray[i].webPublicationDate;
-		if (result.title && result.id && result.section && result.time && result.date) {
+		if (result.title && result.id && result.section && result.time) {
 			returnArray.push(result);
 		}
 	}
 	return {"response": returnArray};
+}
+
+function articleProcess(data) {
+	if (data.response.status === "error") {
+		return {"response": data};
+	} 
+	let resultJson = data.response.content;
+	var result = {"title": resultJson.webTitle,
+					"date": resultJson.webPublicationDate,
+					"section": resultJson.sectionName,
+					"articleURL": resultJson.webUrl,
+					"description": []};
+
+	if (resultJson.blocks && resultJson.blocks.main && resultJson.blocks.main.elements 
+		&& resultJson.blocks.main.elements[0] && resultJson.blocks.main.elements[0].assets 
+		&& resultJson.blocks.main.elements[0].assets.length > 0){
+		result["image"] = resultJson.blocks.main.elements[0].assets[resultJson.blocks.main.elements[0].assets.length - 1].file
+	}
+
+	if (resultJson.blocks) {
+		let body = resultJson.blocks.body
+		for (var i = 0; i < body.length; i++) {
+			if (body[i].bodyHtml) {
+				result["description"].push(body[i].bodyHtml)
+				// console.log(result["description"])
+			}
+		}
+	}
+
+	return {"response": result};
 }
 
 app.get('/', (req, res) => {
@@ -48,6 +77,35 @@ app.get('/home', (req, res) => {
       res.send({'error': err});
    });
 });
+
+app.get('/article/*', (req, res) => {
+	let api_url = "https://content.guardianapis.com/"+req.params[0]+"?api-key=9ee2a116-fe34-40b3-a5af-fbbf20724bd4&show-blocks=all";
+
+	console.log(api_url);
+   fetch(api_url)
+   .then(res => res.json())
+   .then(data => {
+      res.send(articleProcess(data));
+   })
+   .catch(err => {
+      res.send({'error': err});
+   });
+});
+
+app.get('/search/*', (req, res) => {
+	let api_url = "https://content.guardianapis.com/search?q="+req.params[0]+"&order-by=newest&show-fields=starRating,headline,thumbnail,short-url&api-key=9ee2a116-fe34-40b3-a5af-fbbf20724bd4";
+
+	console.log(api_url);
+   fetch(api_url)
+   .then(res => res.json())
+   .then(data => {
+      res.send(guardianDataProcess(data));
+   })
+   .catch(err => {
+      res.send({'error': err});
+   });
+});
+
 
 // Listen to the App Engine-specified port, or 8080 otherwise
 const PORT = process.env.PORT || 8080;
