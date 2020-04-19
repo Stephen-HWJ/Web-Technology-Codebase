@@ -13,7 +13,11 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
     
     var locationManager: CLLocationManager = CLLocationManager()
     var localWeather: Weather?
-    var newsArrayData: NewsCellArray?
+    var newsArrayData: NewsCellArray? {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +35,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(sortArray), for: .valueChanged)
         self.refreshControl = refreshControl
-        newsArrayData = NewsCellArray(tab: "home")
+        newsArrayData = NewsCellArray(tab: "home", tableViewController: self)
     }
     
 
@@ -39,6 +43,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
     
     @objc func sortArray() {
         print("refreshed")
+        newsArrayData = NewsCellArray(tab: "home", tableViewController: self)
         refreshControl?.endRefreshing()
     }
     
@@ -88,7 +93,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return (newsArrayData?.getSize())!
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -104,7 +109,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
             cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath)
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath)
-            let news = NewsCell(imageUrl: "https://media.guim.co.uk/5b2b3cb838cad4b2f84035d497623223b2625798/0_88_3500_2100/master/3500.jpg", title: "Coronavirus US live: White House holds daily briefing amid stay-at-home protests", time: "3h ago", source: "world", tagged: false)
+            let news = newsArrayData?.get(index: indexPath.row)
             if let cell = cell as? NewsTableViewCell {
                 cell.newsData = news
             }

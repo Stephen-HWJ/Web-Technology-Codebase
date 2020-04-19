@@ -21,7 +21,6 @@ class NewsCell {
         self.time = time
         self.source = source
         self.tagged = tagged
-        print(self.title)
     }
     
 }

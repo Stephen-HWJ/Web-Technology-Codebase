@@ -55,7 +55,11 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
     
     func getNewsInfo() {
         if let news = newsData {
-            newImage.downloadImage(from: URL(string: news.imageUrl)!)
+            if news.imageUrl == "" {
+                newImage.image = UIImage(named: "default-guardian")
+            } else {
+                newImage.downloadImage(from: URL(string: news.imageUrl)!)
+            }
             newsTitle.text = news.title
             newsDate.text = news.time
             newsSrc.text = news.source

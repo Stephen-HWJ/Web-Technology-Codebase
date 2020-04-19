@@ -13,12 +13,21 @@ import SwiftSpinner
 
 class NewsCellArray {
     var newsArray: [NewsCell] = [NewsCell]()
+    var size: Int = 0
     
-    init(tab: String) {
-        loadNews(tab: tab)
+    init(tab: String, tableViewController: UITableViewController) {
+        loadNews(tab: tab, tableViewController: tableViewController)
     }
     
-    private func loadNews(tab: String) {
+    func getSize() -> Int {
+        return newsArray.count
+    }
+    
+    func get(index: Int) -> NewsCell {
+        return newsArray[index]
+    }
+    
+    private func loadNews(tab: String, tableViewController: UITableViewController) {
         SwiftSpinner.show("Loading Home Page..")
         let weatherParams = "https://weijihua-hw9-api.wl.r.appspot.com/\(tab)"
         let url = weatherParams.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
@@ -29,8 +38,10 @@ class NewsCellArray {
                 for (_, subJson):(String, JSON) in json {
                     let news = NewsCell(imageUrl: subJson["image"].string ?? "", title: subJson["title"].string!, time: subJson["time"].string!, source: subJson["section"].string!, tagged: false)
                     self.newsArray.append(news)
+                    self.size += 1
                 }
 //                print(json)
+                tableViewController.tableView.reloadData()
                 SwiftSpinner.hide()
             case .failure(let error):
                 print(error)
