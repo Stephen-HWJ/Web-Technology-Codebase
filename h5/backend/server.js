@@ -39,7 +39,7 @@ function articleProcess(data) {
 					"date": resultJson.webPublicationDate,
 					"section": resultJson.sectionName,
 					"articleURL": resultJson.webUrl,
-					"description": []};
+					"description": ""};
 
 	if (resultJson.blocks && resultJson.blocks.main && resultJson.blocks.main.elements 
 		&& resultJson.blocks.main.elements[0] && resultJson.blocks.main.elements[0].assets 
@@ -51,7 +51,7 @@ function articleProcess(data) {
 		let body = resultJson.blocks.body
 		for (var i = 0; i < body.length; i++) {
 			if (body[i].bodyHtml) {
-				result["description"].push(body[i].bodyHtml)
+				result["description"]+=body[i].bodyHtml
 				// console.log(result["description"])
 			}
 		}
