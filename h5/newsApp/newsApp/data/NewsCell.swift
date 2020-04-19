@@ -11,16 +11,20 @@ import UIKit
 class NewsCell {
     var imageUrl: String
     var title: String
-    var time: String
+    var time: Date
     var source: String
     var tagged: Bool = false
+    var id: String
     
-    init(imageUrl: String, title: String, time: String, source: String, tagged: Bool) {
+    init(imageUrl: String, title: String, time: String, source: String, tagged: Bool, id: String) {
         self.imageUrl = imageUrl
         self.title = title
-        self.time = time
         self.source = source
         self.tagged = tagged
+        
+        let formatter = ISO8601DateFormatter()
+        self.time = formatter.date(from: time)!
+        self.id = id
     }
     
 }

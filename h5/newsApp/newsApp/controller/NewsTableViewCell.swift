@@ -34,6 +34,7 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
     @IBOutlet weak var newsSrc: UILabel!
     @IBOutlet weak var tagged: UIImageView!
     
+    // News data type
     var newsData: NewsCell? {
         didSet{
             getNewsInfo()
@@ -61,9 +62,20 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
                 newImage.downloadImage(from: URL(string: news.imageUrl)!)
             }
             newsTitle.text = news.title
-            newsDate.text = news.time
+            newsDate.text = getShownTime(time: news.time)
             newsSrc.text = news.source
 //            tagged = false
+        }
+    }
+    
+    private func getShownTime(time: Date) -> String {
+        let nowTime = Date()
+        if nowTime.timeIntervalSince(time) > 3600 {
+            return "\(Int(nowTime.timeIntervalSince(time) / 3600))h ago"
+        } else if nowTime.timeIntervalSince(time) > 60 {
+            return "\(Int(nowTime.timeIntervalSince(time) / 60))m ago"
+        } else {
+            return "\(Int(nowTime.timeIntervalSince(time)))s ago"
         }
     }
 

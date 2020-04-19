@@ -36,7 +36,7 @@ class NewsCellArray {
             case .success(let value):
                 let json = JSON(value)["response"]
                 for (_, subJson):(String, JSON) in json {
-                    let news = NewsCell(imageUrl: subJson["image"].string ?? "", title: subJson["title"].string!, time: subJson["time"].string!, source: subJson["section"].string!, tagged: false)
+                    let news = NewsCell(imageUrl: subJson["image"].string ?? "", title: subJson["title"].string!, time: subJson["time"].string!, source: subJson["section"].string!, tagged: false, id: subJson["id"].string!)
                     self.newsArray.append(news)
                     self.size += 1
                 }

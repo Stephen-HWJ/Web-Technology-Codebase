@@ -93,7 +93,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (newsArrayData?.getSize())!
+        return max(1, (newsArrayData?.getSize())!)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
