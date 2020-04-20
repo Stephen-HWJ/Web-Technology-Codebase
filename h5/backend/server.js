@@ -88,6 +88,16 @@ function sectionProcess(data) {
 	return {"response": returnArray};
 }
 
+function trendsDataProcess(data){
+	let arrayList = data.default.timelineData;
+	var returnArray = {"response": []}
+	for (var i = 0; i < arrayList.length; i++) {
+		let dataEntry = arrayList[i];
+		returnArray.response.push(dataEntry.value[0]);
+	}
+	return returnArray;
+}
+
 app.get('/', (req, res) => {
   res.send('Hello from App Engine!');
 });
@@ -147,6 +157,19 @@ app.get('/section/*', (req, res) => {
       res.send({'error': err});
    });
 });
+
+app.get('/trends/*', (req, res) => {
+	const googleTrends = require('google-trends-api');
+
+	googleTrends.interestOverTime({keyword: req.params[0], startTime: new Date('2019-06-01')})
+	.then(function(results){
+	  res.send(trendsDataProcess(JSON.parse(results)));
+	})
+	.catch(function(err){
+	  console.error('Oh no there was an error', err);
+	});
+
+})
 
 
 // Listen to the App Engine-specified port, or 8080 otherwise
