@@ -21,6 +21,7 @@
 		F2C58AB1244B9DC300A5B765 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C58AB0244B9DC300A5B765 /* NewsTableViewCell.swift */; };
 		F2C58AB3244BABD900A5B765 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C58AB2244BABD900A5B765 /* NewsCell.swift */; };
 		F2C58AB5244BC42B00A5B765 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C58AB4244BC42B00A5B765 /* ArticleViewController.swift */; };
+		F2EE3EB0244D295F00EFFF12 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EE3EAF244D295F00EFFF12 /* Article.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		F2C58AB0244B9DC300A5B765 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		F2C58AB2244BABD900A5B765 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		F2C58AB4244BC42B00A5B765 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		F2EE3EAF244D295F00EFFF12 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		FC3802E803F280DEB7851674 /* Pods_newsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_newsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 				F2B9326E244A83AD008732F7 /* Weather.swift */,
 				F2C58AB2244BABD900A5B765 /* NewsCell.swift */,
 				F23E3E59244D03E10024923A /* NewsCellArray.swift */,
+				F2EE3EAF244D295F00EFFF12 /* Article.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2EE3EB0244D295F00EFFF12 /* Article.swift in Sources */,
 				F2C58AAF244B9DA000A5B765 /* WeatherTableViewCell.swift in Sources */,
 				F2C58AB1244B9DC300A5B765 /* NewsTableViewCell.swift in Sources */,
 				F25ED400244974D700076A6A /* SecondViewController.swift in Sources */,

@@ -166,6 +166,19 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        guard let newsCell = sender as? NewsTableViewCell else {
+            fatalError("User tapped not on NewsTableViewCell")
+        }
+        
+        let id = newsCell.newsData?.id
+        print(segue.identifier!)
+        if let articleViewController = segue.destination as? ArticleViewController {
+            print("in segue")
+            articleViewController.id = id
+        }
+        
     }
 
 }

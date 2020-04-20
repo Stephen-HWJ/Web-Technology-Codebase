@@ -175,7 +175,7 @@
                                     <outlet property="newsSrc" destination="TCD-Q7-XWB" id="qV1-Qt-a7o"/>
                                     <outlet property="newsTitle" destination="oE9-nD-BN2" id="KiQ-C9-O6c"/>
                                     <outlet property="tagged" destination="nXR-IB-jcx" id="I94-uH-cCH"/>
-                                    <segue destination="tMF-Or-ViT" kind="showDetail" id="8t1-L7-OKi"/>
+                                    <segue destination="WXd-JL-8pM" kind="show" identifier="showArticleSegue" id="ehE-WE-F1a"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -210,7 +210,7 @@
                                                     <constraint firstAttribute="height" constant="230" id="lwx-HA-PJb"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Article Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjU-pr-c6d">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Article Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjU-pr-c6d">
                                                 <rect key="frame" x="0.0" y="235" width="375" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="qG5-qb-jFE"/>
@@ -272,31 +272,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j5V-wq-AJW"/>
                     </view>
-                    <navigationItem key="navigationItem" id="OID-aA-0vy"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="OID-aA-0vy"/>
                     <connections>
                         <outlet property="content" destination="4sb-cE-DWr" id="CH4-tH-nrm"/>
+                        <outlet property="contentTitle" destination="hjU-pr-c6d" id="JNR-oD-dU1"/>
+                        <outlet property="dateString" destination="oKQ-Kp-ch5" id="sv7-Ll-HG4"/>
+                        <outlet property="section" destination="jpl-Tn-IDa" id="Tao-UZ-DYd"/>
+                        <outlet property="titleImage" destination="JRf-ho-f1s" id="Vdb-dD-ovf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6sg-cs-cgH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2924" y="-553.67316341829087"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="CcB-aM-YAK">
-            <objects>
-                <navigationController id="tMF-Or-ViT" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="XBD-36-53b"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9DS-j7-d8j">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="WXd-JL-8pM" kind="relationship" relationship="rootViewController" id="q3L-6p-OPr"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="INx-cr-4nm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2236" y="-555"/>
+            <point key="canvasLocation" x="2254" y="-555"/>
         </scene>
         <!--Home-->
         <scene sceneID="c5t-MF-QUx">
