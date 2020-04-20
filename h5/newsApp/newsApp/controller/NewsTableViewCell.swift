@@ -54,8 +54,6 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
         let interaction = UIContextMenuInteraction(delegate: self)
         self.addInteraction(interaction)
         
-        taggedButton.setImage(UIImage(named: "bookmark"), for: .normal)
-        taggedButton.setImage(UIImage(named: "bookmark.filled"), for: .highlighted)
     }
     
     func getNewsInfo() {

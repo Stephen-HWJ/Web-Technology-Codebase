@@ -314,7 +314,7 @@
                     <connections>
                         <segue destination="Qmd-ZV-6zr" kind="relationship" relationship="viewControllers" id="zh3-dd-Q4A"/>
                         <segue destination="mnW-kM-aj3" kind="relationship" relationship="viewControllers" id="NMo-jl-iwq"/>
-                        <segue destination="dAO-0R-e6K" kind="relationship" relationship="viewControllers" id="Vga-sW-2PI"/>
+                        <segue destination="GAU-KB-wTg" kind="relationship" relationship="viewControllers" id="BC1-T8-azA"/>
                         <segue destination="GMX-sE-fCx" kind="relationship" relationship="viewControllers" id="4Oa-xn-mrh"/>
                     </connections>
                 </tabBarController>
@@ -325,18 +325,42 @@
         <!--Trending-->
         <scene sceneID="XSf-mm-epg">
             <objects>
-                <viewController id="ZgU-DZ-aqR" sceneMemberID="viewController">
+                <viewController id="ZgU-DZ-aqR" customClass="TrendingViewController" customModule="newsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Cu-eN-oXL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter Search Term" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u03-6q-5fL">
+                                <rect key="frame" x="16" y="133" width="142" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Search term.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lLo-lZ-jBS">
+                                <rect key="frame" x="16" y="162" width="343" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            </textField>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6k-Cp-aLh" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="16" y="204" width="343" height="366"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="tdq-sm-2kV"/>
                     </view>
                     <navigationItem key="navigationItem" title="Trending" id="Wvf-q7-eXT"/>
+                    <connections>
+                        <outlet property="chtChart" destination="Y6k-Cp-aLh" id="LTO-bN-74h"/>
+                        <outlet property="textBox" destination="lLo-lZ-jBS" id="48p-Gp-cZP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2tp-OX-jRS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1516" y="824"/>
+            <point key="canvasLocation" x="1516" y="823.53823088455783"/>
         </scene>
         <!--Bookmarks-->
         <scene sceneID="IsC-iA-DtG">
@@ -568,25 +592,6 @@
             </objects>
             <point key="canvasLocation" x="2253.5999999999999" y="169.56521739130437"/>
         </scene>
-        <!--Trending-->
-        <scene sceneID="uRj-Jf-5it">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dAO-0R-e6K" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Trending" image="trending-up" id="4cu-Lb-7g1"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tGO-eo-plT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="ZgU-DZ-aqR" kind="relationship" relationship="rootViewController" id="t10-gq-TUc"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="y85-Mh-iG4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="764" y="824"/>
-        </scene>
         <!--Home-->
         <scene sceneID="JQl-RD-bFP">
             <objects>
@@ -603,6 +608,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Hv-Sq-YIx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="764" y="107"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="PkY-5G-1Vf">
+            <objects>
+                <navigationController title="Home" id="GAU-KB-wTg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Trending" image="trending-up" id="8xD-HL-p7o"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="QkW-Qv-XLg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ZgU-DZ-aqR" kind="relationship" relationship="rootViewController" id="eMU-cz-hLY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d62-fr-KZV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="764" y="824"/>
         </scene>
     </scenes>
     <resources>
