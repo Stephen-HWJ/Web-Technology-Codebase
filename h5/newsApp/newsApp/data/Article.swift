@@ -20,7 +20,7 @@ class Article {
     var articleURL: String = ""
     
     init(id: String) {
-        SwiftSpinner.show("Loading Detailed article..")
+//        SwiftSpinner.show("Loading Detailed article..")
         let weatherParams = "https://weijihua-hw9-api.wl.r.appspot.com/article/\(id)"
         let url = weatherParams.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         Alamofire.request(url!, method: .get).validate().responseJSON(completionHandler: {response in
@@ -41,7 +41,7 @@ class Article {
                 self.date = newFormatter.string(from: newsDate!)
                 
                 print(self.title)
-                SwiftSpinner.hide()
+//                SwiftSpinner.hide()
             case .failure(let error):
                 print(error)
             }

@@ -28,7 +28,7 @@ class NewsCellArray {
     }
     
     private func loadNews(tab: String, tableViewController: UITableViewController) {
-        SwiftSpinner.show("Loading Home Page..")
+//        SwiftSpinner.show("Loading Home Page..")
         let weatherParams = "https://weijihua-hw9-api.wl.r.appspot.com/\(tab)"
         let url = weatherParams.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         Alamofire.request(url!, method: .get).validate().responseJSON(completionHandler: {response in
@@ -42,7 +42,7 @@ class NewsCellArray {
                 }
 //                print(json)
                 tableViewController.tableView.reloadData()
-                SwiftSpinner.hide()
+//                SwiftSpinner.hide()
             case .failure(let error):
                 print(error)
             }

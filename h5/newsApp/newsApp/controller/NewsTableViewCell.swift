@@ -33,6 +33,7 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
     @IBOutlet weak var newsDate: UILabel!
     @IBOutlet weak var newsSrc: UILabel!
     @IBOutlet weak var tagged: UIImageView!
+    @IBOutlet weak var taggedButton: UIButton!
     
     // News data type
     var newsData: NewsCell? {
@@ -52,6 +53,9 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
         
         let interaction = UIContextMenuInteraction(delegate: self)
         self.addInteraction(interaction)
+        
+        taggedButton.setImage(UIImage(named: "bookmark"), for: .normal)
+        taggedButton.setImage(UIImage(named: "bookmark.filled"), for: .highlighted)
     }
     
     func getNewsInfo() {
@@ -84,6 +88,15 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
 
         // Configure the view for the selected state
     }
+    
+    @IBAction func taggedButtonTapped(_ sender: UIButton) {
+//        let defaults = UserDefaults.standard
+//        defaults.set(self.newsData, forKey: self.newsData!.id)
+        
+//        self.taggedButton.isHighlighted = true
+//        taggedButton.setImage(UIImage(named: "bookmark.filled"), for: .normal)
+    }
+    
 
     // MARK: - Delegate protocol implementation
     

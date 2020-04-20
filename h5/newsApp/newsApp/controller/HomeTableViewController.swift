@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreLocation
+import XLPagerTabStrip
 
-class HomeTableViewController: UITableViewController, CLLocationManagerDelegate {
+class HomeTableViewController: UITableViewController, CLLocationManagerDelegate, IndicatorInfoProvider {
     
     var locationManager: CLLocationManager = CLLocationManager()
     var localWeather: Weather?
@@ -35,6 +36,10 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(sortArray), for: .valueChanged)
         self.refreshControl = refreshControl
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         newsArrayData = NewsCellArray(tab: "home", tableViewController: self)
     }
     
@@ -81,8 +86,6 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
             })
         }
     }
-    
-    // MARK: - Table view delegate
 
     // MARK: - Table view data source
 
@@ -97,13 +100,6 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as? WeatherTableViewCell else {
-//            fatalError("The first cell is not an intance of WeatherTableViewCell.")
-//        }
-//        if let localWeather = localWeather {
-//            cell.cityOfLocation.text = localWeather.cityOfLocation
-//        }
-        
         var cell: UITableViewCell
         if indexPath.row == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath)
@@ -114,51 +110,9 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
                 cell.newsData = news
             }
         }
-//        cell.stateOfLocation.text = localWeather?.stateOfLocation
-//        cell.weatherType.text = localWeather?.weatherType
-//        if let t = localWeather?.temperature {
-//            cell.temperature.text = String(t)
-//        }
-//        cell.temperature.text = String( localWeather?.temperature )
-        
 
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: - Navigation
 
@@ -178,7 +132,10 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate 
             print("in segue")
             articleViewController.id = id
         }
-        
+    }
+    
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Child 1")
     }
 
 }

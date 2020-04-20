@@ -55,7 +55,7 @@ class ArticleViewController: UIViewController {
                 
                 // Image
 //                self.articleURL = subJson["articleURL"].string ?? ""
-                if subJson["image"].string == "" {
+                if subJson["image"].string == "" || subJson["image"].string == nil {
                     self.titleImage.image = UIImage(named: "default-guardian")
                 } else {
                     self.titleImage.downloadImage(from: URL(string: subJson["image"].string!)!)

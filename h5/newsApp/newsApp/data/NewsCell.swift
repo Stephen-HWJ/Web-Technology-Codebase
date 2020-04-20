@@ -25,6 +25,8 @@ class NewsCell {
         let formatter = ISO8601DateFormatter()
         self.time = formatter.date(from: time)!
         self.id = id
+        
+//        print(self.title)
     }
     
 }

@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import XLPagerTabStrip
 
-class HeadlinesTableViewController: UITableViewController {
+class HeadlinesTableViewController: UITableViewController, IndicatorInfoProvider {
 
+    var newsArrayData: NewsCellArray? {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,28 +26,34 @@ class HeadlinesTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        newsArrayData = NewsCellArray(tab: "section/world", tableViewController: self)
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return (newsArrayData?.getSize())!
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath)
+        let news = newsArrayData?.get(index: indexPath.row)
+        if let cell = cell as? NewsTableViewCell {
+            cell.newsData = news
+        }
         // Configure the cell...
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -77,14 +90,29 @@ class HeadlinesTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        guard let newsCell = sender as? NewsTableViewCell else {
+            fatalError("User tapped not on NewsTableViewCell")
+        }
+        
+        let id = newsCell.newsData?.id
+        print(segue.identifier!)
+        if let articleViewController = segue.destination as? ArticleViewController {
+            print("in segue")
+            articleViewController.id = id
+        }
     }
-    */
+    
+    // MARK: - Indicator for PagerTabStrip
+    
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Child 2")
+    }
 
 }
