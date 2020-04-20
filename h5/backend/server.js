@@ -60,6 +60,34 @@ function articleProcess(data) {
 	return {"response": result};
 }
 
+function sectionProcess(data) {
+	if (data.response.status === "error") {
+		return {"response": data};
+	} 
+
+	let resultsArray = data.response.results;
+	let returnArray = [];
+
+	for (var i = 0; i < resultsArray.length; i++) {
+		var resultJson = resultsArray[i]
+		var result = {"title": resultJson.webTitle,
+				"time": resultJson.webPublicationDate,
+				"section": resultJson.sectionName,
+				"id": resultJson.id};
+		if (resultJson.blocks && resultJson.blocks.main && resultJson.blocks.main.elements 
+			&& resultJson.blocks.main.elements[0] && resultJson.blocks.main.elements[0].assets 
+			&& resultJson.blocks.main.elements[0].assets.length > 0){
+			result["image"] = resultJson.blocks.main.elements[0].assets[resultJson.blocks.main.elements[0].assets.length - 1].file
+		}
+
+		if (result.title && result.id && result.section && result.time) {
+			// console.log(result);
+			returnArray.push(result);
+		}
+	}
+	return {"response": returnArray};
+}
+
 app.get('/', (req, res) => {
   res.send('Hello from App Engine!');
 });
@@ -100,6 +128,20 @@ app.get('/search/*', (req, res) => {
    .then(res => res.json())
    .then(data => {
       res.send(guardianDataProcess(data));
+   })
+   .catch(err => {
+      res.send({'error': err});
+   });
+});
+
+app.get('/section/*', (req, res) => {
+	let api_url = "https://content.guardianapis.com/"+req.params[0]+"?api-key=9ee2a116-fe34-40b3-a5af-fbbf20724bd4&show-blocks=all";
+
+	console.log(api_url);
+   fetch(api_url)
+   .then(res => res.json())
+   .then(data => {
+      res.send(sectionProcess(data));
    })
    .catch(err => {
       res.send({'error': err});
