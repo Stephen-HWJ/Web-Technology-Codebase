@@ -135,13 +135,13 @@ app.get('/search/*', (req, res) => {
 });
 
 app.get('/section/*', (req, res) => {
-	let api_url = "https://content.guardianapis.com/"+req.params[0]+"?api-key=9ee2a116-fe34-40b3-a5af-fbbf20724bd4&show-blocks=all";
+	let api_url = "https://content.guardianapis.com/"+ req.params[0] +"?order-by=newest&show-fields=starRating,headline,thumbnail,short-url&api-key=9ee2a116-fe34-40b3-a5af-fbbf20724bd4";
 
 	console.log(api_url);
    fetch(api_url)
    .then(res => res.json())
    .then(data => {
-      res.send(sectionProcess(data));
+      res.send(guardianDataProcess(data));
    })
    .catch(err => {
       res.send({'error': err});
