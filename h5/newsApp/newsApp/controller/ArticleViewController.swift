@@ -71,6 +71,7 @@ class ArticleViewController: UIViewController {
                 self.content.attributedText = attributedString
                 self.content.textContainer.maximumNumberOfLines = 30
                 self.content.textContainer.lineBreakMode = .byTruncatingTail
+                self.content.font = UIFont.systemFont(ofSize: 14)
                 SwiftSpinner.hide()
             case .failure(let error):
                 print(error)
