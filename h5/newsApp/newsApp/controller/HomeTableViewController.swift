@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import XLPagerTabStrip
 
-class HomeTableViewController: UITableViewController, CLLocationManagerDelegate, IndicatorInfoProvider {
+class HomeTableViewController: UITableViewController, CLLocationManagerDelegate, IndicatorInfoProvider, UISearchResultsUpdating {
     
     var locationManager: CLLocationManager = CLLocationManager()
     var localWeather: Weather?
@@ -19,6 +19,12 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
             self.tableView.reloadData()
         }
     }
+    
+    /// Search controller to help us with filtering items in the table view.
+    var searchController: UISearchController!
+    
+    /// Search results table view.
+    private var resultsTableController: ResultsTableController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +43,34 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         refreshControl.addTarget(self, action:  #selector(sortArray), for: .valueChanged)
         self.refreshControl = refreshControl
         newsArrayData = NewsCellArray(tab: "home", tableViewController: self)
+        
+        resultsTableController =
+            self.storyboard?.instantiateViewController(withIdentifier: "ResultsTableController") as? ResultsTableController
+        // This view controller is interested in table view row selections.
+        resultsTableController.tableView.delegate = self
+        
+        searchController = UISearchController(searchResultsController: resultsTableController)
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.autocapitalizationType = .none
+//        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self // Monitor when the search button is tapped.
+        
+        // Place the search bar in the navigation bar.
+        navigationItem.searchController = searchController
+        
+        // Make the search bar always visible.
+        //navigationItem.hidesSearchBarWhenScrolling = false
+        
+        /** Search presents a view controller by applying normal view controller presentation semantics.
+            This means that the presentation moves up the view controller hierarchy until it finds the root
+            view controller or one that defines a presentation context.
+        */
+        
+        /** Specify that this view controller determines how the search controller is presented.
+            The search controller should be presented modally and match the physical size of this view controller.
+        */
+        definesPresentationContext = true
     }
     
 
@@ -110,6 +144,12 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
 
         return cell
     }
+    
+    // MARK: - Search update
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        // TODO: ,,,
+    }
 
     // MARK: - Navigation
 
@@ -136,4 +176,47 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         return IndicatorInfo(title: "Child 1")
     }
 
+}
+
+
+// MARK: - UISearchBarDelegate
+
+extension HomeTableViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+//        updateSearchResults(for: searchController)
+    }
+    
+}
+
+// MARK: - UISearchControllerDelegate
+
+// Use these delegate functions for additional control over the search controller.
+
+extension HomeTableViewController: UISearchControllerDelegate {
+    
+    func presentSearchController(_ searchController: UISearchController) {
+        //Swift.debugPrint("UISearchControllerDelegate invoked method: \(#function).")
+    }
+    
+    func willPresentSearchController(_ searchController: UISearchController) {
+        //Swift.debugPrint("UISearchControllerDelegate invoked method: \(#function).")
+    }
+    
+    func didPresentSearchController(_ searchController: UISearchController) {
+        //Swift.debugPrint("UISearchControllerDelegate invoked method: \(#function).")
+    }
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        //Swift.debugPrint("UISearchControllerDelegate invoked method: \(#function).")
+    }
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        //Swift.debugPrint("UISearchControllerDelegate invoked method: \(#function).")
+    }
+    
 }
