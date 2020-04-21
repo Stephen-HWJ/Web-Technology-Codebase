@@ -252,15 +252,25 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhf-Pl-UKo">
+                                        <rect key="frame" x="117.5" y="421" width="140" height="34"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="View Full Article"/>
+                                        <connections>
+                                            <action selector="viewFullArticleButtonTapped:" destination="WXd-JL-8pM" eventType="touchUpInside" id="iOm-WW-Gig"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="xBu-3f-G8p" firstAttribute="trailing" secondItem="4sb-cE-DWr" secondAttribute="trailing" constant="12" id="0rN-6W-S7R"/>
                                     <constraint firstItem="IFG-Lx-p8u" firstAttribute="trailing" secondItem="XPk-Ut-C0p" secondAttribute="trailing" id="2PZ-LQ-Vp1"/>
+                                    <constraint firstItem="nhf-Pl-UKo" firstAttribute="centerX" secondItem="QJg-Gw-diE" secondAttribute="centerX" id="B2i-Nf-cn2"/>
                                     <constraint firstItem="IFG-Lx-p8u" firstAttribute="top" secondItem="XPk-Ut-C0p" secondAttribute="top" id="Tg9-Kq-Qrj"/>
-                                    <constraint firstItem="XPk-Ut-C0p" firstAttribute="bottom" secondItem="4sb-cE-DWr" secondAttribute="bottom" id="id8-K0-Rjl"/>
+                                    <constraint firstItem="nhf-Pl-UKo" firstAttribute="bottom" secondItem="XPk-Ut-C0p" secondAttribute="bottom" id="id8-K0-Rjl"/>
                                     <constraint firstItem="IFG-Lx-p8u" firstAttribute="width" secondItem="xBu-3f-G8p" secondAttribute="width" id="pNP-eT-THM"/>
                                     <constraint firstItem="IFG-Lx-p8u" firstAttribute="leading" secondItem="XPk-Ut-C0p" secondAttribute="leading" id="rfm-tY-aXL"/>
                                     <constraint firstItem="4sb-cE-DWr" firstAttribute="top" secondItem="IFG-Lx-p8u" secondAttribute="bottom" constant="25" id="tj6-2C-9ws"/>
+                                    <constraint firstItem="nhf-Pl-UKo" firstAttribute="top" secondItem="4sb-cE-DWr" secondAttribute="bottom" constant="8" id="uKP-xC-MRk"/>
                                     <constraint firstItem="4sb-cE-DWr" firstAttribute="leading" secondItem="xBu-3f-G8p" secondAttribute="leading" constant="12" id="y6j-yQ-Nbr"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="XPk-Ut-C0p"/>
@@ -535,65 +545,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AFM-CV-FOy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1516" y="107"/>
-        </scene>
-        <!--Headlines-->
-        <scene sceneID="8is-J6-uH9">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="iud-I0-FhH" customClass="ParentPagerTabViewController" customModule="newsApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="SQ5-lf-vU5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CJI-zx-QcS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <viewLayoutGuide key="contentLayoutGuide" id="5Zm-QR-wZC"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="0Sg-kS-ple"/>
-                            </scrollView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sZu-H1-uKj" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="UC2-4g-Xv2"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QOZ-TK-Jzg">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="oZr-3L-hLl">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="f6I-lX-fhN">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="sZu-H1-uKj" firstAttribute="top" secondItem="YjW-zQ-POw" secondAttribute="top" id="2lT-85-vuv"/>
-                            <constraint firstAttribute="trailing" secondItem="CJI-zx-QcS" secondAttribute="trailing" id="45z-d9-p8X"/>
-                            <constraint firstItem="sZu-H1-uKj" firstAttribute="leading" secondItem="SQ5-lf-vU5" secondAttribute="leading" id="4Nj-6n-vgI"/>
-                            <constraint firstItem="CJI-zx-QcS" firstAttribute="top" secondItem="SQ5-lf-vU5" secondAttribute="top" id="Z0Y-ZE-Fa3"/>
-                            <constraint firstItem="CJI-zx-QcS" firstAttribute="leading" secondItem="SQ5-lf-vU5" secondAttribute="leading" id="asp-0c-oQc"/>
-                            <constraint firstAttribute="trailing" secondItem="sZu-H1-uKj" secondAttribute="trailing" id="gmc-fa-dbg"/>
-                            <constraint firstAttribute="bottom" secondItem="CJI-zx-QcS" secondAttribute="bottom" id="qPS-rw-4Cy"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="YjW-zQ-POw"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Headlines" id="ecX-HD-LKe"/>
-                    <connections>
-                        <outlet property="buttonBarView" destination="sZu-H1-uKj" id="iUi-Vr-JYs"/>
-                        <outlet property="containerView" destination="CJI-zx-QcS" id="hTp-ys-PdA"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KLD-jP-cBp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2253.5999999999999" y="169.56521739130437"/>
         </scene>
         <!--Home-->
         <scene sceneID="JQl-RD-bFP">

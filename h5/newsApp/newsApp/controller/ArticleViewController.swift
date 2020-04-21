@@ -27,6 +27,8 @@ class ArticleViewController: UIViewController {
         }
     }
     
+    var articleURL: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,6 +46,7 @@ class ArticleViewController: UIViewController {
                 self.title = subJson["title"].string ?? ""
                 self.contentTitle.text = subJson["title"].string ?? ""
                 self.section.text = subJson["section"].string ?? ""
+                self.articleURL = subJson["articleURL"].string
                 
                 // Date string
                 let formatter = ISO8601DateFormatter()
@@ -67,12 +70,17 @@ class ArticleViewController: UIViewController {
                 let options = [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html]
                 let attributedString = try! NSAttributedString(data: htmlData!, options: options, documentAttributes: nil)
                 self.content.attributedText = attributedString
-                
+                self.content.textContainer.maximumNumberOfLines = 30
+                self.content.textContainer.lineBreakMode = .byTruncatingTail
                 SwiftSpinner.hide()
             case .failure(let error):
                 print(error)
             }
         })
+    }
+    
+    @IBAction func viewFullArticleButtonTapped(_ sender: UIButton) {
+        UIApplication.shared.open(URL(string: self.articleURL!)!)
     }
     
 

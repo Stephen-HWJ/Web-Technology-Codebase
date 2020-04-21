@@ -128,6 +128,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         if let articleViewController = segue.destination as? ArticleViewController {
             print("in segue")
             articleViewController.id = id
+//            articleViewController.articleURL = newsCell.newsData
         }
     }
     
