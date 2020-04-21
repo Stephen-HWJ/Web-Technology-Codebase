@@ -36,10 +36,6 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(sortArray), for: .valueChanged)
         self.refreshControl = refreshControl
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         newsArrayData = NewsCellArray(tab: "home", tableViewController: self)
     }
     
@@ -108,6 +104,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
             let news = newsArrayData?.get(index: indexPath.row)
             if let cell = cell as? NewsTableViewCell {
                 cell.newsData = news
+                cell.parentTableView = self
             }
         }
 

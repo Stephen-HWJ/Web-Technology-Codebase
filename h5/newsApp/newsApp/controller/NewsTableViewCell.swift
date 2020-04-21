@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toast_Swift
 
 extension UIImageView {
    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
@@ -34,6 +35,8 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
     @IBOutlet weak var newsSrc: UILabel!
 //    @IBOutlet weak var taggedButton: UIButton!
     @IBOutlet weak var taggedButton: UIButton!
+    
+    var parentTableView: UITableViewController?
     
     // News data type
     var newsData: NewsCell? {
@@ -93,11 +96,11 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
         sender.isSelected = !sender.isSelected
         if sender.isSelected{
             sender.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-//          sender.setTitleColor(UIColor.blue, for: .normal)
+            parentTableView?.navigationController?.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view")
         } else{
             sender.setImage(UIImage(systemName: "bookmark"), for: .normal)
-//          sender.setTitleColor(UIColor.white, for: .normal)
-        }
+            parentTableView?.navigationController?.view.makeToast("Article Removed from Bookmarks")
+        }        
     }
     
 
