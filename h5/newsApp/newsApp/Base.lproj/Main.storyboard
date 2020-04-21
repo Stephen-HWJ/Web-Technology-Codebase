@@ -208,7 +208,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IFG-Lx-p8u">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="338"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image-1" translatesAutoresizingMaskIntoConstraints="NO" id="JRf-ho-f1s">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JRf-ho-f1s">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="230" id="lwx-HA-PJb"/>
@@ -286,7 +286,27 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j5V-wq-AJW"/>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="OID-aA-0vy"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="OID-aA-0vy">
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" id="fgc-Hf-xax">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hAZ-Bk-Qiz" userLabel="Twitter Share">
+                                    <rect key="frame" x="324" y="10" width="35" height="24"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="twitter"/>
+                                    <connections>
+                                        <action selector="shareButtonTapped:" destination="WXd-JL-8pM" eventType="touchUpInside" id="el1-z1-miW"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="Ddl-em-o3C">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mnk-h1-tZ9" userLabel="Taging Button">
+                                    <rect key="frame" x="281" y="11" width="35" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="bookmark" catalog="system"/>
+                                </button>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="content" destination="4sb-cE-DWr" id="CH4-tH-nrm"/>
                         <outlet property="contentTitle" destination="hjU-pr-c6d" id="JNR-oD-dU1"/>
@@ -582,7 +602,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image-1" width="1080" height="1920"/>
         <image name="bookmark" catalog="system" width="56" height="64"/>
         <image name="bookmark.fill" catalog="system" width="56" height="64"/>
         <image name="default-guardian" width="1000" height="1000"/>
@@ -590,5 +609,6 @@
         <image name="rectangle.split.3x3.fill" catalog="system" width="64" height="46"/>
         <image name="sunny_weather" width="1024" height="519"/>
         <image name="trending-up" width="28" height="28"/>
+        <image name="twitter" width="24" height="24"/>
     </resources>
 </document>

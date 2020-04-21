@@ -46,7 +46,7 @@ class ArticleViewController: UIViewController {
                 self.title = subJson["title"].string ?? ""
                 self.contentTitle.text = subJson["title"].string ?? ""
                 self.section.text = subJson["section"].string ?? ""
-                self.articleURL = subJson["articleURL"].string
+                self.articleURL = subJson["articleURL"].string ?? ""
                 
                 // Date string
                 let formatter = ISO8601DateFormatter()
@@ -57,7 +57,6 @@ class ArticleViewController: UIViewController {
                 self.dateString.text = newFormatter.string(from: newsDate!)
                 
                 // Image
-//                self.articleURL = subJson["articleURL"].string ?? ""
                 if subJson["image"].string == "" || subJson["image"].string == nil {
                     self.titleImage.image = UIImage(named: "default-guardian")
                 } else {
@@ -81,6 +80,19 @@ class ArticleViewController: UIViewController {
     
     @IBAction func viewFullArticleButtonTapped(_ sender: UIButton) {
         UIApplication.shared.open(URL(string: self.articleURL!)!)
+    }
+    @IBAction func shareButtonTapped(_ sender: UIButton) {
+        let tweetText = "Check out this Article! \(articleURL ?? "") #CSCI_571_NewsApp"
+        let shareString = "https://twitter.com/intent/tweet?text=\(tweetText)"
+        
+        // encode a space to %20 for example
+        let escapedShareString = shareString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+
+        // cast to an url
+        let url = URL(string: escapedShareString)
+        
+        // open in safari
+        UIApplication.shared.open(url!)
     }
     
 
