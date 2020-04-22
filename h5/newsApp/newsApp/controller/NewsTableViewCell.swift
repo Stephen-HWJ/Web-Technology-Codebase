@@ -69,7 +69,7 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
             newsTitle.text = news.title
             newsDate.text = getShownTime(time: news.time)
             newsSrc.text = news.source
-//            tagged = false
+            self.updateFlagged()
         }
     }
     
@@ -93,14 +93,22 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
     // MARK: - Button action
     
     @IBAction func tagButtonTapped(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
         if sender.isSelected{
-            sender.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-            parentTableView?.navigationController?.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view")
+            self.newsData?.remove()
         } else{
-            sender.setImage(UIImage(systemName: "bookmark"), for: .normal)
-            parentTableView?.navigationController?.view.makeToast("Article Removed from Bookmarks")
-        }        
+            self.newsData?.save()
+        }
+        self.updateFlagged()
+    }
+    
+    private func updateFlagged() {
+        if self.newsData?.checkSaved() ?? false {
+            self.taggedButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            self.taggedButton.isSelected = true
+        } else {
+            self.taggedButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+            self.taggedButton.isSelected = false
+        }
     }
     
 
