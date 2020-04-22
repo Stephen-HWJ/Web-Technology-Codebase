@@ -9,6 +9,8 @@
 import UIKit
 import CoreLocation
 import XLPagerTabStrip
+import Alamofire
+import SwiftyJSON
 
 class HomeTableViewController: UITableViewController, CLLocationManagerDelegate, IndicatorInfoProvider, UISearchResultsUpdating {
     
@@ -58,9 +60,6 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         
         // Place the search bar in the navigation bar.
         navigationItem.searchController = searchController
-        
-        // Make the search bar always visible.
-        //navigationItem.hidesSearchBarWhenScrolling = false
         
         /** Search presents a view controller by applying normal view controller presentation semantics.
             This means that the presentation moves up the view controller hierarchy until it finds the root
@@ -148,7 +147,24 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
     // MARK: - Search update
     
     func updateSearchResults(for searchController: UISearchController) {
-        // TODO: ,,,
+        if let resultsController = searchController.searchResultsController as? ResultsTableController {
+            let suggestApi = "https://api.cognitive.microsoft.com/bing/v7.0/suggestions?q=\(searchController.searchBar.text!)"
+            let url = suggestApi.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            let headers: HTTPHeaders = ["Ocp-Apim-Subscription-Key": "fa5edb60ea4a419da391b8968bbfa824"]
+            
+            Alamofire.request(url!, headers: headers).responseJSON(completionHandler: {response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let resultArray = json["suggestionGroups"].arrayValue[0]["searchSuggestions"].arrayValue.map({$0["displayText"].stringValue})
+                    resultsController.searchResults = resultArray
+                    resultsController.tableView.reloadData()
+                case .failure(let error):
+                    print(error)
+                }
+            })
+            
+        }
     }
 
     // MARK: - Navigation
