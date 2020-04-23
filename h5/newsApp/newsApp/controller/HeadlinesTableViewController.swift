@@ -46,10 +46,10 @@ class HeadlinesTableViewController: UITableViewController, IndicatorInfoProvider
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath)
-        let news = newsArrayData?.get(index: indexPath.row)
-        if let cell = cell as? NewsTableViewCell {
-            cell.newsData = news
-        }
+//        let news = newsArrayData?.get(index: indexPath.row)
+//        if let cell = cell as? NewsTableViewCell {
+//            cell.newsData = news
+//        }
         // Configure the cell...
 
         return cell

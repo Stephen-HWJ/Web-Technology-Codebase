@@ -11,6 +11,8 @@ import XLPagerTabStrip
 
 class ParentPagerTabViewController: ButtonBarPagerTabStripViewController {
     let purpleInspireColor = UIColor(red:0.13, green:0.03, blue:0.25, alpha:1.0)
+    let redColor = UIColor(red: 221/255.0, green: 0/255.0, blue: 19/255.0, alpha: 1.0)
+    let unselectedIconColor = UIColor(red: 73/255.0, green: 8/255.0, blue: 10/255.0, alpha: 1.0)
     override func viewDidLoad() {
         // change selected bar color
         settings.style.buttonBarBackgroundColor = .white
@@ -31,9 +33,11 @@ class ParentPagerTabViewController: ButtonBarPagerTabStripViewController {
         super.viewDidLoad()
     }
     
-//    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-//        let child_1 = HomeTableViewController(style: .plain, childInfo: "table view")
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        let child_1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController")
+        let child_2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController")
+        let child_3 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController")
 //        let child_2 = HomeTableViewController(style: .plain, childInfo: "table view 2")
-//        return [child_1, child_2]
-//    }
+        return [child_1, child_2, child_3]
+    }
 }

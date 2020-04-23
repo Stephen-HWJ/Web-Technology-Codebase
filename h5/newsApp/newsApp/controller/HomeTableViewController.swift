@@ -28,11 +28,11 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
 //        self.childInfo = childInfo
 //        super.init(style: style)
 //    }
-    
+//    
 //    required init?(coder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")
 //    }
-    
+//    
     /// Search controller to help us with filtering items in the table view.
     var searchController: UISearchController!
     
@@ -41,7 +41,6 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
