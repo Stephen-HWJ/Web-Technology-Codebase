@@ -29,12 +29,17 @@ class NewsCellArray {
     
     private func loadNews(tab: String, tableViewController: UITableViewController) {
 //        SwiftSpinner.show("Loading Home Page..")
-        let weatherParams = "https://weijihua-hw9-api.wl.r.appspot.com/\(tab)"
+        var section = tab.lowercased()
+        if section == "sports" {
+            section = "sport"
+        }
+        let weatherParams = "https://weijihua-hw9-api.wl.r.appspot.com/section/\(section)"
         let url = weatherParams.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         Alamofire.request(url!, method: .get).validate().responseJSON(completionHandler: {response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)["response"]
+                print(url!)
                 for (_, subJson):(String, JSON) in json {
                     let news = NewsCell(imageUrl: subJson["image"].string ?? "", title: subJson["title"].string!, time: subJson["time"].string!, source: subJson["section"].string!, tagged: false, id: subJson["id"].string!)
                     self.newsArray.append(news)

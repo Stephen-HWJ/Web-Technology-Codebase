@@ -22,17 +22,18 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         }
     }
     
-    var childInfo = IndicatorInfo(title: "home")
+    var childInfo = "home"
     
-//    init(style: UITableView.Style, childInfo: IndicatorInfo) {
-//        self.childInfo = childInfo
-//        super.init(style: style)
-//    }
-//    
-//    required init?(coder: NSCoder) {
+    init(style: UITableView.Style, childInfo: String) {
+        self.childInfo = childInfo
+        super.init(style: style)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
 //        fatalError("init(coder:) has not been implemented")
-//    }
-//    
+    }
+    
     /// Search controller to help us with filtering items in the table view.
     var searchController: UISearchController!
     
@@ -54,7 +55,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(sortArray), for: .valueChanged)
         self.refreshControl = refreshControl
-        newsArrayData = NewsCellArray(tab: "home", tableViewController: self)
+        newsArrayData = NewsCellArray(tab: self.childInfo, tableViewController: self)
         
         resultsTableController =
             self.storyboard?.instantiateViewController(withIdentifier: "ResultsTableController") as? ResultsTableController
@@ -135,20 +136,27 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return max(1, (newsArrayData?.getSize())!)
+        if self.childInfo.lowercased() == "home" {
+            return (newsArrayData?.getSize() ?? 0) + 1
+        }
+        return newsArrayData?.getSize() ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell
-        if indexPath.row == 0 {
-            cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath)
-        } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath)
-            let news = newsArrayData?.get(index: indexPath.row)
-            if let cell = cell as? NewsTableViewCell {
-                cell.newsData = news
-                cell.parentTableView = self
-            }
+        var rowIndex = indexPath.row
+        
+        if self.childInfo.lowercased() == "home" && rowIndex == 0 {
+            return tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath)
+        }
+        if self.childInfo.lowercased() == "home" {
+            rowIndex -= 1
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath)
+        let news = newsArrayData?.get(index: rowIndex)
+        if let cell = cell as? NewsTableViewCell {
+            cell.newsData = news
+            cell.parentTableView = self
         }
 
         return cell
@@ -198,7 +206,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return childInfo
+        return IndicatorInfo(title: self.childInfo)
     }
 
 }
