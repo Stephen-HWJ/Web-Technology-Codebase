@@ -18,10 +18,11 @@ class ArticleViewController: UIViewController {
     @IBOutlet weak var contentTitle: UILabel!
     @IBOutlet weak var section: UILabel!
     @IBOutlet weak var dateString: UILabel!
+    @IBOutlet weak var taggedButton: UIButton!
     
     var htmlTextString: String = ""
     
-    var id: String? {
+    var newsCellData: NewsCell? {
         didSet{
             getContent()
         }
@@ -37,7 +38,7 @@ class ArticleViewController: UIViewController {
     
     private func getContent() {
         SwiftSpinner.show("Loading Detailed article..")
-        let weatherParams = "https://weijihua-hw9-api.wl.r.appspot.com/article/\(id!)"
+        let weatherParams = "https://weijihua-hw9-api.wl.r.appspot.com/article/\(self.newsCellData!.id)"
         let url = weatherParams.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         Alamofire.request(url!, method: .get).validate().responseJSON(completionHandler: {response in
             switch response.result {
@@ -77,11 +78,23 @@ class ArticleViewController: UIViewController {
                 print(error)
             }
         })
+        
+        updateFlagged()
     }
     
     @IBAction func viewFullArticleButtonTapped(_ sender: UIButton) {
         UIApplication.shared.open(URL(string: self.articleURL!)!)
     }
+    
+    @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
+        if sender.isSelected{
+            self.newsCellData?.remove()
+        } else{
+            self.newsCellData?.save()
+        }
+        self.updateFlagged()
+    }
+    
     @IBAction func shareButtonTapped(_ sender: UIButton) {
         let tweetText = "Check out this Article! \(articleURL ?? "") #CSCI_571_NewsApp"
         let shareString = "https://twitter.com/intent/tweet?text=\(tweetText)"
@@ -96,6 +109,15 @@ class ArticleViewController: UIViewController {
         UIApplication.shared.open(url!)
     }
     
+    private func updateFlagged() {
+        if self.newsCellData?.checkSaved() ?? false {
+            self.taggedButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            self.taggedButton.isSelected = true
+        } else {
+            self.taggedButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+            self.taggedButton.isSelected = false
+        }
+    }
 
     /*
     // MARK: - Navigation

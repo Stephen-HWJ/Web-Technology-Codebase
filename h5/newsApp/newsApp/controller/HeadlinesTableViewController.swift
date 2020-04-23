@@ -101,11 +101,10 @@ class HeadlinesTableViewController: UITableViewController, IndicatorInfoProvider
             fatalError("User tapped not on NewsTableViewCell")
         }
         
-        let id = newsCell.newsData?.id
         print(segue.identifier!)
         if let articleViewController = segue.destination as? ArticleViewController {
             print("in segue")
-            articleViewController.id = id
+            articleViewController.newsCellData = newsCell.newsData
         }
     }
     

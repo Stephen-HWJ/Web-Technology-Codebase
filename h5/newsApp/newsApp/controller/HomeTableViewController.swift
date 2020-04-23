@@ -22,6 +22,17 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         }
     }
     
+    var childInfo = IndicatorInfo(title: "home")
+    
+//    init(style: UITableView.Style, childInfo: IndicatorInfo) {
+//        self.childInfo = childInfo
+//        super.init(style: style)
+//    }
+    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     /// Search controller to help us with filtering items in the table view.
     var searchController: UISearchController!
     
@@ -179,17 +190,16 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
             fatalError("User tapped not on NewsTableViewCell")
         }
         
-        let id = newsCell.newsData?.id
         print(segue.identifier!)
         if let articleViewController = segue.destination as? ArticleViewController {
             print("in segue")
-            articleViewController.id = id
+            articleViewController.newsCellData = newsCell.newsData
 //            articleViewController.articleURL = newsCell.newsData
         }
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Child 1")
+        return childInfo
     }
 
 }

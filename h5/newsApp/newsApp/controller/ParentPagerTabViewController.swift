@@ -31,9 +31,9 @@ class ParentPagerTabViewController: ButtonBarPagerTabStripViewController {
         super.viewDidLoad()
     }
     
-    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let child_1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "child1")
-        let child_2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "child2")
-        return [child_1, child_2]
-    }
+//    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+//        let child_1 = HomeTableViewController(style: .plain, childInfo: "table view")
+//        let child_2 = HomeTableViewController(style: .plain, childInfo: "table view 2")
+//        return [child_1, child_2]
+//    }
 }

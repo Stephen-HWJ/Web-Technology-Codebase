@@ -25,27 +25,7 @@ class NewsCell: Codable {
         let formatter = ISO8601DateFormatter()
         self.time = formatter.date(from: time)!
         self.id = id
-        
-//        print(self.title)
     }
-    
-//    required init(coder aDecoder: NSCoder) {
-//        imageUrl = aDecoder.decodeObject(forKey: "imageUrl") as! String
-//        title = aDecoder.decodeObject(forKey: "title") as! String
-//        time = aDecoder.decodeObject(forKey: "time") as! Date
-//        source = aDecoder.decodeObject(forKey: "source") as! String
-//        tagged = aDecoder.decodeObject(forKey: "tagged") as! Bool
-//        id = aDecoder.decodeObject(forKey: "tagged") as! String
-//    }
-//
-//    func encode(with aCoder: NSCoder) {
-//        aCoder.encode(imageUrl, forKey: "imageUrl")
-//        aCoder.encode(title, forKey: "title")
-//        aCoder.encode(time, forKey: "time")
-//        aCoder.encode(source, forKey: "source")
-//        aCoder.encode(tagged, forKey: "tagged")
-//        aCoder.encode(id, forKey: "id")
-//    }
     
     func save() {
         do {
@@ -57,6 +37,13 @@ class NewsCell: Codable {
 
             // Write/Set Data
             UserDefaults.standard.set(data, forKey: self.id)
+            
+            if let idArray = UserDefaults.standard.object(forKey: "id") as? [String] {
+                UserDefaults.standard.set(idArray + [self.id], forKey: "id")
+            } else {
+                UserDefaults.standard.set([self.id], forKey: "id")
+            }
+//            print(UserDefaults.standard.object(forKey: "id")!)
 
         } catch {
             print("Unable to Encode NewsCell (\(error))")
@@ -65,24 +52,13 @@ class NewsCell: Codable {
     
     func remove() {
         UserDefaults.standard.removeObject(forKey: self.id)
+        if let idArray = UserDefaults.standard.object(forKey: "id") as? [String] {
+            UserDefaults.standard.set(idArray.filter(){$0 != self.id}, forKey: "id")
+        }
+//        print(UserDefaults.standard.object(forKey: "id")!)
     }
     
     func checkSaved() -> Bool{
-        if UserDefaults.standard.data(forKey: self.id) != nil {
-//            do {
-//                // Create JSON Decoder
-//                let decoder = JSONDecoder()
-//
-//                // Decode Note
-//                let news = try decoder.decode(NewsCell.self, from: data)
-////                print(news.id)
-                return true
-//
-//            } catch {
-//                print("Unable to Decode Note (\(error))")
-//            }
-        }
-        
-        return false
+        return UserDefaults.standard.data(forKey: self.id) != nil 
     }
 }
