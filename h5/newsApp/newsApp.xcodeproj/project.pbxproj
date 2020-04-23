@@ -18,6 +18,7 @@
 		F25ED403244974D700076A6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F25ED401244974D700076A6A /* Main.storyboard */; };
 		F25ED405244974D800076A6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F25ED404244974D800076A6A /* Assets.xcassets */; };
 		F25ED408244974D800076A6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F25ED406244974D800076A6A /* LaunchScreen.storyboard */; };
+		F2A13CEF2452565D00A409EB /* BookmarkCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A13CEE2452565D00A409EB /* BookmarkCollectionViewController.swift */; };
 		F2B93268244A7724008732F7 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B93267244A7724008732F7 /* HomeTableViewController.swift */; };
 		F2B9326F244A83AD008732F7 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9326E244A83AD008732F7 /* Weather.swift */; };
 		F2BE0693244EBF22009CCFF2 /* ResultsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0692244EBF22009CCFF2 /* ResultsTableController.swift */; };
@@ -45,6 +46,7 @@
 		F25ED404244974D800076A6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F25ED407244974D800076A6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F25ED409244974D800076A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2A13CEE2452565D00A409EB /* BookmarkCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCollectionViewController.swift; sourceTree = "<group>"; };
 		F2B93267244A7724008732F7 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		F2B9326E244A83AD008732F7 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		F2BE0692244EBF22009CCFF2 /* ResultsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				F2209A74244E5FE70024E7D8 /* TrendingViewController.swift */,
 				F241EBB32450FBD0004A5372 /* TestViewController.swift */,
 				F241EBB52450FF87004A5372 /* ReusableTableView.swift */,
+				F2A13CEE2452565D00A409EB /* BookmarkCollectionViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				F2C58AAF244B9DA000A5B765 /* WeatherTableViewCell.swift in Sources */,
 				F2C58AB1244B9DC300A5B765 /* NewsTableViewCell.swift in Sources */,
 				F25ED400244974D700076A6A /* SecondViewController.swift in Sources */,
+				F2A13CEF2452565D00A409EB /* BookmarkCollectionViewController.swift in Sources */,
 				F25ED3FA244974D700076A6A /* AppDelegate.swift in Sources */,
 				F2BE0693244EBF22009CCFF2 /* ResultsTableController.swift in Sources */,
 				F2C58AB5244BC42B00A5B765 /* ArticleViewController.swift in Sources */,

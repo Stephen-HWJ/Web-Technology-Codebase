@@ -17,8 +17,8 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
     var locationManager: CLLocationManager = CLLocationManager()
     var localWeather: Weather?
     var newsArrayData: NewsCellArray? {
-        didSet {
-            self.tableView.reloadData()
+        didSet{
+            tableView.reloadData()
         }
     }
     
@@ -57,38 +57,31 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         self.refreshControl = refreshControl
         newsArrayData = NewsCellArray(tab: self.childInfo, tableViewController: self)
         
-        resultsTableController =
-            self.storyboard?.instantiateViewController(withIdentifier: "ResultsTableController") as? ResultsTableController
-        // This view controller is interested in table view row selections.
-        resultsTableController.tableView.delegate = self
-        
-        searchController = UISearchController(searchResultsController: resultsTableController)
-        searchController.delegate = self
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.autocapitalizationType = .none
-//        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.delegate = self // Monitor when the search button is tapped.
-        
-        // Place the search bar in the navigation bar.
-        navigationItem.searchController = searchController
-        
-        /** Search presents a view controller by applying normal view controller presentation semantics.
-            This means that the presentation moves up the view controller hierarchy until it finds the root
-            view controller or one that defines a presentation context.
-        */
-        
-        /** Specify that this view controller determines how the search controller is presented.
-            The search controller should be presented modally and match the physical size of this view controller.
-        */
-        definesPresentationContext = true
+        if ["world", "business", "politics", "sport", "technology", "science", "home"].contains(self.childInfo.lowercased()) {
+            resultsTableController = self.storyboard?.instantiateViewController(withIdentifier: "ResultsTableController") as? ResultsTableController
+            // This view controller is interested in table view row selections.
+            resultsTableController.tableView.delegate = resultsTableController
+            resultsTableController.navVC = self.navigationController
+            
+            searchController = UISearchController(searchResultsController: resultsTableController)
+            searchController.delegate = self
+            searchController.searchResultsUpdater = self
+            searchController.searchBar.autocapitalizationType = .none
+            searchController.searchBar.delegate = self // Monitor when the search button is tapped.
+            
+            // Place the search bar in the navigation bar.
+            navigationItem.searchController = searchController
+            definesPresentationContext = true
+        } else {
+            self.navigationItem.title = "Search Results"
+        }
     }
     
 
     // MARK: - Pull down to refresh function
     
     @objc func sortArray() {
-        print("refreshed")
-        newsArrayData = NewsCellArray(tab: "home", tableViewController: self)
+        newsArrayData = NewsCellArray(tab: self.childInfo, tableViewController: self, animated: false)
         refreshControl?.endRefreshing()
     }
     

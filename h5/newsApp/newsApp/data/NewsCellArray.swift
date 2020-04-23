@@ -15,8 +15,8 @@ class NewsCellArray {
     var newsArray: [NewsCell] = [NewsCell]()
     var size: Int = 0
     
-    init(tab: String, tableViewController: UITableViewController) {
-        loadNews(tab: tab, tableViewController: tableViewController)
+    init(tab: String, tableViewController: UITableViewController, animated: Bool = true) {
+        loadNews(tab: tab, tableViewController: tableViewController, animated: animated)
     }
     
     func getSize() -> Int {
@@ -27,19 +27,26 @@ class NewsCellArray {
         return newsArray[index]
     }
     
-    private func loadNews(tab: String, tableViewController: UITableViewController) {
-//        SwiftSpinner.show("Loading Home Page..")
+    private func loadNews(tab: String, tableViewController: UITableViewController, animated: Bool) {
+        if animated {
+            SwiftSpinner.show("Loading Home Page..")
+        }
         var section = tab.lowercased()
         if section == "sports" {
             section = "sport"
         }
-        let weatherParams = "https://weijihua-hw9-api.wl.r.appspot.com/section/\(section)"
+        var weatherParams = "https://weijihua-hw9-api.wl.r.appspot.com/section/\(section)"
+        
+        if !["world", "business", "politics", "sport", "technology", "science", "home"].contains(section) {
+            weatherParams = "https://weijihua-hw9-api.wl.r.appspot.com/search/\(section)"
+        }
+        
         let url = weatherParams.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         Alamofire.request(url!, method: .get).validate().responseJSON(completionHandler: {response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)["response"]
-                print(url!)
+                print("News loaded from \(url!)")
                 for (_, subJson):(String, JSON) in json {
                     let news = NewsCell(imageUrl: subJson["image"].string ?? "", title: subJson["title"].string!, time: subJson["time"].string!, source: subJson["section"].string!, tagged: false, id: subJson["id"].string!)
                     self.newsArray.append(news)
@@ -47,7 +54,9 @@ class NewsCellArray {
                 }
 //                print(json)
                 tableViewController.tableView.reloadData()
-//                SwiftSpinner.hide()
+                if animated {
+                    SwiftSpinner.hide()
+                }
             case .failure(let error):
                 print(error)
             }
