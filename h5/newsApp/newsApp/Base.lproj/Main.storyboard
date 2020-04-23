@@ -453,16 +453,6 @@
             <point key="canvasLocation" x="1516" y="1532"/>
         </scene>
         <!--Headlines-->
-        <scene sceneID="rAI-5z-3KW">
-            <objects>
-                <tableViewController storyboardIdentifier="child2" automaticallyAdjustsScrollViewInsets="NO" id="PPZ-Zk-aAB" customClass="HeadlinesTableViewController" customModule="newsApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Headlines" largeTitleDisplayMode="always" id="Eoa-BO-tS6"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AFM-CV-FOy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2900" y="100"/>
-        </scene>
-        <!--Headlines-->
         <scene sceneID="hvF-ZL-4kV">
             <objects>
                 <viewController id="RSE-zb-2jE" customClass="ParentPagerTabViewController" customModule="newsApp" customModuleProvider="target" sceneMemberID="viewController">
