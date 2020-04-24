@@ -8,9 +8,12 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "bookmarkCell"
 
-class BookmarkCollectionViewController: UICollectionViewController {
+class BookmarkCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var savedNewsID: [String]? = UserDefaults.standard.object(forKey: "id") as? [String]
+    var newsArray: NewsCellArray = NewsCellArray()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,9 +22,10 @@ class BookmarkCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+//        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
+        print(savedNewsID!)
     }
 
     /*
@@ -38,17 +42,26 @@ class BookmarkCollectionViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return newsArray.getSize()
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+//        cell?.textLabel.text = String(indexPath.row)
+        if let cell = cell as? BookmarkCollectionViewCell {
+            cell.layer.cornerRadius = 8
+            cell.layer.borderColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0).cgColor
+            cell.layer.borderWidth = 1
+            
+            cell.newsData = newsArray.get(index: indexPath.row)
+        }
+        
     
         // Configure the cell
     
@@ -71,19 +84,14 @@ class BookmarkCollectionViewController: UICollectionViewController {
     }
     */
 
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
+//    // MARK: - Flow delegate layout
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        return CGSize(width: view.frame.width / 2 - 8, height: view.frame.height / 3)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return CGFloat(2)
+//    }
 
 }

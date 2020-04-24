@@ -19,6 +19,20 @@ class NewsCellArray {
         loadNews(tab: tab, tableViewController: tableViewController, animated: animated)
     }
     
+    init() {
+        let savedNewsID: [String]? = UserDefaults.standard.object(forKey: "id") as? [String]
+        for newsID in savedNewsID! {
+            if let savedNews = UserDefaults.standard.object(forKey: newsID) as? Data {
+                let decoder = JSONDecoder()
+                if let loadedNews = try? decoder.decode(NewsCell.self, from: savedNews) {
+                    newsArray.append(loadedNews)
+                }
+            }
+        }
+        
+        size = newsArray.count
+    }
+    
     func getSize() -> Int {
         return newsArray.count
     }
