@@ -25,7 +25,13 @@ class BookmarkCollectionViewController: UICollectionViewController, UICollection
 //        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
+        reloadSavedNews()
         print(savedNewsID!)
+    }
+    
+    func reloadSavedNews() {
+        newsArray = NewsCellArray()
+        collectionView.reloadData()
     }
 
     /*
@@ -83,15 +89,29 @@ class BookmarkCollectionViewController: UICollectionViewController, UICollection
         return true
     }
     */
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedNews = newsArray.get(index: indexPath.row)
+        
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArticleViewController")
+        if let articleView = viewController as? ArticleViewController {
+            articleView.newsCellData = selectedNews
+            self.navigationController?.pushViewController(articleView, animated: true)
+        }
+        
+        collectionView.deselectItem(at: indexPath, animated: false)
+//        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 
-//    // MARK: - Flow delegate layout
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        return CGSize(width: view.frame.width / 2 - 8, height: view.frame.height / 3)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return CGFloat(2)
-//    }
+        if collectionView.numberOfItems(inSection: section) == 1 {
+            let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+//            print(UIEdgeInsets(top: 0, left: 8, bottom: 0, right: collectionView.frame.width - flowLayout.itemSize.width - 8))
+            return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: collectionView.frame.width - flowLayout.itemSize.width - 8)
+        }
 
+        return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+
+    }
 }

@@ -197,7 +197,7 @@
         <!--Article View Controller-->
         <scene sceneID="EkR-zu-B26">
             <objects>
-                <viewController id="WXd-JL-8pM" customClass="ArticleViewController" customModule="newsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArticleViewController" id="WXd-JL-8pM" customClass="ArticleViewController" customModule="newsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VgH-XI-LVx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
