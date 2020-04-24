@@ -44,6 +44,7 @@ class NewsCellArray {
     private func loadNews(tab: String, tableViewController: UITableViewController, animated: Bool) {
         if animated {
             SwiftSpinner.show("Loading Home Page..")
+            print("LOADING NEWS FROM NEWS_ARRAY")
         }
         var section = tab.lowercased()
         if section == "sports" {

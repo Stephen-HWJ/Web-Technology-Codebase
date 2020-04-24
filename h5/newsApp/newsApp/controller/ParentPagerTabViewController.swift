@@ -63,7 +63,9 @@ class ParentPagerTabViewController: ButtonBarPagerTabStripViewController, UISear
     
     func reloadTables() {
         for tableVC in childrenViewControllers {
-            tableVC.tableView.reloadData()
+            if tableVC.isViewLoaded {
+                tableVC.tableView.reloadData()
+            }
         }
     }
     

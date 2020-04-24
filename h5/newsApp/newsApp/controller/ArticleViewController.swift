@@ -40,6 +40,7 @@ class ArticleViewController: UIViewController {
     
     private func getContent() {
         SwiftSpinner.show("Loading Detailed article..")
+        print("LOADING FROM ARTICLE_VC")
         let weatherParams = "https://weijihua-hw9-api.wl.r.appspot.com/article/\(self.newsCellData!.id)"
         let url = weatherParams.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         Alamofire.request(url!, method: .get).validate().responseJSON(completionHandler: {response in
@@ -90,7 +91,7 @@ class ArticleViewController: UIViewController {
     
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
         if sender.isSelected{
-            self.delegate?.mark(news: self.newsCellData)
+            self.delegate?.unMark(news: self.newsCellData)
         } else{
             self.delegate?.mark(news: self.newsCellData)
         }

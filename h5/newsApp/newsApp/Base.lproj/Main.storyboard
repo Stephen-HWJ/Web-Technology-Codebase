@@ -78,6 +78,10 @@
                                 <viewLayoutGuide key="safeArea" id="Bpm-td-2aI"/>
                                 <connections>
                                     <outlet property="backgroundImage" destination="NZq-Pa-cBK" id="pMf-r2-vnA"/>
+                                    <outlet property="cityLabel" destination="Kj2-JC-FAQ" id="dpo-f4-9kr"/>
+                                    <outlet property="stateLabel" destination="Bee-L8-0vR" id="Baw-57-lkb"/>
+                                    <outlet property="temperature" destination="WVv-LA-zdJ" id="Z1K-aG-AWv"/>
+                                    <outlet property="weatherType" destination="vMD-bI-erk" id="yZR-dg-hoe"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="NewsCell" id="0kG-qa-sFp" customClass="NewsTableViewCell" customModule="newsApp" customModuleProvider="target">
@@ -471,9 +475,9 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08 Apr 20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOu-rG-xLl">
-                                                    <rect key="frame" x="8" y="235" width="70" height="16"/>
+                                                    <rect key="frame" x="8" y="235" width="62" height="16"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="70" id="lwc-IS-8xw"/>
+                                                        <constraint firstAttribute="width" constant="62" id="lwc-IS-8xw"/>
                                                         <constraint firstAttribute="height" constant="16" id="uWr-4H-Ioi"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -481,7 +485,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="| Business" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXY-KX-TDk">
-                                                    <rect key="frame" x="86" y="235" width="65" height="16"/>
+                                                    <rect key="frame" x="74" y="235" width="65" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="65" id="L8i-S2-Wm4"/>
                                                         <constraint firstAttribute="height" constant="16" id="rkl-xh-aXq"/>
@@ -496,7 +500,7 @@
                                                 <constraint firstItem="3Lx-DZ-NzN" firstAttribute="top" secondItem="mjH-dt-0x1" secondAttribute="top" id="0aq-sg-26o"/>
                                                 <constraint firstAttribute="bottom" secondItem="tOu-rG-xLl" secondAttribute="bottom" constant="8" id="6Lh-UZ-lz4"/>
                                                 <constraint firstAttribute="trailing" secondItem="BbE-uY-9H7" secondAttribute="trailing" constant="8" id="8qo-DN-qIl"/>
-                                                <constraint firstItem="yXY-KX-TDk" firstAttribute="leading" secondItem="tOu-rG-xLl" secondAttribute="trailing" constant="8" id="DeD-vy-6Db"/>
+                                                <constraint firstItem="yXY-KX-TDk" firstAttribute="leading" secondItem="tOu-rG-xLl" secondAttribute="trailing" constant="4" id="DeD-vy-6Db"/>
                                                 <constraint firstAttribute="bottom" secondItem="yXY-KX-TDk" secondAttribute="bottom" constant="8" id="Fpt-QR-GzI"/>
                                                 <constraint firstItem="3Lx-DZ-NzN" firstAttribute="leading" secondItem="mjH-dt-0x1" secondAttribute="leading" id="M9g-Bd-hJg"/>
                                                 <constraint firstAttribute="width" constant="175" id="UDg-xy-ZmG"/>

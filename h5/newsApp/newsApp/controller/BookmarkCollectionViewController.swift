@@ -8,6 +8,25 @@
 
 import UIKit
 
+extension UICollectionView {
+
+    func setEmptyMessage(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = .black
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = .center;
+//        messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
+        messageLabel.sizeToFit()
+
+        self.backgroundView = messageLabel;
+    }
+
+    func restore() {
+        self.backgroundView = nil
+    }
+}
+
 private let reuseIdentifier = "bookmarkCell"
 
 class BookmarkCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -39,6 +58,12 @@ class BookmarkCollectionViewController: UICollectionViewController, UICollection
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
+        if newsArray.getSize() == 0 {
+            self.collectionView.setEmptyMessage("No bookmarks added.")
+        } else {
+            self.collectionView.restore()
+        }
+        
         return newsArray.getSize()
     }
 
@@ -66,6 +91,7 @@ class BookmarkCollectionViewController: UICollectionViewController, UICollection
         let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArticleViewController")
         if let articleView = viewController as? ArticleViewController {
             articleView.newsCellData = selectedNews
+            articleView.delegate = self
             self.navigationController?.pushViewController(articleView, animated: true)
         }
         

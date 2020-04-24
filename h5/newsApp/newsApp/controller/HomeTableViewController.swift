@@ -16,7 +16,12 @@ import Toast_Swift
 class HomeTableViewController: UITableViewController, CLLocationManagerDelegate, IndicatorInfoProvider, UISearchResultsUpdating {
     
     var locationManager: CLLocationManager = CLLocationManager()
-    var localWeather: Weather?
+    var localWeather: Weather? {
+       didSet{
+           tableView.reloadData()
+       }
+   }
+    
     var newsArrayData: NewsCellArray? {
         didSet{
             tableView.reloadData()
@@ -57,7 +62,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         refreshControl.addTarget(self, action:  #selector(sortArray), for: .valueChanged)
         self.refreshControl = refreshControl
         newsArrayData = NewsCellArray(tab: self.childInfo, tableViewController: self)
-        
+                
         if ["world", "business", "politics", "sport", "technology", "science", "home"].contains(self.childInfo.lowercased()) {
             resultsTableController = self.storyboard?.instantiateViewController(withIdentifier: "ResultsTableController") as? ResultsTableController
             // This view controller is interested in table view row selections.
@@ -140,7 +145,10 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         var rowIndex = indexPath.row
         
         if self.childInfo.lowercased() == "home" && rowIndex == 0 {
-            return tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath)
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as? WeatherTableViewCell {
+                cell.weatherData = self.localWeather
+                return cell
+            }
         }
         if self.childInfo.lowercased() == "home" {
             rowIndex -= 1
