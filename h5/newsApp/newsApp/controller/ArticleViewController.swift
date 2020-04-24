@@ -20,6 +20,8 @@ class ArticleViewController: UIViewController {
     @IBOutlet weak var dateString: UILabel!
     @IBOutlet weak var taggedButton: UIButton!
     
+    var delegate: BookmarkDelegate?
+    
     var htmlTextString: String = ""
     
     var newsCellData: NewsCell? {
@@ -88,9 +90,9 @@ class ArticleViewController: UIViewController {
     
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
         if sender.isSelected{
-            self.newsCellData?.remove()
+            self.delegate?.mark(news: self.newsCellData)
         } else{
-            self.newsCellData?.save()
+            self.delegate?.mark(news: self.newsCellData)
         }
         self.updateFlagged()
     }

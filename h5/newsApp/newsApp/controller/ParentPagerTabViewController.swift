@@ -15,6 +15,8 @@ class ParentPagerTabViewController: ButtonBarPagerTabStripViewController, UISear
     let purpleInspireColor = UIColor(red:0.13, green:0.03, blue:0.25, alpha:1.0)
     let redColor = UIColor(red: 221/255.0, green: 0/255.0, blue: 19/255.0, alpha: 1.0)
     let unselectedIconColor = UIColor(red: 73/255.0, green: 8/255.0, blue: 10/255.0, alpha: 1.0)
+
+    let childrenViewControllers = [UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController, UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController, UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController, UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController, UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController, UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController]
     
     /// Search controller to help us with filtering items in the table view.
     var searchController: UISearchController!
@@ -59,23 +61,20 @@ class ParentPagerTabViewController: ButtonBarPagerTabStripViewController, UISear
         super.viewDidLoad()
     }
     
+    func reloadTables() {
+        for tableVC in childrenViewControllers {
+            tableVC.tableView.reloadData()
+        }
+    }
+    
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-//        let child_1 = HomeTableViewController(style: .plain, childInfo: IndicatorInfo(title: "home"))
-//        let child_2 = HomeTableViewController(style: .plain, childInfo: IndicatorInfo(title: "home"))
-//        let child_3 = HomeTableViewController(style: .plain, childInfo: IndicatorInfo(title: "home"))
-        let child_1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController
-        let child_2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController
-        let child_3 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController
-        let child_4 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController
-        let child_5 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController
-        let child_6 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController
-        child_1.childInfo = "WORLD"
-        child_2.childInfo = "BUSINESS"
-        child_3.childInfo = "POLITICS"
-        child_4.childInfo = "SPORTS"
-        child_5.childInfo = "TECHNOLOGY"
-        child_6.childInfo = "SCIENCE"
-        return [child_1, child_2, child_3, child_4, child_5, child_6]
+        
+        let childInfos = [ "WORLD", "BUSINESS", "POLITICS", "SPORTS", "TECHNOLOGY", "SCIENCE"]
+        for tableVCIndex in 0..<self.childrenViewControllers.count {
+            childrenViewControllers[tableVCIndex].childInfo = childInfos[tableVCIndex]
+        }
+
+        return childrenViewControllers
     }
     
     

@@ -15,11 +15,13 @@ class BookmarkCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var sectionLabel: UILabel!
     @IBOutlet weak var tagButton: UIButton!
     
+    var delegate: BookmarkDelegate?
+    
     var newsData: NewsCell? {
         didSet {
             self.newsTitle.text = self.newsData?.title
 //            self.dateLabel.text = self.newsData?.time
-            self.sectionLabel.text = self.newsData?.source
+            self.sectionLabel.text = "| \(self.newsData?.source ?? "")" 
             self.newsImage.downloadImage(from: URL(string: self.newsData!.imageUrl)!)
             
             let formatter = DateFormatter()
@@ -30,6 +32,9 @@ class BookmarkCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
+        delegate?.unMark(news: self.newsData)
+    }
     
 
 }

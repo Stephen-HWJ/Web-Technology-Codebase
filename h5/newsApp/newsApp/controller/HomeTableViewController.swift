@@ -11,6 +11,7 @@ import CoreLocation
 import XLPagerTabStrip
 import Alamofire
 import SwiftyJSON
+import Toast_Swift
 
 class HomeTableViewController: UITableViewController, CLLocationManagerDelegate, IndicatorInfoProvider, UISearchResultsUpdating {
     
@@ -150,6 +151,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         if let cell = cell as? NewsTableViewCell {
             cell.newsData = news
             cell.parentTableView = self
+            cell.delegate = self
         }
 
         return cell
@@ -189,12 +191,10 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         guard let newsCell = sender as? NewsTableViewCell else {
             fatalError("User tapped not on NewsTableViewCell")
         }
-        
-        print(segue.identifier!)
+
         if let articleViewController = segue.destination as? ArticleViewController {
-            print("in segue")
             articleViewController.newsCellData = newsCell.newsData
-//            articleViewController.articleURL = newsCell.newsData
+            articleViewController.delegate = self
         }
     }
     
@@ -245,4 +245,41 @@ extension HomeTableViewController: UISearchControllerDelegate {
         //Swift.debugPrint("UISearchControllerDelegate invoked method: \(#function).")
     }
     
+}
+
+// MARK: - Implement bookmark delegate
+
+extension HomeTableViewController: BookmarkDelegate {
+    func mark(news: NewsCell?) {
+        news?.save()
+        
+        self.tableView.reloadData()
+        
+        let tbc = self.navigationController?.tabBarController
+        let bvc = tbc?.viewControllers?[3] as! UINavigationController
+        let bvc_root = bvc.viewControllers[0] as! BookmarkCollectionViewController
+        bvc_root.reloadSavedNews()
+        
+        let pageVC = tbc?.viewControllers?[1] as! UINavigationController
+        let pageVC_root = pageVC.viewControllers[0] as! ParentPagerTabViewController
+        pageVC_root.reloadTables()
+        
+        self.navigationController?.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view")
+    }
+    
+    func unMark(news: NewsCell?) {
+        news?.remove()
+        
+        self.tableView.reloadData()
+        let tbc = self.navigationController?.tabBarController
+        let bvc = tbc?.viewControllers?[3] as! UINavigationController
+        let bvc_root = bvc.viewControllers[0] as! BookmarkCollectionViewController
+        bvc_root.reloadSavedNews()
+        
+        let pageVC = tbc?.viewControllers?[1] as! UINavigationController
+        let pageVC_root = pageVC.viewControllers[0] as! ParentPagerTabViewController
+        pageVC_root.reloadTables()
+        
+        self.navigationController?.view.makeToast("Article removed from Bookmarks")
+    }
 }

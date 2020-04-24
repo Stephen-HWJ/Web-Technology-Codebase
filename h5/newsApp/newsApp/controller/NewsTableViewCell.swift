@@ -26,6 +26,11 @@ extension UIImageView {
    }
 }
 
+protocol BookmarkDelegate {
+    func mark(news: NewsCell?)
+    func unMark(news: NewsCell?)
+}
+
 class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
 //    @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var background: UIView!
@@ -35,6 +40,8 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
     @IBOutlet weak var newsSrc: UILabel!
 //    @IBOutlet weak var taggedButton: UIButton!
     @IBOutlet weak var taggedButton: UIButton!
+    
+    var delegate: BookmarkDelegate?
     
     var parentTableView: UITableViewController?
     
@@ -94,11 +101,11 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
     
     @IBAction func tagButtonTapped(_ sender: UIButton) {
         if sender.isSelected{
-            self.newsData?.remove()
+            self.delegate?.unMark(news: self.newsData)
         } else{
-            self.newsData?.save()
+            self.delegate?.mark(news: self.newsData)
         }
-        self.updateFlagged()
+        self.updateFlagged()    
     }
     
     private func updateFlagged() {

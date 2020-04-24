@@ -17,32 +17,17 @@ class BookmarkCollectionViewController: UICollectionViewController, UICollection
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-//        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        
         reloadSavedNews()
-        print(savedNewsID!)
+        print(savedNewsID)
     }
+    
     
     func reloadSavedNews() {
         newsArray = NewsCellArray()
+        print("News marked count: \(newsArray.size)")
         collectionView.reloadData()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -64,7 +49,7 @@ class BookmarkCollectionViewController: UICollectionViewController, UICollection
             cell.layer.cornerRadius = 8
             cell.layer.borderColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0).cgColor
             cell.layer.borderWidth = 1
-            
+            cell.delegate = self
             cell.newsData = newsArray.get(index: indexPath.row)
         }
         
@@ -75,21 +60,6 @@ class BookmarkCollectionViewController: UICollectionViewController, UICollection
     }
 
     // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedNews = newsArray.get(index: indexPath.row)
         
@@ -113,5 +83,39 @@ class BookmarkCollectionViewController: UICollectionViewController, UICollection
 
         return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
 
+    }
+}
+
+extension BookmarkCollectionViewController: BookmarkDelegate {
+    func mark(news: NewsCell?) {
+        news?.save()
+        
+        let tbc = self.navigationController?.tabBarController
+        let bvc = tbc?.viewControllers?[0] as! UINavigationController
+        let bvc_root = bvc.viewControllers[0] as! HomeTableViewController
+        bvc_root.tableView.reloadData()
+        
+        let pageVC = tbc?.viewControllers?[1] as! UINavigationController
+        let pageVC_root = pageVC.viewControllers[0] as! ParentPagerTabViewController
+        pageVC_root.reloadTables()
+        
+        self.navigationController?.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view")
+        self.reloadSavedNews()
+    }
+
+    func unMark(news: NewsCell?) {
+        news?.remove()
+
+        let tbc = self.navigationController?.tabBarController
+        let bvc = tbc?.viewControllers?[0] as! UINavigationController
+        let bvc_root = bvc.viewControllers[0] as! HomeTableViewController
+        bvc_root.tableView.reloadData()
+        
+        let pageVC = tbc?.viewControllers?[1] as! UINavigationController
+        let pageVC_root = pageVC.viewControllers[0] as! ParentPagerTabViewController
+        pageVC_root.reloadTables()
+
+        self.navigationController?.view.makeToast("Article removed from Bookmarks")
+        self.reloadSavedNews()
     }
 }
