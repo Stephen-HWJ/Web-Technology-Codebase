@@ -23,7 +23,8 @@ function guardianDataProcess(data) {
 		}
 		result["time"] = resultsArray[i].webPublicationDate;
 		result["section"] = resultsArray[i].sectionName;
-		if (result.title && result.id && result.section && result.time) {
+		result["articleURL"] = resultsArray[i].webUrl;
+		if (result.title && result.id && result.section && result.time && result.articleURL) {
 			returnArray.push(result);
 		}
 	}
