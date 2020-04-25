@@ -25,6 +25,8 @@ class Weather {
     var stateOfLocation: String = ""
     var temperature: Int = 0
     var weatherType: String = ""
+    var loading: Bool = true
+    var delegate: WeatherDelegate?
     
     init(cityOfLocation: String, stateOfLocation: String) {
         self.cityOfLocation = cityOfLocation
@@ -48,6 +50,8 @@ class Weather {
                 let json = JSON(value)
                 self.temperature = json["main"]["temp"].int!
                 self.weatherType = json["weather"][0]["main"].string!
+                self.loading = false
+                self.delegate?.loaded()
             case .failure(let error):
                 print(error)
             }

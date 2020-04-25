@@ -113,7 +113,7 @@ class BookmarkCollectionViewController: UICollectionViewController, UICollection
 }
 
 extension BookmarkCollectionViewController: BookmarkDelegate {
-    func mark(news: NewsCell?) {
+    func mark(news: NewsCell?, reload: Bool) {
         news?.save()
         
         let tbc = self.navigationController?.tabBarController
@@ -129,7 +129,7 @@ extension BookmarkCollectionViewController: BookmarkDelegate {
         self.reloadSavedNews()
     }
 
-    func unMark(news: NewsCell?) {
+    func unMark(news: NewsCell?, reload: Bool) {
         news?.remove()
 
         let tbc = self.navigationController?.tabBarController

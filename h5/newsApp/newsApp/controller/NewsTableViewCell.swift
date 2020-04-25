@@ -27,8 +27,8 @@ extension UIImageView {
 }
 
 protocol BookmarkDelegate {
-    func mark(news: NewsCell?)
-    func unMark(news: NewsCell?)
+    func mark(news: NewsCell?, reload: Bool)
+    func unMark(news: NewsCell?, reload: Bool)
 }
 
 class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
@@ -63,6 +63,8 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
         
         let interaction = UIContextMenuInteraction(delegate: self)
         self.addInteraction(interaction)
+        
+        self.updateFlagged()
         
     }
     
@@ -101,9 +103,9 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
     
     @IBAction func tagButtonTapped(_ sender: UIButton) {
         if sender.isSelected{
-            self.delegate?.unMark(news: self.newsData)
+            self.delegate?.unMark(news: self.newsData, reload: true)
         } else{
-            self.delegate?.mark(news: self.newsData)
+            self.delegate?.mark(news: self.newsData, reload: true)
         }
         self.updateFlagged()    
     }
@@ -131,11 +133,36 @@ class NewsTableViewCell: UITableViewCell, UIContextMenuInteractionDelegate {
     func makeContextMenu() -> UIMenu {
 
         // Create a UIAction for sharing
-        let share = UIAction(title: "Share Pupper", image: UIImage(systemName: "square.and.arrow.up")) { action in
-            // Show system share sheet
+        let share = UIAction(title: "Share with Twitter", image: UIImage(named: "twitter")) { action in
+            // TODO: share with Twitter
+            let tweetText = "Check out this Article! \(self.newsData?.articleUrl ?? "") #CSCI_571_NewsApp"
+            let shareString = "https://twitter.com/intent/tweet?text=\(tweetText)"
+            
+            // encode a space to %20 for example
+            let escapedShareString = shareString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+
+            // cast to an url
+            let url = URL(string: escapedShareString)
+            
+            // open in safari
+            UIApplication.shared.open(url!)
+        }
+        
+        var bookmark = UIAction(title: "Bookmark", image: UIImage(systemName: "bookmark")) { action in
+            // TODO: bookmark this cell if cell is unBookmarked
+            self.delegate?.mark(news: self.newsData, reload: false)
+            self.updateFlagged()
+        }
+        
+        if self.newsData?.checkSaved() ?? false {
+            bookmark = UIAction(title: "Unbookmark", image: UIImage(systemName: "bookmark.fill")) { action in
+                // TODO: bookmark this cell if cell is unBookmarked
+                self.delegate?.unMark(news: self.newsData, reload: false)
+                self.updateFlagged()
+            }
         }
 
         // Create and return a UIMenu with the share action
-        return UIMenu(title: "Menu", children: [share])
+        return UIMenu(title: "Menu", children: [share, bookmark])
     }
 }

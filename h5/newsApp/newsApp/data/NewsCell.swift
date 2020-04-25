@@ -14,9 +14,10 @@ class NewsCell: Codable {
     var time: Date
     var source: String
     var tagged: Bool = false
+    var articleUrl: String
     var id: String
     
-    init(imageUrl: String, title: String, time: String, source: String, tagged: Bool, id: String) {
+    init(imageUrl: String, title: String, time: String, source: String, tagged: Bool, id: String, articleUrl: String) {
         self.imageUrl = imageUrl
         self.title = title
         self.source = source
@@ -25,6 +26,7 @@ class NewsCell: Codable {
         let formatter = ISO8601DateFormatter()
         self.time = formatter.date(from: time)!
         self.id = id
+        self.articleUrl = articleUrl
     }
     
     func save() {

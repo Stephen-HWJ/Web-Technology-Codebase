@@ -147,6 +147,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
         if self.childInfo.lowercased() == "home" && rowIndex == 0 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as? WeatherTableViewCell {
                 cell.weatherData = self.localWeather
+                localWeather?.delegate = cell.self
                 return cell
             }
         }
@@ -258,35 +259,45 @@ extension HomeTableViewController: UISearchControllerDelegate {
 // MARK: - Implement bookmark delegate
 
 extension HomeTableViewController: BookmarkDelegate {
-    func mark(news: NewsCell?) {
+    func mark(news: NewsCell?, reload: Bool) {
         news?.save()
         
-        self.tableView.reloadData()
+        if reload {
+            tableView.reloadData()
+            
+            let tbc = self.navigationController?.tabBarController
+            let pageVC = tbc?.viewControllers?[1] as! UINavigationController
+            let pageVC_root = pageVC.viewControllers[0] as! ParentPagerTabViewController
+            pageVC_root.reloadTables()
+        }
+
         
         let tbc = self.navigationController?.tabBarController
         let bvc = tbc?.viewControllers?[3] as! UINavigationController
         let bvc_root = bvc.viewControllers[0] as! BookmarkCollectionViewController
         bvc_root.reloadSavedNews()
-        
-        let pageVC = tbc?.viewControllers?[1] as! UINavigationController
-        let pageVC_root = pageVC.viewControllers[0] as! ParentPagerTabViewController
-        pageVC_root.reloadTables()
-        
+                
         self.navigationController?.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view")
     }
     
-    func unMark(news: NewsCell?) {
+    func unMark(news: NewsCell?, reload: Bool) {
         news?.remove()
         
-        self.tableView.reloadData()
+        if reload {
+            let tbc = self.navigationController?.tabBarController
+            let pageVC = tbc?.viewControllers?[1] as! UINavigationController
+            let pageVC_root = pageVC.viewControllers[0] as! ParentPagerTabViewController
+            pageVC_root.reloadTables()
+            
+            tableView.reloadData()
+            
+
+        }
+
         let tbc = self.navigationController?.tabBarController
         let bvc = tbc?.viewControllers?[3] as! UINavigationController
         let bvc_root = bvc.viewControllers[0] as! BookmarkCollectionViewController
         bvc_root.reloadSavedNews()
-        
-        let pageVC = tbc?.viewControllers?[1] as! UINavigationController
-        let pageVC_root = pageVC.viewControllers[0] as! ParentPagerTabViewController
-        pageVC_root.reloadTables()
         
         self.navigationController?.view.makeToast("Article removed from Bookmarks")
     }

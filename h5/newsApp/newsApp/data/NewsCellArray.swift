@@ -43,8 +43,12 @@ class NewsCellArray {
     
     private func loadNews(tab: String, tableViewController: UITableViewController, animated: Bool) {
         if animated {
-            SwiftSpinner.show("Loading Home Page..")
-            print("LOADING NEWS FROM NEWS_ARRAY")
+            if tab.lowercased() == "home"{
+                SwiftSpinner.show("Loading Home Page..")
+                print("LOADING NEWS FROM NEWS_ARRAY")
+            } else {
+                SwiftSpinner.show("Loading \(tab) Headlines..")
+            }
         }
         var section = tab.lowercased()
         if section == "sports" {
@@ -63,7 +67,7 @@ class NewsCellArray {
                 let json = JSON(value)["response"]
                 print("News loaded from \(url!)")
                 for (_, subJson):(String, JSON) in json {
-                    let news = NewsCell(imageUrl: subJson["image"].string ?? "", title: subJson["title"].string!, time: subJson["time"].string!, source: subJson["section"].string!, tagged: false, id: subJson["id"].string!)
+                    let news = NewsCell(imageUrl: subJson["image"].string ?? "", title: subJson["title"].string!, time: subJson["time"].string!, source: subJson["section"].string!, tagged: false, id: subJson["id"].string!, articleUrl: subJson["articleURL"].string!)
                     self.newsArray.append(news)
                     self.size += 1
                 }

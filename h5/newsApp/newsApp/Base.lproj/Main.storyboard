@@ -92,21 +92,21 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P8d-Ii-Qze">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="113"/>
+                                            <rect key="frame" x="12" y="0.0" width="351" height="113"/>
                                             <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="113" id="pYt-ti-iKD"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="113" id="pYt-ti-iKD"/>
                                             </constraints>
                                         </view>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-guardian" translatesAutoresizingMaskIntoConstraints="NO" id="HAS-qp-Y9R">
-                                            <rect key="frame" x="17" y="1" width="113" height="111"/>
+                                            <rect key="frame" x="13" y="1" width="113" height="111"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="113" id="1Ax-k2-AJk"/>
                                                 <constraint firstAttribute="height" constant="111" id="hfu-Z1-HjQ"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UK Daily coronavirus death toll surpasses 9000 for first time ..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oE9-nD-BN2">
-                                            <rect key="frame" x="138" y="11" width="221" height="73"/>
+                                            <rect key="frame" x="134" y="11" width="225" height="73"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="73" id="yfV-aF-dAB"/>
                                             </constraints>
@@ -116,7 +116,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1h ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GwD-FL-FHH">
-                                            <rect key="frame" x="138" y="92" width="45" height="15"/>
+                                            <rect key="frame" x="134" y="92" width="45" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="hxN-PC-TmY"/>
                                             </constraints>
@@ -125,7 +125,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="US News" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCD-Q7-XWB">
-                                            <rect key="frame" x="209" y="92" width="74" height="15"/>
+                                            <rect key="frame" x="205" y="92" width="74" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="74" id="GBl-Uv-82G"/>
                                                 <constraint firstAttribute="height" constant="15" id="cVF-iI-KCV"/>
@@ -135,7 +135,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="|" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ub-cC-Esx">
-                                            <rect key="frame" x="201" y="92" width="8" height="15"/>
+                                            <rect key="frame" x="197" y="92" width="8" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="8" id="4pc-ce-GjE"/>
                                             </constraints>
@@ -144,11 +144,12 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2pD-Eh-X4V">
-                                            <rect key="frame" x="333" y="88" width="15" height="19"/>
+                                            <rect key="frame" x="332" y="87" width="23" height="25"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="19" id="1nZ-bw-Uc3"/>
-                                                <constraint firstAttribute="width" constant="15" id="p4l-lw-hOF"/>
+                                                <constraint firstAttribute="height" constant="25" id="8Xd-BC-m4S"/>
+                                                <constraint firstAttribute="width" constant="23" id="ijV-zL-LZ3"/>
                                             </constraints>
+                                            <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                             <state key="normal" image="bookmark" catalog="system"/>
                                             <connections>
                                                 <action selector="tagButtonTapped:" destination="0kG-qa-sFp" eventType="touchUpInside" id="J2U-Um-LtK"/>
@@ -156,16 +157,16 @@
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="P8d-Ii-Qze" secondAttribute="trailing" constant="16" id="Ald-zk-hAt"/>
+                                        <constraint firstAttribute="bottom" secondItem="2pD-Eh-X4V" secondAttribute="bottom" constant="6" id="5ds-2g-hyX"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P8d-Ii-Qze" secondAttribute="trailing" constant="12" id="Ald-zk-hAt"/>
                                         <constraint firstItem="HAS-qp-Y9R" firstAttribute="top" secondItem="EKR-Ow-ZIl" secondAttribute="top" constant="1" id="Et1-om-gWH"/>
                                         <constraint firstItem="oE9-nD-BN2" firstAttribute="leading" secondItem="HAS-qp-Y9R" secondAttribute="trailing" constant="8" id="FCG-JE-K93"/>
-                                        <constraint firstItem="2pD-Eh-X4V" firstAttribute="bottom" secondItem="EKR-Ow-ZIl" secondAttribute="bottomMargin" id="Fn9-LM-gK8"/>
                                         <constraint firstItem="oE9-nD-BN2" firstAttribute="trailing" secondItem="EKR-Ow-ZIl" secondAttribute="trailingMargin" id="GpE-1W-FUk"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="2pD-Eh-X4V" secondAttribute="trailing" constant="11" id="Jya-pY-4BZ"/>
-                                        <constraint firstItem="HAS-qp-Y9R" firstAttribute="leading" secondItem="EKR-Ow-ZIl" secondAttribute="leading" constant="17" id="Kt5-od-1aN"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="2pD-Eh-X4V" secondAttribute="trailing" constant="4" id="Jya-pY-4BZ"/>
+                                        <constraint firstItem="HAS-qp-Y9R" firstAttribute="leading" secondItem="EKR-Ow-ZIl" secondAttribute="leading" constant="13" id="Kt5-od-1aN"/>
                                         <constraint firstItem="TCD-Q7-XWB" firstAttribute="bottom" secondItem="EKR-Ow-ZIl" secondAttribute="bottomMargin" id="NAo-1V-uN0"/>
                                         <constraint firstItem="P8d-Ii-Qze" firstAttribute="centerX" secondItem="EKR-Ow-ZIl" secondAttribute="centerX" id="Pcp-Fp-DFA"/>
-                                        <constraint firstItem="P8d-Ii-Qze" firstAttribute="leading" secondItem="EKR-Ow-ZIl" secondAttribute="leading" constant="16" id="TMP-yR-ZRk"/>
+                                        <constraint firstItem="P8d-Ii-Qze" firstAttribute="leading" relation="lessThanOrEqual" secondItem="EKR-Ow-ZIl" secondAttribute="leading" constant="12" id="TMP-yR-ZRk"/>
                                         <constraint firstItem="TCD-Q7-XWB" firstAttribute="leading" secondItem="2Ub-cC-Esx" secondAttribute="trailing" id="dFi-Al-aWb"/>
                                         <constraint firstItem="GwD-FL-FHH" firstAttribute="leading" secondItem="HAS-qp-Y9R" secondAttribute="trailing" constant="8" id="euC-QK-xDx"/>
                                         <constraint firstItem="2Ub-cC-Esx" firstAttribute="leading" secondItem="GwD-FL-FHH" secondAttribute="trailing" constant="18" id="ffe-6k-SL2"/>
@@ -196,7 +197,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G43-0G-h05" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1615" y="-562"/>
+            <point key="canvasLocation" x="1613.5999999999999" y="-562.66866566716647"/>
         </scene>
         <!--Article View Controller-->
         <scene sceneID="EkR-zu-B26">

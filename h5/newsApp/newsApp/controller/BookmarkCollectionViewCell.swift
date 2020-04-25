@@ -33,7 +33,7 @@ class BookmarkCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
-        delegate?.unMark(news: self.newsData)
+        delegate?.unMark(news: self.newsData, reload: false)
     }
     
 

@@ -91,9 +91,9 @@ class ArticleViewController: UIViewController {
     
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
         if sender.isSelected{
-            self.delegate?.unMark(news: self.newsCellData)
+            self.delegate?.unMark(news: self.newsCellData, reload: true)
         } else{
-            self.delegate?.mark(news: self.newsCellData)
+            self.delegate?.mark(news: self.newsCellData, reload: true)
         }
         self.updateFlagged()
     }
