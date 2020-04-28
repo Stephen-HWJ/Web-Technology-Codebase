@@ -46,8 +46,10 @@ class NewsCellArray {
             if tab.lowercased() == "home"{
                 SwiftSpinner.show("Loading Home Page..")
                 print("LOADING NEWS FROM NEWS_ARRAY")
-            } else {
+            } else if ["world", "business", "politics", "sport", "technology", "science"].contains(tab.lowercased())  {
                 SwiftSpinner.show("Loading \(tab) Headlines..")
+            } else {
+                SwiftSpinner.show("Loading Search results..")
             }
         }
         var section = tab.lowercased()
