@@ -170,6 +170,9 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
     
     func updateSearchResults(for searchController: UISearchController) {
         if let resultsController = searchController.searchResultsController as? ResultsTableController {
+            if searchController.searchBar.text?.count ?? 0 < 3{
+                return
+            }
             let suggestApi = "https://api.cognitive.microsoft.com/bing/v7.0/suggestions?q=\(searchController.searchBar.text!)"
             let url = suggestApi.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             let headers: HTTPHeaders = ["Ocp-Apim-Subscription-Key": "fa5edb60ea4a419da391b8968bbfa824"]
