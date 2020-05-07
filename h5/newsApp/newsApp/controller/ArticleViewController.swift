@@ -42,6 +42,7 @@ class ArticleViewController: UIViewController {
         SwiftSpinner.show("Loading Detailed article..")
         print("LOADING FROM ARTICLE_VC")
         let weatherParams = "https://weijihua-hw9-api.wl.r.appspot.com/article/\(self.newsCellData!.id)"
+        print("ARTICLE LOADED FROM \(weatherParams)")
         let url = weatherParams.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         Alamofire.request(url!, method: .get).validate().responseJSON(completionHandler: {response in
             switch response.result {
