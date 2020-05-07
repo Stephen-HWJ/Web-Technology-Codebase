@@ -43,6 +43,7 @@ class Weather {
     
     func getWeather() {
         let weatherParams = "https://api.openweathermap.org/data/2.5/weather?q=\(cityOfLocation)&units=metric&appid=48d6ef9b8fe8d0a508261053d62dd362"
+        print(weatherParams)
         let url = weatherParams.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         Alamofire.request(url!, method: .get).validate().responseJSON(completionHandler: {response in
             switch response.result {

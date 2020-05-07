@@ -484,7 +484,7 @@
                                                         <action selector="bookmarkButtonTapped:" destination="YkC-gD-tpB" eventType="touchUpInside" id="lYk-c7-jpQ"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08 Apr 20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOu-rG-xLl">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08 Apr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOu-rG-xLl">
                                                     <rect key="frame" x="8" y="235" width="62" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="62" id="lwc-IS-8xw"/>

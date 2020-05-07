@@ -109,7 +109,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
             print("Unable to Reverse Geocode Location (\(error))")
         } else {
             if let placemarks = placemarks, let placemark = placemarks.first {
-                localWeather = Weather(cityOfLocation: placemark.locality!, stateOfLocation: placemark.administrativeArea!)
+                localWeather = Weather(cityOfLocation: placemark.locality ?? "Los Angeles", stateOfLocation: placemark.administrativeArea ?? "CA")
             } else {
                 print("No Matching Addresses Found")
             }
@@ -302,6 +302,6 @@ extension HomeTableViewController: BookmarkDelegate {
         let bvc_root = bvc.viewControllers[0] as! BookmarkCollectionViewController
         bvc_root.reloadSavedNews()
         
-        self.navigationController?.view.makeToast("Article removed from Bookmarks")
+        self.navigationController?.view.makeToast("Article Removed from Bookmarks")
     }
 }

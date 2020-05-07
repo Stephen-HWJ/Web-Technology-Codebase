@@ -32,7 +32,7 @@ class BookmarkCollectionViewCell: UICollectionViewCell, UIContextMenuInteraction
             self.newsImage.downloadImage(from: URL(string: self.newsData!.imageUrl)!)
             
             let formatter = DateFormatter()
-            formatter.dateFormat = "dd MMM yy"
+            formatter.dateFormat = "dd MMM"
             if let newsDate = self.newsData?.time {
                  self.dateLabel.text = formatter.string(from: newsDate)
             } 
