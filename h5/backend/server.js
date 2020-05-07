@@ -50,8 +50,8 @@ function articleProcess(data) {
 
 	if (resultJson.blocks) {
 		let body = resultJson.blocks.body
-		for (var i = 0; i < body.length; i++) {
-			if (body[i].bodyHtml) {
+		for (var i = 0; i < Math.min(body.length, 15); i++) {
+			if (body[i].bodyHtml && !body[i].bodyHtml.includes("iframe")) {
 				result["description"]+=body[i].bodyHtml
 				// console.log(result["description"])
 			}
