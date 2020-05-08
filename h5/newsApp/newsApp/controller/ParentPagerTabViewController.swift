@@ -52,6 +52,7 @@ class ParentPagerTabViewController: ButtonBarPagerTabStripViewController, UISear
         searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.searchBar.autocapitalizationType = .none
+        searchController.searchBar.placeholder = "Enter keyword.."
         searchController.searchBar.delegate = self // Monitor when the search button is tapped.
         
         // Place the search bar in the navigation bar.
@@ -82,6 +83,9 @@ class ParentPagerTabViewController: ButtonBarPagerTabStripViewController, UISear
     
     func updateSearchResults(for searchController: UISearchController) {
         if let resultsController = searchController.searchResultsController as? ResultsTableController {
+            if searchController.searchBar.text?.count ?? 0 < 3{
+                return
+            }
             let suggestApi = "https://api.cognitive.microsoft.com/bing/v7.0/suggestions?q=\(searchController.searchBar.text!)"
             let url = suggestApi.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             let headers: HTTPHeaders = ["Ocp-Apim-Subscription-Key": "fa5edb60ea4a419da391b8968bbfa824"]

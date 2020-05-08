@@ -73,6 +73,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate,
             searchController.delegate = self
             searchController.searchResultsUpdater = self
             searchController.searchBar.autocapitalizationType = .none
+            searchController.searchBar.placeholder = "Enter keyword.."
             searchController.searchBar.delegate = self // Monitor when the search button is tapped.
             
             // Place the search bar in the navigation bar.

@@ -91,7 +91,7 @@ class TrendingViewController: UIViewController, UITextFieldDelegate {
         
 
         chtChart.data = data //finally - it adds the chart data to the chart and causes an update
-        chtChart.chartDescription?.text = "My awesome chart" // Here we set the description for the graph
+//        chtChart.chartDescription?.text = "My awesome chart" // Here we set the description for the graph
     }
 
 }
